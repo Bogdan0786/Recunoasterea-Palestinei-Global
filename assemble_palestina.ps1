@@ -341,6 +341,18 @@ window.onerror = function(message, source, lineno, colno, error) {
     display: none !important;
   }
 
+  .country.rec {
+    fill: var(--rec) !important;
+  }
+
+  .country.norec {
+    fill: var(--norec) !important;
+  }
+
+  .country.contested {
+    fill: var(--contested) !important;
+  }
+
   .graticule {
     fill: none;
     stroke: var(--border);
@@ -2366,9 +2378,13 @@ function renderMap() {
     .append('path')
     .attr('class', d => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
+      const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
       let cls = 'country';
       if (targetNames.includes(name) || d.id === '642' || d.id === '826') {
         cls += ' europe-focus';
+      }
+      if (t) {
+        cls += ' ' + t.categorie;
       }
       return cls;
     })
