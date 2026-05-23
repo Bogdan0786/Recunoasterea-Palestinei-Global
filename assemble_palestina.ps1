@@ -1,4 +1,4 @@
-﻿# Asamblează index.html premium pentru proiectul Palestinei în Europa
+# Asamblează index.html premium pentru proiectul Palestinei în Europa
 $frenchPath = "C:\Users\Bogdan\.gemini\antigravity\scratch\teritorii-franta\index.html"
 $destPath = "C:\Users\Bogdan\.gemini\antigravity\scratch\harta-palestina\index.html"
 
@@ -2296,7 +2296,7 @@ let cachedSphere, cachedGraticule, cachedCountries, cachedMarkers;
 let isRotating = false;
 let autoRotateTimer;
 let autoRotateTimeout;
-let rotationState = [15, -50, 0];
+let rotationState = [-15, -48, 0];
 
 const tooltip = document.getElementById('tooltip');
 const searchInput = document.getElementById('search-input');
@@ -2328,7 +2328,7 @@ function renderMap() {
       .scale(Math.min(W, H) * 0.95) // Zoom mare pentru a focaliza perfect Europa pe glob
       .translate([W / 2, H / 2])
       .clipAngle(90) // Previne randarea țărilor de pe spatele globului pe fața acestuia!
-      .rotate([-rotationState[0], -rotationState[1], rotationState[2]])
+      .rotate(rotationState)
       .precision(0.1);
   }
   
@@ -2445,15 +2445,15 @@ function renderMap() {
         clearTimeout(autoRotateTimeout);
       })
       .on('drag', (event) => {
-        const sensitivity = 0.25;
+        const k = 70 / projection.scale();
         const rotate = projection.rotate();
         // Rotația globului pe baza deplasării mouse-ului
         projection.rotate([
-          rotate[0] + event.dx * sensitivity,
-          rotate[1] - event.dy * sensitivity,
+          rotate[0] + event.dx * k,
+          rotate[1] - event.dy * k,
           rotate[2]
         ]);
-        rotationState = [-projection.rotate()[0], -projection.rotate()[1], projection.rotate()[2]];
+        rotationState = projection.rotate();
         updateProjection();
       })
       .on('end', () => {
@@ -2592,8 +2592,8 @@ function startCinematicRotation() {
   autoRotateTimer = d3.timer(() => {
     if (!isRotating || currentMode !== '3d') return;
     const rotate = projection.rotate();
-    projection.rotate([rotate[0] + 0.04, rotate[1], rotate[2]]);
-    rotationState = [-projection.rotate()[0], -projection.rotate()[1], projection.rotate()[2]];
+    projection.rotate([rotate[0] - 0.05, rotate[1], rotate[2]]);
+    rotationState = projection.rotate();
     updateProjection();
   });
 }
@@ -2632,9 +2632,9 @@ document.getElementById('zoom-reset').addEventListener('click', () => {
   if (currentMode === '2d') {
     svg.transition().duration(800).call(zoomBehavior.transform, d3.zoomIdentity);
   } else {
-    rotationState = [15, -50, 0];
+    rotationState = [-15, -48, 0];
     const rect = container.getBoundingClientRect();
-    projection.scale(Math.min(rect.width, rect.height) * 0.95).rotate([-rotationState[0], -rotationState[1], rotationState[2]]);
+    projection.scale(Math.min(rect.width, rect.height) * 0.95).rotate(rotationState);
     updateProjection();
   }
 });
@@ -3023,7 +3023,7 @@ function rotateToCoords(coords) {
     .tween('rotate', () => {
       return (t) => {
         projection.rotate(interpolator(t));
-        rotationState = [-projection.rotate()[0], -projection.rotate()[1], projection.rotate()[2]];
+        rotationState = projection.rotate();
         updateProjection();
       };
     })
