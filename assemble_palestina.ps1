@@ -1901,6 +1901,7 @@ const teritorii = [
     id: 'france_placeholder_norec',
     idReal: 'france',
     nume: 'Franța (Istoric)',
+    numeEn: 'France_Placeholder',
     categorie: 'norec',
     popVal: 0, supVal: 0, zeeVal: 9999, note: 'Pentru evitarea erorilor, Franța este trecută în categoria celor care recunosc după decizia istorică din septembrie 2025.',
     badges: []
@@ -2352,7 +2353,7 @@ function renderMap() {
   const countries = topojson.feature(worldData, worldData.objects.countries);
 
   // Căutăm țările noastre în dataset
-  const targetNames = teritorii.map(t => t.numeEn.toLowerCase());
+  const targetNames = teritorii.map(t => t.numeEn ? t.numeEn.toLowerCase() : '');
 
   // Randarea granițelor tuturor țărilor lumii
   cachedCountries = svg.append('g')
@@ -2371,7 +2372,7 @@ function renderMap() {
     .attr('d', pathGenerator)
     .attr('fill', d => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      const t = teritorii.find(x => x.numeEn.toLowerCase() === name || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
+      const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
       if (t) {
         return `var(--${t.categorie})`;
       }
@@ -2379,7 +2380,7 @@ function renderMap() {
     })
     .on('mouseenter', (event, d) => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      const t = teritorii.find(x => x.numeEn.toLowerCase() === name || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
+      const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
       
       if (t) {
         tooltip.innerHTML = `
@@ -2407,7 +2408,7 @@ function renderMap() {
     })
     .on('click', (event, d) => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      const t = teritorii.find(x => x.numeEn.toLowerCase() === name || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
+      const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
       if (t) selectTerritory(t.id);
     });
 
@@ -2649,7 +2650,7 @@ searchInput.addEventListener('input', (event) => {
   const activeList = teritorii.filter(t => t.popVal > 0);
   const filtered = activeList.filter(t => 
     t.nume.toLowerCase().includes(query) || 
-    t.numeEn.toLowerCase().includes(query) || 
+    (t.numeEn && t.numeEn.toLowerCase().includes(query)) || 
     t.capitala.toLowerCase().includes(query) || 
     t.categorieLabel.toLowerCase().includes(query)
   );
