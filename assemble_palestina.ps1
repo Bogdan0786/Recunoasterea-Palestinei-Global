@@ -2326,32 +2326,32 @@ function renderMap() {
     projection = d3.geoOrthographic()
       .scale(Math.min(W, H) * 0.95) // Zoom mare pentru a focaliza perfect Europa pe glob
       .translate([W / 2, H / 2])
-      .clipAngle(90) // Previne randarea ╚¢─ârilor de pe spatele globului pe fa╚¢a acestuia!
+      .clipAngle(90) // Previne randarea țărilor de pe spatele globului pe fața acestuia!
       .rotate(rotationState)
       .precision(0.1);
   }
   
   pathGenerator = d3.geoPath().projection(projection);
   
-  // Desen─âm Oceanul (Sfera ├«n 3D, fundalul ├«n 2D)
+  // Desenăm Oceanul (Sfera în 3D, fundalul în 2D)
   cachedSphere = svg.append('path')
     .datum({type: 'Sphere'})
     .attr('class', 'sphere')
     .attr('d', pathGenerator);
     
-  // Desen─âm Grila de Coordonate (Graticule)
+  // Desenăm Grila de Coordonate (Graticule)
   const graticule = d3.geoGraticule().step([10, 10]); // Linii mai fine
   cachedGraticule = svg.append('path')
     .datum(graticule)
     .attr('class', 'graticule')
     .attr('d', pathGenerator);
 
-  // ├Änc─ârc─âm datele h─âr╚¢ii din scriptul securizat world-data
+  // Încărcăm datele hărții din scriptul securizat world-data
   const worldDataNode = document.getElementById('world-data');
   const worldData = JSON.parse(worldDataNode.textContent);
   const countries = topojson.feature(worldData, worldData.objects.countries);
 
-  // C─âut─âm ╚¢─ârile noastre ├«n dataset
+  // Căutăm țările noastre în dataset
   const targetNames = teritorii.map(t => t.numeEn ? t.numeEn.toLowerCase() : '');
 
   // Randarea grani╚¢elor tuturor ╚¢─ârilor lumii
@@ -2431,6 +2431,9 @@ function renderMap() {
             const ty = transform.applyY(projected[1]);
             return `translate(${tx}, ${ty})`;
           });
+          // Afișează denumirile țărilor doar când transform.k >= 2.0 (când mărim harta)
+          svg.selectAll('.marker-label')
+             .style('display', transform.k >= 2.0 ? 'block' : 'none');
         }
       });
       
@@ -2517,6 +2520,21 @@ function buildMarkers() {
 function updateMarkerPositions() {
   if (!cachedMarkers) return;
 
+  // Determină factorul de zoom curent
+  let zoomScale = 1;
+  if (currentMode === '2d') {
+    const node = svg.node();
+    if (node) {
+      zoomScale = d3.zoomTransform(node).k;
+    }
+  } else {
+    // În 3D, comparăm scala curentă cu cea de bază
+    const rect = container.getBoundingClientRect();
+    const baseScale = Math.min(rect.width, rect.height) * 0.95;
+    zoomScale = projection.scale() / baseScale;
+  }
+  const showLabels = zoomScale >= 2.0;
+
   cachedMarkers.each(function(t) {
     const isVisible = currentMode === '2d' || isVisibleOnGlobe(t.coords);
     const projected = projection(t.coords);
@@ -2526,11 +2544,13 @@ function updateMarkerPositions() {
       g.style('display', 'block')
        .attr('transform', `translate(${projected[0]}, ${projected[1]})`);
       
-      // Sincroniz─âm fin dimensiunile marcajelor
+      // Sincronizăm fin dimensiunile marcajelor
       const radius = getMarkerRadius(t);
       g.select('.halo').attr('r', radius * 1.5);
       g.select('.core').attr('r', radius);
-      g.select('.marker-label').attr('y', -(radius + 6));
+      g.select('.marker-label')
+       .attr('y', -(radius + 6))
+       .style('display', showLabels ? 'block' : 'none');
     } else {
       g.style('display', 'none');
     }
