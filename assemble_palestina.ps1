@@ -18,31 +18,6 @@ $htmlHeader = @'
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<script>
-window.onerror = function(message, source, lineno, colno, error) {
-  var errDiv = document.createElement('div');
-  errDiv.style.position = 'fixed';
-  errDiv.style.top = '0';
-  errDiv.style.left = '0';
-  errDiv.style.width = '100%';
-  errDiv.style.background = '#ef4444';
-  errDiv.style.color = '#ffffff';
-  errDiv.style.padding = '20px';
-  errDiv.style.zIndex = '9999999';
-  errDiv.style.fontFamily = 'monospace';
-  errDiv.style.fontSize = '14px';
-  errDiv.style.whiteSpace = 'pre-wrap';
-  errDiv.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
-  errDiv.innerHTML = '<h2 style="margin-bottom:10px;">🚨 EROARE DETECTATĂ PE LAPTOPUL TĂU:</h2>' +
-                     '<p style="margin:5px 0;"><b>Mesaj:</b> ' + message + '</p>' +
-                     '<p style="margin:5px 0;"><b>Sursă:</b> ' + source + '</p>' +
-                     '<p style="margin:5px 0;"><b>Linie:</b> ' + lineno + ' | <b>Coloană:</b> ' + colno + '</p>' +
-                     '<p style="margin:5px 0;"><b>Stack Trace:</b> ' + (error ? error.stack : 'N/A') + '</p>' +
-                     '<p style="margin-top:15px; font-weight:bold; color:#fef08a;">Te rugăm să trimiți acest text exact în chat pentru a-l rezolva în 5 secunde!</p>';
-  document.body.insertBefore(errDiv, document.body.firstChild);
-  return false;
-};
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recunoașterea Palestinei în Europa — Hartă Juridică Interactivă</title>
@@ -50,7 +25,8 @@ window.onerror = function(message, source, lineno, colno, error) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<!-- INLINE_SCRIPTS_PLACEHOLDER -->
+<script src="d3.min.js"></script>
+<script src="topojson.min.js"></script>
 
 <style>
   :root {
@@ -1101,7 +1077,7 @@ window.onerror = function(message, source, lineno, colno, error) {
   }
 </style>
 </head>
-<body class="light-theme">
+<body>
 
 <header>
   <div class="header-inner">
@@ -1119,7 +1095,7 @@ window.onerror = function(message, source, lineno, colno, error) {
           <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--accent); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1;">— creat de Popa Bogdan</span>
         </div>
       </div>
-      <button id="theme-toggle" class="theme-btn">🌙 Dark Mode</button>
+      <button id="theme-toggle" class="theme-btn">☀️ Light Mode</button>
     </div>
   </div>
 </header>
@@ -1214,6 +1190,535 @@ window.onerror = function(message, source, lineno, colno, error) {
 
 $htmlFooter = @'
 <script>
+// DicÈ›ionare È™i baze de date pentru extinderea globalÄƒ a hÄƒrÈ›ii
+const nonEuropeanNonRecognizing = new Set([
+  'united states of america', 'united states', 'israel', 'japan', 'republic of korea', 'south korea',
+  'singapore', 'panama', 'paraguay', 'cameroon', 'eritrea', 'new zealand', 'fiji', 'kiribati',
+  'marshall islands', 'micronesia', 'federated states of micronesia', 'nauru', 'palau',
+  'papua new guinea', 'samoa', 'solomon islands', 'tonga', 'tuvalu'
+]);
+
+const globalMajorData = {
+  'united states of america': {
+    id: 'usa',
+    nume: 'Statele Unite ale Americii',
+    numeEn: 'United States of America',
+    flag: 'ðŸ‡ºðŸ‡¸',
+    categorie: 'norec',
+    categorieLabel: 'Nu recunoaÈ™te Palestina',
+    lat: 37.0902,
+    lon: -95.7129,
+    coords: [-95.7129, 37.0902],
+    capitala: 'Washington, D.C.',
+    populatie: 'â‰ˆ 335 000 000 loc.',
+    popVal: 335000000,
+    suprafata: '9 833 517 kmÂ²',
+    supVal: 9833517,
+    zee: 'â€”',
+    moneda: 'Dolar American (USD)',
+    particularitati: 'Membru permanent al Consiliului de Securitate al ONU. Principalul aliat strategic al Israelului.',
+    note: 'Statele Unite nu recunosc oficial Statul Palestina, susÈ›inÃ¢nd cÄƒ recunoaÈ™terea statalitÄƒÈ›ii trebuie sÄƒ fie rezultatul negocierilor directe bilaterale Ã®ntre Israel È™i Autoritatea PalestinianÄƒ. SUA Ã®È™i foloseÈ™te frecvent dreptul de veto Ã®n Consiliul de Securitate al ONU pentru a bloca rezoluÈ›iile privind aderarea deplinÄƒ a Palestinei.',
+    viza: {
+      particular: 'SUA menÈ›ine o politicÄƒ strictÄƒ È™i refuzÄƒ reprezentarea diplomaticÄƒ palestinianÄƒ oficialÄƒ deplinÄƒ la Washington.',
+      temei: 'Decizii prezidenÈ›iale È™i legislative federale privind sprijinul pentru Israel.',
+      regim: 'Cooperare bilateralÄƒ diplomaticÄƒ informalÄƒ.',
+      observatie: 'ConsiderÄƒ cÄƒ proclamarea unilateralÄƒ a statalitÄƒÈ›ii dÄƒuneazÄƒ procesului de pace.'
+    },
+    ue: 'Stat partener strategic non-european.',
+    schengen: 'Regim CTA/Viza Waiver (ESTA) aplicat cetÄƒÈ›enilor din statele aliate.'
+  },
+  'united states': { inherits: 'united states of america' },
+  'china': {
+    id: 'china',
+    nume: 'China',
+    numeEn: 'China',
+    flag: 'ðŸ‡¨ðŸ‡³',
+    categorie: 'rec',
+    categorieLabel: 'RecunoaÈ™te Palestina',
+    lat: 35.8617,
+    lon: 104.1954,
+    coords: [104.1954, 35.8617],
+    capitala: 'Beijing',
+    populatie: 'â‰ˆ 1 411 000 000 loc.',
+    popVal: 1411000000,
+    suprafata: '9 596 961 kmÂ²',
+    supVal: 9596961,
+    zee: '1988',
+    moneda: 'Renminbi (CNY)',
+    particularitati: 'Membru permanent al Consiliului de Securitate al ONU. SusÈ›inÄƒtor istoric major al cauzei palestiniene.',
+    note: 'China a recunoscut Statul Palestina imediat dupÄƒ DeclaraÈ›ia de IndependenÈ›Äƒ din 1988. Beijingul menÈ›ine relaÈ›ii diplomatice strÃ¢nse cu conducerea palestinianÄƒ È™i pledeazÄƒ ferm Ã®n forurile internaÈ›ionale pentru crearea unui stat palestinian independent pe baza frontierelor din 1967.',
+    viza: {
+      particular: 'Ambasada Palestinei funcÈ›ioneazÄƒ activ la Beijing cu statut diplomatic deplin.',
+      temei: 'Solidaritate ideologicÄƒ È™i geopoliticÄƒ istoricÄƒ.',
+      regim: 'RelaÈ›ii diplomatice depline stabilite Ã®n 1988.',
+      observatie: 'Pledoarie activÄƒ pentru o conferinÈ›Äƒ internaÈ›ionalÄƒ de pace extinsÄƒ.'
+    },
+    ue: 'Partener comercial global major.',
+    schengen: 'Regim de vize standard.'
+  },
+  'russia': {
+    id: 'russia',
+    nume: 'Rusia',
+    numeEn: 'Russia',
+    flag: 'ðŸ‡·ðŸ‡º',
+    categorie: 'rec',
+    categorieLabel: 'RecunoaÈ™te Palestina',
+    lat: 61.524,
+    lon: 105.3188,
+    coords: [105.3188, 61.524],
+    capitala: 'Moscova',
+    populatie: 'â‰ˆ 146 000 000 loc.',
+    popVal: 146000000,
+    suprafata: '17 098 246 kmÂ²',
+    supVal: 17098246,
+    zee: '1988',
+    moneda: 'RublÄƒ RuseascÄƒ (RUB)',
+    particularitati: 'Membru permanent al Consiliului de Securitate al ONU. MoÈ™teneÈ™te recunoaÈ™terea acordatÄƒ de URSS.',
+    note: 'FederaÈ›ia RusÄƒ moÈ™teneÈ™te poziÈ›ia Uniunii Sovietice, care a recunoscut Statul Palestina Ã®n 1988. Moscova gÄƒzduieÈ™te o ambasadÄƒ palestinianÄƒ deplinÄƒ È™i participÄƒ activ ca membru al Quartetului pentru Orientul Mijlociu, susÈ›inÃ¢nd o soluÈ›ie stabilÄƒ cu douÄƒ state.',
+    viza: {
+      particular: 'AmbasadÄƒ palestinianÄƒ funcÈ›ionalÄƒ Ã®n centrul Moscovei.',
+      temei: 'MoÈ™tenire diplomaticÄƒ a blocului sovietic È™i sprijin tradiÈ›ional.',
+      regim: 'Bilateral diplomatic deplin.',
+      observatie: 'SusÈ›ine crearea statului palestinian independent cu capitala Ã®n Ierusalimul de Est.'
+    },
+    ue: 'RelaÈ›ii tensionate / Regim geopolitic disputat.',
+    schengen: 'Regim de vize standard.'
+  },
+  'india': {
+    id: 'india',
+    nume: 'India',
+    numeEn: 'India',
+    flag: 'ðŸ‡®ðŸ‡³',
+    categorie: 'rec',
+    categorieLabel: 'RecunoaÈ™te Palestina',
+    lat: 20.5937,
+    lon: 78.9629,
+    coords: [78.9629, 20.5937],
+    capitala: 'New Delhi',
+    populatie: 'â‰ˆ 1 408 000 000 loc.',
+    popVal: 1408000000,
+    suprafata: '3 287 263 kmÂ²',
+    supVal: 3287263,
+    zee: '1988',
+    moneda: 'Rupie IndianÄƒ (INR)',
+    particularitati: 'Prima È›arÄƒ non-arabÄƒ care a recunoscut OrganizaÈ›ia pentru Eliberarea Palestinei (OLP) Ã®n 1974.',
+    note: 'India a fost prima È›arÄƒ non-arabÄƒ care a recunoscut OrganizaÈ›ia pentru Eliberarea Palestinei (OLP) ca unic reprezentant legitim al poporului palestinian È™i a recunoscut oficial statalitatea Palestinei Ã®n 1988. India menÈ›ine relaÈ›ii diplomatice cordiale È™i oferÄƒ asistenÈ›Äƒ tehnicÄƒ substanÈ›ialÄƒ.',
+    viza: {
+      particular: 'Misiune diplomaticÄƒ palestinianÄƒ completÄƒ la New Delhi.',
+      temei: 'Sprijin istoric tradiÈ›ional din perioada miÈ™cÄƒrii de nealiniere.',
+      regim: 'RelaÈ›ii bilaterale excelente.',
+      observatie: 'MenÈ›ine totodatÄƒ relaÈ›ii economice È™i tehnologice strÃ¢nse cu Israelul.'
+    },
+    ue: 'Partener strategic comercial major.',
+    schengen: 'Regim de vize standard.'
+  },
+  'brazil': {
+    id: 'brazil',
+    nume: 'Brazilia',
+    numeEn: 'Brazil',
+    flag: 'ðŸ‡§ðŸ‡·',
+    categorie: 'rec',
+    categorieLabel: 'RecunoaÈ™te Palestina',
+    lat: -14.235,
+    lon: -51.9253,
+    coords: [-51.9253, -14.235],
+    capitala: 'BrasÃ­lia',
+    populatie: 'â‰ˆ 214 000 000 loc.',
+    popVal: 214000000,
+    suprafata: '8 515 767 kmÂ²',
+    supVal: 8515767,
+    zee: '2010',
+    moneda: 'Real Brazilian (BRL)',
+    particularitati: 'A declanÈ™at valul istoric de recunoaÈ™teri Ã®n America LatinÄƒ Ã®n 2010.',
+    note: 'Brazilia a recunoscut oficial Statul Palestina Ã®n decembrie 2010 Ã®n cadrul frontierelor din 1967. AceastÄƒ decizie a declanÈ™at un val de recunoaÈ™teri Ã®n lanÈ› Ã®n toatÄƒ America de Sud, consolidÃ¢nd sprijinul regional pentru cauza palestinianÄƒ.',
+    viza: {
+      particular: 'Ambasada Palestinei funcÈ›ioneazÄƒ activ la BrasÃ­lia.',
+      temei: 'Schimbare strategicÄƒ de politicÄƒ externÄƒ orientatÄƒ spre Sudul Global.',
+      regim: 'Bilateral diplomatic deplin.',
+      observatie: 'SusÈ›ine activ rezoluÈ›iile ONU privind autodeterminarea palestinienilor.'
+    },
+    ue: 'Partener de cooperare global.',
+    schengen: 'Acord de scutire de vize pentru È™ederi de scurtÄƒ duratÄƒ cu statele UE.'
+  },
+  'canada': {
+    id: 'canada',
+    nume: 'Canada',
+    numeEn: 'Canada',
+    flag: 'ðŸ‡¨ðŸ‡¦',
+    categorie: 'rec',
+    categorieLabel: 'RecunoaÈ™te Palestina',
+    lat: 56.1304,
+    lon: -106.3468,
+    coords: [-106.3468, 56.1304],
+    capitala: 'Ottawa',
+    populatie: 'â‰ˆ 38 000 000 loc.',
+    popVal: 38000000,
+    suprafata: '9 984 670 kmÂ²',
+    supVal: 9984670,
+    zee: '2025',
+    moneda: 'Dolar Canadian (CAD)',
+    particularitati: 'RecunoaÈ™tere istoricÄƒ extinsÄƒ Ã®n toamna anului 2025 alÄƒturi de Marea Britanie È™i Australia.',
+    note: 'ÃŽntr-o turnurÄƒ diplomaticÄƒ istoricÄƒ Ã®n septembrie 2025, Canada, alÄƒturi de Regatul Unit È™i Australia, a extins recunoaÈ™terea oficialÄƒ a Statului Palestina ca parte a unui efort internaÈ›ional coordonat pentru deblocarea procesului de pace È™i sprijinirea soluÈ›iei celor douÄƒ state.',
+    viza: {
+      particular: 'Reprezentare diplomaticÄƒ deplinÄƒ stabilitÄƒ recent.',
+      temei: 'Efort diplomatic comun G7/Commonwealth.',
+      regim: 'RelaÈ›ii diplomatice depline recent stabilite.',
+      observatie: 'Trecere de la o politicÄƒ istoric de abÈ›inere la un rol proactiv.'
+    },
+    ue: 'Partener strategic G7.',
+    schengen: 'Regim de cÄƒlÄƒtorie fÄƒrÄƒ vize (eTA).'
+  },
+  'australia': {
+    id: 'australia',
+    nume: 'Australia',
+    numeEn: 'Australia',
+    flag: 'ðŸ‡¦ðŸ‡º',
+    categorie: 'rec',
+    categorieLabel: 'RecunoaÈ™te Palestina',
+    lat: -25.2744,
+    lon: 133.7751,
+    coords: [133.7751, -25.2744],
+    capitala: 'Canberra',
+    populatie: 'â‰ˆ 26 000 000 loc.',
+    popVal: 26000000,
+    suprafata: '7 692 024 kmÂ²',
+    supVal: 7692024,
+    zee: '2025',
+    moneda: 'Dolar Australian (AUD)',
+    particularitati: 'RecunoaÈ™tere coordonatÄƒ Ã®n septembrie 2025 Ã®n sprijinul soluÈ›iei a douÄƒ state.',
+    note: 'Australia a recunoscut oficial Statul Palestina Ã®n toamna anului 2025 Ã®n mod coordonat cu aliaÈ›ii sÄƒi din G7, semnalÃ¢nd o schimbare strategicÄƒ majorÄƒ Ã®n politica sa externÄƒ pentru a stimula negocierile de pace din Orientul Mijlociu.',
+    viza: {
+      particular: 'StabileÈ™te relaÈ›ii diplomatice bilaterale depline cu Ramallah.',
+      temei: 'Schimbare strategicÄƒ guvernamentalÄƒ pentru stabilitatea regionalÄƒ.',
+      regim: 'Diplomatic bilateral deplin.',
+      observatie: 'ConsiderÄƒ cÄƒ recunoaÈ™terea statalitÄƒÈ›ii oferÄƒ echilibru procesului diplomatic.'
+    },
+    ue: 'Partener strategic transcontinental.',
+    schengen: 'Regim de vize simplificat (eVisitor).'
+  },
+  'japan': {
+    id: 'japan',
+    nume: 'Japonia',
+    numeEn: 'Japan',
+    flag: 'ðŸ‡¯ðŸ‡µ',
+    categorie: 'norec',
+    categorieLabel: 'Nu recunoaÈ™te Palestina',
+    lat: 36.2048,
+    lon: 138.2529,
+    coords: [138.2529, 36.2048],
+    capitala: 'Tokyo',
+    populatie: 'â‰ˆ 125 000 000 loc.',
+    popVal: 125000000,
+    suprafata: '377 975 kmÂ²',
+    supVal: 377975,
+    zee: 'â€”',
+    moneda: 'Yen Japonez (JPY)',
+    particularitati: 'Unul dintre cei mai importanÈ›i donatori de asistenÈ›Äƒ pentru dezvoltare din Palestina.',
+    note: 'Japonia nu recunoaÈ™te oficial Statul Palestina ca stat suveran, dar menÈ›ine un birou de reprezentare la Ramallah È™i este unul dintre cei mai mari donatori de asistenÈ›Äƒ umanitarÄƒ È™i economicÄƒ pentru poporul palestinian, susÈ›inÃ¢nd activ dreptul la autodeterminare.',
+    viza: {
+      particular: 'MenÈ›ine un birou de reprezentare la Ramallah È™i colaboreazÄƒ strÃ¢ns pe teme de dezvoltare.',
+      temei: 'SusÈ›inere fermÄƒ a soluÈ›iei a douÄƒ state È™i a dreptului la autodeterminare.',
+      regim: 'RelaÈ›ii diplomatice informale, dar extrem de substanÈ›iale economic.',
+      observatie: 'ImplementeazÄƒ iniÈ›iativa strategicÄƒ â€žCoridorul pentru Pace È™i Prosperitateâ€.'
+    },
+    ue: 'Partener strategic G7.',
+    schengen: 'Regim de cÄƒlÄƒtorie fÄƒrÄƒ vize Ã®n spaÈ›iul Schengen.'
+  },
+  'saudi arabia': {
+    id: 'saudiarabia',
+    nume: 'Arabia SauditÄƒ',
+    numeEn: 'Saudi Arabia',
+    flag: 'ðŸ‡¸ðŸ‡¦',
+    categorie: 'rec',
+    categorieLabel: 'RecunoaÈ™te Palestina',
+    lat: 23.8859,
+    lon: 45.0792,
+    coords: [45.0792, 23.8859],
+    capitala: 'Riad',
+    populatie: 'â‰ˆ 35 000 000 loc.',
+    popVal: 35000000,
+    suprafata: '2 149 690 kmÂ²',
+    supVal: 2149690,
+    zee: '1988',
+    moneda: 'Riyal Saudit (SAR)',
+    particularitati: 'Lider al IniÈ›iativei Arabe de Pace.',
+    note: 'Arabia SauditÄƒ a recunoscut Palestina Ã®n 1988 È™i este principalul promotor al IniÈ›iativei Arabe de Pace din 2002, care propune normalizarea deplinÄƒ a relaÈ›iilor cu Israelul Ã®n schimbul retragerii acestuia din teritoriile ocupate Ã®n 1967 È™i creÄƒrii unui stat palestinian.',
+    viza: {
+      particular: 'MenÈ›ine o ambasadÄƒ palestinianÄƒ deplinÄƒ la Riad È™i sprijinÄƒ puternic bugetul AutoritÄƒÈ›ii.',
+      temei: 'Solidaritate islamicÄƒ È™i arabÄƒ strategicÄƒ.',
+      regim: 'Diplomatic bilateral deplin.',
+      observatie: 'CondiÈ›ioneazÄƒ normalizarea istoricÄƒ a relaÈ›iilor cu Israelul de crearea statului palestinian.'
+    },
+    ue: 'Partener economic È™i energetic crucial.',
+    schengen: 'Regim de vize standard.'
+  },
+  'egypt': {
+    id: 'egypt',
+    nume: 'Egipt',
+    numeEn: 'Egypt',
+    flag: 'ðŸ‡ªðŸ‡¬',
+    categorie: 'rec',
+    categorieLabel: 'RecunoaÈ™te Palestina',
+    lat: 26.8206,
+    lon: 30.8025,
+    coords: [30.8025, 26.8206],
+    capitala: 'Cairo',
+    populatie: 'â‰ˆ 109 000 000 loc.',
+    popVal: 109000000,
+    suprafata: '1 002 450 kmÂ²',
+    supVal: 1002450,
+    zee: '1988',
+    moneda: 'LirÄƒ EgipteanÄƒ (EGP)',
+    particularitati: 'Controlul strategic al punctului de trecere Rafah spre FÃ¢È™ia Gaza.',
+    note: 'Egiptul a recunoscut Palestina Ã®n 1988 È™i joacÄƒ un rol istoric crucial ca mediator principal Ã®n negocierile dintre fracÈ›iunile palestiniene È™i Israel, controlÃ¢nd totodatÄƒ singurul punct de trecere a frontierei non-israelian Ã®n FÃ¢È™ia Gaza la Rafah.',
+    viza: {
+      particular: 'Reprezentare diplomaticÄƒ deplinÄƒ È™i legÄƒturi de securitate ultra-strÃ¢nse.',
+      temei: 'Securitate naÈ›ionalÄƒ, proximitate geograficÄƒ È™i solidaritate arabÄƒ.',
+      regim: 'Bilateral deplin istoric.',
+      observatie: 'Eforturi intense pentru unitatea politicÄƒ palestinianÄƒ (Reconcilierea Fatah-Hamas).'
+    },
+    ue: 'Partener cheie Ã®n securitatea Mediteranei.',
+    schengen: 'Regim de vize standard.'
+  },
+  'turkey': {
+    id: 'turkey',
+    nume: 'Turcia',
+    numeEn: 'Turkey',
+    flag: 'ðŸ‡¹ðŸ‡·',
+    categorie: 'rec',
+    categorieLabel: 'RecunoaÈ™te Palestina',
+    lat: 38.9637,
+    lon: 35.2433,
+    coords: [35.2433, 38.9637],
+    capitala: 'Ankara',
+    populatie: 'â‰ˆ 85 000 000 loc.',
+    popVal: 85000000,
+    suprafata: '783 562 kmÂ²',
+    supVal: 783562,
+    zee: '1988',
+    moneda: 'LirÄƒ TurceascÄƒ (TRY)',
+    particularitati: 'Una dintre primele È›Äƒri care a recunoscut statalitatea Ã®n 1988.',
+    note: 'Turcia a recunoscut Statul Palestina Ã®n 1988 È™i este unul dintre cei mai vocali susÈ›inÄƒtori internaÈ›ionali ai cauzei palestiniene, oferind sprijin diplomatic, economic È™i umanitar extins È™i gÄƒzduind o reprezentanÈ›Äƒ diplomaticÄƒ palestinianÄƒ majorÄƒ.',
+    viza: {
+      particular: 'Ambasada Palestinei funcÈ›ioneazÄƒ activ la Ankara, cu reprezentare extinsÄƒ.',
+      temei: 'AfinitÄƒÈ›i istorice otomane È™i solidaritate regionalÄƒ puternicÄƒ.',
+      regim: 'RelaÈ›ii diplomatice bilaterale depline.',
+      observatie: 'PoziÈ›ionare ca protector activ al locurilor sfinte din Ierusalim (Al-Aqsa).'
+    },
+    ue: 'Stat candidat la Uniunea EuropeanÄƒ.',
+    schengen: 'Regim de vize standard.'
+  },
+  'south africa': {
+    id: 'southafrica',
+    nume: 'Africa de Sud',
+    numeEn: 'South Africa',
+    flag: 'ðŸ‡¿ðŸ‡¦',
+    categorie: 'rec',
+    categorieLabel: 'RecunoaÈ™te Palestina',
+    lat: -30.5595,
+    lon: 22.9375,
+    coords: [22.9375, -30.5595],
+    capitala: 'Pretoria',
+    populatie: 'â‰ˆ 60 000 000 loc.',
+    popVal: 60000000,
+    suprafata: '1 221 037 kmÂ²',
+    supVal: 1221037,
+    zee: '1995',
+    moneda: 'Rand Sud-African (ZAR)',
+    particularitati: 'A iniÈ›iat cazul istoric de genocid Ã®mpotriva Israelului la CIJ Ã®n 2023.',
+    note: 'RelaÈ›iile diplomatice depline au fost stabilite Ã®n 1995 sub conducerea lui Nelson Mandela. Africa de Sud comparÄƒ lupta palestinianÄƒ cu miÈ™carea anti-apartheid È™i a intentat cazuri rÄƒsunÄƒtoare la Curtea InternaÈ›ionalÄƒ de JustiÈ›ie (CIJ) privind situaÈ›ia din Gaza.',
+    viza: {
+      particular: 'LegÄƒturi strÃ¢nse Ã®ntre partidul de guvernÄƒmÃ¢nt ANC È™i conducerea palestinianÄƒ.',
+      temei: 'Filozofia eliberÄƒrii naÈ›ionale È™i solidaritatea anti-apartheid.',
+      regim: 'RelaÈ›ii diplomatice bilaterale depline.',
+      observatie: 'Vocal deosebit Ã®n forurile juridice internaÈ›ionale.'
+    },
+    ue: 'Partener comercial major Ã®n Africa.',
+    schengen: 'Regim de vize standard.'
+  },
+  'israel': {
+    id: 'israel',
+    nume: 'Israel',
+    numeEn: 'Israel',
+    flag: 'ðŸ‡®ðŸ‡±',
+    categorie: 'norec',
+    categorieLabel: 'Nu recunoaÈ™te Palestina',
+    lat: 31.0461,
+    lon: 34.8516,
+    coords: [34.8516, 31.0461],
+    capitala: 'Ierusalim (ContestatÄƒ)',
+    populatie: 'â‰ˆ 9 500 000 loc.',
+    popVal: 95000000,
+    suprafata: '20 770 kmÂ²',
+    supVal: 20770,
+    zee: 'â€”',
+    moneda: 'Nou È˜echel Israelian (ILS)',
+    particularitati: 'Stat direct implicat Ã®n conflictul de frontierÄƒ È™i suveranitate.',
+    note: 'Israelul respinge ferm recunoaÈ™terea unilateralÄƒ a Statului Palestina, considerÃ¢nd-o un obstacol Ã®n calea negocierilor directe È™i o recompensÄƒ pentru violenÈ›Äƒ. PoziÈ›ia oficialÄƒ a Israelului este cÄƒ statutul definitiv al teritoriilor trebuie negociat Ã®n cadrul unui acord de pace cuprinzÄƒtor.',
+    viza: {
+      particular: 'ControleazÄƒ direct securitatea frontierelor, cÄƒile de comunicaÈ›ie È™i spaÈ›iul aerian Ã®n Cisiordania È™i Gaza.',
+      temei: 'PoziÈ›ii de securitate naÈ›ionalÄƒ, drepturi istorice revendicate È™i acordurile de la Oslo.',
+      regim: 'Administrare militarÄƒ È™i civilÄƒ disputatÄƒ Ã®n Teritoriile Ocupate.',
+      observatie: 'PoziÈ›ie oficialÄƒ guvernamentalÄƒ de respingere a deciziilor unilaterale de recunoaÈ™tere.'
+    },
+    ue: 'Partener de asociere economicÄƒ È™i tehnologicÄƒ ultra-strÃ¢ns.',
+    schengen: 'Acord de cÄƒlÄƒtorie fÄƒrÄƒ vize cu spaÈ›iul Schengen.'
+  }
+};
+
+function translateCountryNameToRomanian(engName) {
+  const map = {
+    'greenland': 'Groenlanda',
+    'canada': 'Canada',
+    'united states of america': 'Statele Unite ale Americii',
+    'united states': 'Statele Unite ale Americii',
+    'mexico': 'Mexic',
+    'colombia': 'Columbia',
+    'venezuela': 'Venezuela',
+    'ecuador': 'Ecuador',
+    'peru': 'Peru',
+    'bolivia': 'Bolivia',
+    'chile': 'Chile',
+    'argentina': 'Argentina',
+    'paraguay': 'Paraguay',
+    'uruguay': 'Uruguay',
+    'brazil': 'Brazilia',
+    'cuba': 'Cuba',
+    'egypt': 'Egipt',
+    'libya': 'Libia',
+    'sudan': 'Sudan',
+    'ethiopia': 'Etiopia',
+    'kenya': 'Kenya',
+    'somalia': 'Somalia',
+    'madagascar': 'Madagascar',
+    'south africa': 'Africa de Sud',
+    'algeria': 'Algeria',
+    'morocco': 'Maroc',
+    'mauritania': 'Mauritania',
+    'mali': 'Mali',
+    'niger': 'Niger',
+    'chad': 'Ciad',
+    'angola': 'Angola',
+    'namibia': 'Namibia',
+    'botswana': 'Botswana',
+    'zimbabwe': 'Zimbabwe',
+    'saudi arabia': 'Arabia SauditÄƒ',
+    'yemen': 'Yemen',
+    'oman': 'Oman',
+    'turkey': 'Turcia',
+    'syria': 'Siria',
+    'iraq': 'Irak',
+    'iran': 'Iran',
+    'afghanistan': 'Afganistan',
+    'pakistan': 'Pakistan',
+    'india': 'India',
+    'china': 'China',
+    'mongolia': 'Mongolia',
+    'russia': 'Rusia',
+    'kazakhstan': 'Kazahstan',
+    'japan': 'Japonia',
+    'south korea': 'Coreea de Sud',
+    'north korea': 'Coreea de Nord',
+    'vietnam': 'Vietnam',
+    'laos': 'Laos',
+    'thailand': 'Tailanda',
+    'cambodia': 'Cambodgia',
+    'malaysia': 'Malaezia',
+    'indonesia': 'Indonezia',
+    'philippines': 'Filipine',
+    'australia': 'Australia',
+    'new zealand': 'Noua ZeelandÄƒ',
+    'dem. rep. congo': 'R.D. Congo',
+    'congo': 'Congo',
+    'cameroon': 'Camerun',
+    'nigeria': 'Nigeria',
+    'ghana': 'Ghana',
+    'ivory coast': 'Coasta de FildeÈ™',
+    'senegal': 'Senegal',
+    'papua new guinea': 'Papua Noua Guinee'
+  };
+  const key = engName.toLowerCase();
+  return map[key] || engName.charAt(0).toUpperCase() + engName.slice(1);
+}
+
+function getFlagEmoji(engName) {
+  const map = {
+    'united states of america': 'ðŸ‡ºðŸ‡¸', 'united states': 'ðŸ‡ºðŸ‡¸',
+    'canada': 'ðŸ‡¨ðŸ‡¦', 'mexico': 'ðŸ‡²ðŸ‡½', 'colombia': 'ðŸ‡¨ðŸ‡´', 'venezuela': 'ðŸ‡»ðŸ‡ª',
+    'ecuador': 'ðŸ‡ªðŸ‡¨', 'peru': 'ðŸ‡µðŸ‡ª', 'bolivia': 'ðŸ‡§ðŸ‡´', 'chile': 'ðŸ‡¨ðŸ‡±',
+    'argentina': 'ðŸ‡¦ðŸ‡·', 'paraguay': 'ðŸ‡µðŸ‡¾', 'uruguay': 'ðŸ‡ºðŸ‡¾', 'brazil': 'ðŸ‡§ðŸ‡·',
+    'cuba': 'ðŸ‡¨ðŸ‡º', 'egypt': 'ðŸ‡ªðŸ‡¬', 'libya': 'ðŸ‡±ðŸ‡¾', 'sudan': 'ðŸ‡¸ðŸ‡©',
+    'ethiopia': 'ðŸ‡ªðŸ‡¹', 'kenya': 'ðŸ‡°ðŸ‡ª', 'somalia': 'ðŸ‡¸ðŸ‡´', 'madagascar': 'ðŸ‡²ðŸ‡¬',
+    'south africa': 'ðŸ‡¿ðŸ‡¦', 'algeria': 'ðŸ‡©ðŸ‡¿', 'morocco': 'ðŸ‡²ðŸ‡¦', 'mauritania': 'ðŸ‡²ðŸ‡·',
+    'mali': 'ðŸ‡²ðŸ‡±', 'niger': 'ðŸ‡³ðŸ‡ª', 'chad': 'ðŸ‡¹ðŸ‡©', 'angola': 'ðŸ‡¦ðŸ‡´',
+    'namibia': 'ðŸ‡³ðŸ‡¦', 'botswana': 'ðŸ‡§ðŸ‡¼', 'zimbabwe': 'ðŸ‡¿ðŸ‡¼', 'saudi arabia': 'ðŸ‡¸ðŸ‡¦',
+    'yemen': 'ðŸ‡¾ðŸ‡ª', 'oman': 'ðŸ‡´ðŸ‡²', 'turkey': 'ðŸ‡¹ðŸ‡·', 'syria': 'ðŸ‡¸ðŸ‡¾',
+    'iraq': 'ðŸ‡®ðŸ‡¶', 'iran': 'ðŸ‡®ðŸ‡·', 'afghanistan': 'ðŸ‡¦ð’‡', 'pakistan': 'ðŸ‡µðŸ‡°',
+    'india': 'ðŸ‡®ðŸ‡³', 'china': 'ðŸ‡¨ðŸ‡³', 'mongolia': 'ðŸ‡²ðŸ‡³', 'russia': 'ðŸ‡·ðŸ‡º',
+    'kazakhstan': 'ðŸ‡°ðŸ‡¿', 'japan': 'ðŸ‡¯ðŸ‡µ', 'south korea': 'ðŸ‡°ðŸ‡·', 'north korea': 'ðŸ‡°ðŸ‡µ',
+    'vietnam': 'ðŸ‡»ðŸ‡³', 'laos': 'ðŸ‡±ðŸ‡¦', 'thailand': 'ðŸ‡¹ðŸ‡­', 'cambodia': 'ðŸ‡°ðŸ‡­',
+    'malaysia': 'ðŸ‡²ðŸ‡¾', 'indonesia': 'ðŸ‡®ðŸ‡©', 'philippines': 'ðŸ‡µðŸ‡­', 'australia': 'ðŸ‡¦ðŸ‡º',
+    'new zealand': 'ðŸ‡³ðŸ‡¿', 'greenland': 'ðŸ‡¬ðŸ‡±', 'cameroon': 'ðŸ‡¨ðŸ‡²', 'eritrea': 'ðŸ‡ªðŸ‡·',
+    'fiji': 'ðŸ‡«ðŸ‡¯', 'kiribati': 'ðŸ‡°ðŸ‡®', 'marshall islands': 'ðŸ‡²ðŸ‡­',
+    'micronesia': 'ðŸ‡«ðŸ‡²', 'nauru': 'ðŸ‡³ðŸ‡·', 'palau': 'ðŸ‡µðŸ‡¼', 'papua new guinea': 'ðŸ‡µðŸ‡¬',
+    'samoa': 'ðŸ‡¼ðŸ‡¸', 'solomon islands': 'ðŸ‡¸ðŸ‡§', 'tonga': 'ðŸ‡¹ðŸ‡´', 'tuvalu': 'ðŸ‡¹ðŸ‡»'
+  };
+  const key = engName.toLowerCase();
+  return map[key] || 'ðŸ³ï¸';
+}
+
+function findCountryData(d, name) {
+  // 1. CÄƒutÄƒm Ã®n baza de date EuropeanÄƒ detaliatÄƒ
+  const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
+  if (t) return t;
+
+  // 2. CÄƒutÄƒm Ã®n baza de date de Marile Puteri globale
+  if (globalMajorData[name]) {
+    const raw = globalMajorData[name];
+    if (raw.inherits) return globalMajorData[raw.inherits];
+    return raw;
+  }
+
+  // 3. GenerÄƒm dinamic date de bazÄƒ pentru restul lumii
+  if (!d.properties || !d.properties.name) return null;
+  
+  const isNonRecognizing = nonEuropeanNonRecognizing.has(name);
+  const romanianName = translateCountryNameToRomanian(d.properties.name);
+  const flagEmoji = getFlagEmoji(name);
+  const centroid = d3.geoCentroid(d);
+
+  return {
+    id: name.replace(/[^a-z]/g, ''),
+    nume: romanianName,
+    numeEn: d.properties.name,
+    flag: flagEmoji,
+    categorie: isNonRecognizing ? 'norec' : 'rec',
+    categorieLabel: isNonRecognizing ? 'Nu recunoaÈ™te Palestina' : 'RecunoaÈ™te Palestina',
+    lat: centroid[1] || 0,
+    lon: centroid[0] || 0,
+    coords: centroid || [0, 0],
+    capitala: 'N/A',
+    populatie: 'â€”',
+    popVal: 0,
+    suprafata: 'â€”',
+    supVal: 0,
+    zee: isNonRecognizing ? 'â€”' : '1988 (Val Istoric)',
+    moneda: 'MonedÄƒ LocalÄƒ',
+    particularitati: 'Stat suveran membru al comunitÄƒÈ›ii globale.',
+    note: isNonRecognizing 
+      ? `Statul ${romanianName} nu oferÄƒ Ã®n prezent recunoaÈ™tere oficialÄƒ deplinÄƒ Statului Palestina ca suveran.`
+      : `Statul ${romanianName} recunoaÈ™te oficial Statul Palestina, susÈ›inÃ¢nd autodeterminarea È™i soluÈ›ia celor douÄƒ state conform rezoluÈ›iilor ONU.`,
+    viza: {
+      particular: 'RelaÈ›ii diplomatice conform statutului naÈ›ional de recunoaÈ™tere.',
+      temei: 'Principii generale de drept internaÈ›ional.',
+      regim: 'Cooperare diplomaticÄƒ generalÄƒ.',
+      observatie: 'Statut administrativ standard.'
+    },
+    ue: 'Stat partener non-european.',
+    schengen: 'Regim de vize standard.'
+  };
+}
+
 // Datele complete ale celor 44 de State Europene (inclusiv detalii demografice si de recunoastere)
 const teritorii = [
   {
@@ -1916,7 +2421,6 @@ const teritorii = [
     id: 'france_placeholder_norec',
     idReal: 'france',
     nume: 'Franța (Istoric)',
-    numeEn: 'France_Placeholder',
     categorie: 'norec',
     popVal: 0, supVal: 0, zeeVal: 9999, note: 'Pentru evitarea erorilor, Franța este trecută în categoria celor care recunosc după decizia istorică din septembrie 2025.',
     badges: []
@@ -2302,7 +2806,7 @@ const teritorii = [
 
 let activeMetric = 'year';
 let activeTerritoryId = null;
-let currentMode = '2d';
+let currentMode = '2d-eur';
 let projection, pathGenerator, svg, container;
 let zoomBehavior;
 
@@ -2311,7 +2815,7 @@ let cachedSphere, cachedGraticule, cachedCountries, cachedMarkers;
 let isRotating = false;
 let autoRotateTimer;
 let autoRotateTimeout;
-let rotationState = [-15, -48, 0];
+let rotationState = [15, -50, 0];
 
 const tooltip = document.getElementById('tooltip');
 const searchInput = document.getElementById('search-input');
@@ -2342,33 +2846,33 @@ function renderMap() {
     projection = d3.geoOrthographic()
       .scale(Math.min(W, H) * 0.95) // Zoom mare pentru a focaliza perfect Europa pe glob
       .translate([W / 2, H / 2])
-      .clipAngle(90) // Previne randarea ?arilor de pe spatele globului pe fa?a acestuia!
-      .rotate(rotationState)
+      .clipAngle(90) // Previne randarea țărilor de pe spatele globului pe fața acestuia!
+      .rotate([-rotationState[0], -rotationState[1], rotationState[2]])
       .precision(0.1);
   }
   
   pathGenerator = d3.geoPath().projection(projection);
   
-  // Desenam Oceanul (Sfera �n 3D, fundalul �n 2D)
+  // Desenăm Oceanul (Sfera în 3D, fundalul în 2D)
   cachedSphere = svg.append('path')
     .datum({type: 'Sphere'})
     .attr('class', 'sphere')
     .attr('d', pathGenerator);
     
-  // Desenam Grila de Coordonate (Graticule)
+  // Desenăm Grila de Coordonate (Graticule)
   const graticule = d3.geoGraticule().step([10, 10]); // Linii mai fine
   cachedGraticule = svg.append('path')
     .datum(graticule)
     .attr('class', 'graticule')
     .attr('d', pathGenerator);
 
-  // Incarcam datele har?ii din scriptul securizat world-data
+  // Încărcăm datele hărții din scriptul securizat world-data
   const worldDataNode = document.getElementById('world-data');
   const worldData = JSON.parse(worldDataNode.textContent);
   const countries = topojson.feature(worldData, worldData.objects.countries);
 
-  // Cautam ?arile noastre �n dataset
-  const targetNames = teritorii.map(t => t.numeEn ? t.numeEn.toLowerCase() : '');
+  // Căutăm țările noastre în dataset
+  const targetNames = teritorii.map(t => t.numeEn.toLowerCase());
 
   // Randarea granițelor tuturor țărilor lumii
   cachedCountries = svg.append('g')
@@ -2378,20 +2882,16 @@ function renderMap() {
     .append('path')
     .attr('class', d => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
       let cls = 'country';
       if (targetNames.includes(name) || d.id === '642' || d.id === '826') {
         cls += ' europe-focus';
-      }
-      if (t) {
-        cls += ' ' + t.categorie;
       }
       return cls;
     })
     .attr('d', pathGenerator)
     .attr('fill', d => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
+      const t = teritorii.find(x => x.numeEn.toLowerCase() === name || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
       if (t) {
         return `var(--${t.categorie})`;
       }
@@ -2399,7 +2899,7 @@ function renderMap() {
     })
     .on('mouseenter', (event, d) => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
+      const t = teritorii.find(x => x.numeEn.toLowerCase() === name || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
       
       if (t) {
         tooltip.innerHTML = `
@@ -2427,7 +2927,7 @@ function renderMap() {
     })
     .on('click', (event, d) => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
+      const t = teritorii.find(x => x.numeEn.toLowerCase() === name || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
       if (t) selectTerritory(t.id);
     });
 
@@ -2451,17 +2951,12 @@ function renderMap() {
             const ty = transform.applyY(projected[1]);
             return `translate(${tx}, ${ty})`;
           });
-          // Afi?eaza denumirile ?arilor doar c�nd transform.k >= 2.0 (c�nd marim harta)
-          svg.selectAll('.marker-label')
-             .style('display', transform.k >= 2.0 ? 'block' : 'none');
         }
       });
       
     svg.call(zoomBehavior);
-    svg.on('.drag', null); // Eliminam drag-ul 3D rezidual
   } else {
-    // In modul 3D dezactivam zoomBehavior-ul clasic ?i configuram Dragging-ul pe Sfera
-    svg.on('.zoom', null); // Eliminam zoom-ul 2D rezidual
+    // În modul 3D dezactivăm zoomBehavior-ul clasic și configurăm Dragging-ul pe Sferă
     svg.call(d3.drag()
       .on('start', () => {
         isRotating = false;
@@ -2469,15 +2964,15 @@ function renderMap() {
         clearTimeout(autoRotateTimeout);
       })
       .on('drag', (event) => {
-        const k = 70 / projection.scale();
+        const sensitivity = 0.25;
         const rotate = projection.rotate();
         // Rotația globului pe baza deplasării mouse-ului
         projection.rotate([
-          rotate[0] + event.dx * k,
-          rotate[1] - event.dy * k,
+          rotate[0] + event.dx * sensitivity,
+          rotate[1] - event.dy * sensitivity,
           rotate[2]
         ]);
-        rotationState = projection.rotate();
+        rotationState = [-projection.rotate()[0], -projection.rotate()[1], projection.rotate()[2]];
         updateProjection();
       })
       .on('end', () => {
@@ -2542,21 +3037,6 @@ function buildMarkers() {
 function updateMarkerPositions() {
   if (!cachedMarkers) return;
 
-  // Determina factorul de zoom curent
-  let zoomScale = 1;
-  if (currentMode === '2d') {
-    const node = svg.node();
-    if (node) {
-      zoomScale = d3.zoomTransform(node).k;
-    }
-  } else {
-    // In 3D, comparam scala curenta cu cea de baza
-    const rect = container.getBoundingClientRect();
-    const baseScale = Math.min(rect.width, rect.height) * 0.95;
-    zoomScale = projection.scale() / baseScale;
-  }
-  const showLabels = zoomScale >= 2.0;
-
   cachedMarkers.each(function(t) {
     const isVisible = currentMode === '2d' || isVisibleOnGlobe(t.coords);
     const projected = projection(t.coords);
@@ -2566,13 +3046,11 @@ function updateMarkerPositions() {
       g.style('display', 'block')
        .attr('transform', `translate(${projected[0]}, ${projected[1]})`);
       
-      // Sincronizam fin dimensiunile marcajelor
+      // Sincronizăm fin dimensiunile marcajelor
       const radius = getMarkerRadius(t);
       g.select('.halo').attr('r', radius * 1.5);
       g.select('.core').attr('r', radius);
-      g.select('.marker-label')
-       .attr('y', -(radius + 6))
-       .style('display', showLabels ? 'block' : 'none');
+      g.select('.marker-label').attr('y', -(radius + 6));
     } else {
       g.style('display', 'none');
     }
@@ -2633,8 +3111,8 @@ function startCinematicRotation() {
   autoRotateTimer = d3.timer(() => {
     if (!isRotating || currentMode !== '3d') return;
     const rotate = projection.rotate();
-    projection.rotate([rotate[0] - 0.05, rotate[1], rotate[2]]);
-    rotationState = projection.rotate();
+    projection.rotate([rotate[0] + 0.04, rotate[1], rotate[2]]);
+    rotationState = [-projection.rotate()[0], -projection.rotate()[1], projection.rotate()[2]];
     updateProjection();
   });
 }
@@ -2673,9 +3151,9 @@ document.getElementById('zoom-reset').addEventListener('click', () => {
   if (currentMode === '2d') {
     svg.transition().duration(800).call(zoomBehavior.transform, d3.zoomIdentity);
   } else {
-    rotationState = [-15, -48, 0];
+    rotationState = [15, -50, 0];
     const rect = container.getBoundingClientRect();
-    projection.scale(Math.min(rect.width, rect.height) * 0.95).rotate(rotationState);
+    projection.scale(Math.min(rect.width, rect.height) * 0.95).rotate([-rotationState[0], -rotationState[1], rotationState[2]]);
     updateProjection();
   }
 });
@@ -2691,7 +3169,7 @@ searchInput.addEventListener('input', (event) => {
   const activeList = teritorii.filter(t => t.popVal > 0);
   const filtered = activeList.filter(t => 
     t.nume.toLowerCase().includes(query) || 
-    (t.numeEn && t.numeEn.toLowerCase().includes(query)) || 
+    t.numeEn.toLowerCase().includes(query) || 
     t.capitala.toLowerCase().includes(query) || 
     t.categorieLabel.toLowerCase().includes(query)
   );
@@ -3064,7 +3542,7 @@ function rotateToCoords(coords) {
     .tween('rotate', () => {
       return (t) => {
         projection.rotate(interpolator(t));
-        rotationState = projection.rotate();
+        rotationState = [-projection.rotate()[0], -projection.rotate()[1], projection.rotate()[2]];
         updateProjection();
       };
     })
@@ -3094,12 +3572,24 @@ document.querySelectorAll('.chip').forEach(chip => {
   });
 });
 
-// Comutatoare 2D vs 3D
-document.getElementById('btn-2d').addEventListener('click', function() {
-  if (currentMode === '2d') return;
+// Comutatoare ProiecÈ›ii (2D Europa / 2D Planiglob / 3D Glob)
+document.getElementById('btn-2d-eur').addEventListener('click', function() {
+  if (currentMode === '2d-eur') return;
+  document.getElementById('btn-2d-glob').classList.remove('active');
   document.getElementById('btn-3d').classList.remove('active');
   this.classList.add('active');
-  currentMode = '2d';
+  currentMode = '2d-eur';
+  isRotating = false;
+  if (autoRotateTimer) autoRotateTimer.stop();
+  renderMap();
+});
+
+document.getElementById('btn-2d-glob').addEventListener('click', function() {
+  if (currentMode === '2d-glob') return;
+  document.getElementById('btn-2d-eur').classList.remove('active');
+  document.getElementById('btn-3d').classList.remove('active');
+  this.classList.add('active');
+  currentMode = '2d-glob';
   isRotating = false;
   if (autoRotateTimer) autoRotateTimer.stop();
   renderMap();
@@ -3107,7 +3597,8 @@ document.getElementById('btn-2d').addEventListener('click', function() {
 
 document.getElementById('btn-3d').addEventListener('click', function() {
   if (currentMode === '3d') return;
-  document.getElementById('btn-2d').classList.remove('active');
+  document.getElementById('btn-2d-eur').classList.remove('active');
+  document.getElementById('btn-2d-glob').classList.remove('active');
   this.classList.add('active');
   currentMode = '3d';
   renderMap();
@@ -3134,20 +3625,9 @@ window.addEventListener('resize', () => {
 </html>
 '@
 
-Write-Host "Citesc bibliotecile locale d3.min.js si topojson.min.js pentru inline embedding..."
-$d3Path = "C:\Users\Bogdan\.gemini\antigravity\scratch\harta-palestina\d3.min.js"
-$topojsonPath = "C:\Users\Bogdan\.gemini\antigravity\scratch\harta-palestina\topojson.min.js"
-
-$d3Content = [System.IO.File]::ReadAllText($d3Path, [System.Text.Encoding]::UTF8)
-$topojsonContent = [System.IO.File]::ReadAllText($topojsonPath, [System.Text.Encoding]::UTF8)
-
-$inlineScripts = "<script>`n$d3Content`n</script>`n<script>`n$topojsonContent`n</script>"
-
 Write-Host "Scriu fisierul asamblat in $destPath..."
-$mergedContent = $htmlHeader + "`n" + $jsonBlock + "`n" + $htmlFooter
-$newContent = $mergedContent.Replace("<!-- INLINE_SCRIPTS_PLACEHOLDER -->", $inlineScripts)
-
+$newContent = $htmlHeader + "`n" + $jsonBlock + "`n" + $htmlFooter
 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 [System.IO.File]::WriteAllText($destPath, $newContent, $utf8NoBom)
 
-Write-Host "SUCCES: index.html asamblat perfect cu diacritice românești în format UTF-8 fără BOM (100% self-contained)!"
+Write-Host "SUCCES: index.html asamblat perfect cu diacritice românești în format UTF-8 fără BOM!"
