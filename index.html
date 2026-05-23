@@ -2427,8 +2427,10 @@ function renderMap() {
       });
       
     svg.call(zoomBehavior);
+    svg.on('.drag', null); // Eliminăm drag-ul 3D rezidual
   } else {
-    // ├Än modul 3D dezactiv─âm zoomBehavior-ul clasic ╚Öi configur─âm Dragging-ul pe Sfer─â
+    // În modul 3D dezactivăm zoomBehavior-ul clasic și configurăm Dragging-ul pe Sferă
+    svg.on('.zoom', null); // Eliminăm zoom-ul 2D rezidual
     svg.call(d3.drag()
       .on('start', () => {
         isRotating = false;
