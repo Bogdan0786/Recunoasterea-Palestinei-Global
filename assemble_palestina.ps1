@@ -1,4 +1,4 @@
-# Asamblează index.html premium pentru proiectul Palestinei în Europa
+﻿# Asamblează index.html premium pentru proiectul Palestinei în Europa
 $frenchPath = "C:\Users\Bogdan\.gemini\antigravity\scratch\teritorii-franta\index.html"
 $destPath = "C:\Users\Bogdan\.gemini\antigravity\scratch\harta-palestina\index.html"
 
