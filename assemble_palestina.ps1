@@ -1062,7 +1062,7 @@ $htmlHeader = @'
   }
 </style>
 </head>
-<body>
+<body class="light-theme">
 
 <header>
   <div class="header-inner">
@@ -1080,7 +1080,7 @@ $htmlHeader = @'
           <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--accent); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1;">— creat de Popa Bogdan</span>
         </div>
       </div>
-      <button id="theme-toggle" class="theme-btn">☀️ Light Mode</button>
+      <button id="theme-toggle" class="theme-btn">🌙 Dark Mode</button>
     </div>
   </div>
 </header>
