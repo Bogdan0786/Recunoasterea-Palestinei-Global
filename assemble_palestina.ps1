@@ -331,12 +331,27 @@ window.onerror = function(message, source, lineno, colno, error) {
   }
 
   .country.europe-focus {
-    fill: #1e293b;
-    stroke: #334155;
+    stroke: var(--land-border);
     stroke-width: 0.6;
   }
 
   .country:hover { fill: var(--paper-dark); }
+
+  .marker circle {
+    display: none !important;
+  }
+
+  .country.rec {
+    fill: var(--rec) !important;
+  }
+
+  .country.norec {
+    fill: var(--norec) !important;
+  }
+
+  .country.contested {
+    fill: var(--contested) !important;
+  }
 
   .graticule {
     fill: none;
@@ -2327,32 +2342,32 @@ function renderMap() {
     projection = d3.geoOrthographic()
       .scale(Math.min(W, H) * 0.95) // Zoom mare pentru a focaliza perfect Europa pe glob
       .translate([W / 2, H / 2])
-      .clipAngle(90) // Previne randarea țărilor de pe spatele globului pe fața acestuia!
+      .clipAngle(90) // Previne randarea ?arilor de pe spatele globului pe fa?a acestuia!
       .rotate(rotationState)
       .precision(0.1);
   }
   
   pathGenerator = d3.geoPath().projection(projection);
   
-  // Desenăm Oceanul (Sfera în 3D, fundalul în 2D)
+  // Desenam Oceanul (Sfera �n 3D, fundalul �n 2D)
   cachedSphere = svg.append('path')
     .datum({type: 'Sphere'})
     .attr('class', 'sphere')
     .attr('d', pathGenerator);
     
-  // Desenăm Grila de Coordonate (Graticule)
+  // Desenam Grila de Coordonate (Graticule)
   const graticule = d3.geoGraticule().step([10, 10]); // Linii mai fine
   cachedGraticule = svg.append('path')
     .datum(graticule)
     .attr('class', 'graticule')
     .attr('d', pathGenerator);
 
-  // Încărcăm datele hărții din scriptul securizat world-data
+  // Incarcam datele har?ii din scriptul securizat world-data
   const worldDataNode = document.getElementById('world-data');
   const worldData = JSON.parse(worldDataNode.textContent);
   const countries = topojson.feature(worldData, worldData.objects.countries);
 
-  // Căutăm țările noastre în dataset
+  // Cautam ?arile noastre �n dataset
   const targetNames = teritorii.map(t => t.numeEn ? t.numeEn.toLowerCase() : '');
 
   // Randarea granițelor tuturor țărilor lumii
@@ -2363,9 +2378,13 @@ function renderMap() {
     .append('path')
     .attr('class', d => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
+      const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
       let cls = 'country';
       if (targetNames.includes(name) || d.id === '642' || d.id === '826') {
         cls += ' europe-focus';
+      }
+      if (t) {
+        cls += ' ' + t.categorie;
       }
       return cls;
     })
@@ -2432,12 +2451,17 @@ function renderMap() {
             const ty = transform.applyY(projected[1]);
             return `translate(${tx}, ${ty})`;
           });
+          // Afi?eaza denumirile ?arilor doar c�nd transform.k >= 2.0 (c�nd marim harta)
+          svg.selectAll('.marker-label')
+             .style('display', transform.k >= 2.0 ? 'block' : 'none');
         }
       });
       
     svg.call(zoomBehavior);
+    svg.on('.drag', null); // Eliminam drag-ul 3D rezidual
   } else {
-    // În modul 3D dezactivăm zoomBehavior-ul clasic și configurăm Dragging-ul pe Sferă
+    // In modul 3D dezactivam zoomBehavior-ul clasic ?i configuram Dragging-ul pe Sfera
+    svg.on('.zoom', null); // Eliminam zoom-ul 2D rezidual
     svg.call(d3.drag()
       .on('start', () => {
         isRotating = false;
@@ -2518,6 +2542,21 @@ function buildMarkers() {
 function updateMarkerPositions() {
   if (!cachedMarkers) return;
 
+  // Determina factorul de zoom curent
+  let zoomScale = 1;
+  if (currentMode === '2d') {
+    const node = svg.node();
+    if (node) {
+      zoomScale = d3.zoomTransform(node).k;
+    }
+  } else {
+    // In 3D, comparam scala curenta cu cea de baza
+    const rect = container.getBoundingClientRect();
+    const baseScale = Math.min(rect.width, rect.height) * 0.95;
+    zoomScale = projection.scale() / baseScale;
+  }
+  const showLabels = zoomScale >= 2.0;
+
   cachedMarkers.each(function(t) {
     const isVisible = currentMode === '2d' || isVisibleOnGlobe(t.coords);
     const projected = projection(t.coords);
@@ -2527,11 +2566,13 @@ function updateMarkerPositions() {
       g.style('display', 'block')
        .attr('transform', `translate(${projected[0]}, ${projected[1]})`);
       
-      // Sincronizăm fin dimensiunile marcajelor
+      // Sincronizam fin dimensiunile marcajelor
       const radius = getMarkerRadius(t);
       g.select('.halo').attr('r', radius * 1.5);
       g.select('.core').attr('r', radius);
-      g.select('.marker-label').attr('y', -(radius + 6));
+      g.select('.marker-label')
+       .attr('y', -(radius + 6))
+       .style('display', showLabels ? 'block' : 'none');
     } else {
       g.style('display', 'none');
     }
