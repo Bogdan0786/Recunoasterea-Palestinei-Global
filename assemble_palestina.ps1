@@ -1,4 +1,4 @@
-﻿# Asamblează index.html premium pentru proiectul Palestinei în Europa
+# Asamblează index.html premium pentru proiectul Palestinei în Europa
 $frenchPath = "C:\Users\Bogdan\.gemini\antigravity\scratch\teritorii-franta\index.html"
 $destPath = "C:\Users\Bogdan\.gemini\antigravity\scratch\harta-palestina\index.html"
 
@@ -2292,16 +2292,19 @@ function renderMap() {
   
   // Inițializare Proiecție bazată pe mod (2D plană adaptată pe Europa sau 3D sferică)
   if (currentMode === '2d') {
-    // Proiecție AzimuthalEqualArea perfect centrată pe continentul European
-    projection = d3.geoAzimuthalEqualArea()
-      .scale(W * 1.05)
+    // Proiecție geoEquirectangular perfect centrată pe continentul European
+    projection = d3.geoEquirectangular()
+      .scale(W * 1.15)
       .center([15, 52])
-      .translate([W / 2, H / 2.1]);
+      .translate([W / 2, H / 2.1])
+      .precision(0.1);
   } else {
     projection = d3.geoOrthographic()
-      .scale(Math.min(W, H) * 0.95) // Zoom mult mai mare pentru a focaliza perfect Europa pe glob
+      .scale(Math.min(W, H) * 0.95) // Zoom mare pentru a focaliza perfect Europa pe glob
       .translate([W / 2, H / 2])
-      .rotate([-rotationState[0], -rotationState[1], rotationState[2]]);
+      .clipAngle(90) // Previne randarea țărilor de pe spatele globului pe fața acestuia!
+      .rotate([-rotationState[0], -rotationState[1], rotationState[2]])
+      .precision(0.1);
   }
   
   pathGenerator = d3.geoPath().projection(projection);
