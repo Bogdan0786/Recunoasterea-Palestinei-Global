@@ -331,8 +331,7 @@ window.onerror = function(message, source, lineno, colno, error) {
   }
 
   .country.europe-focus {
-    fill: #1e293b;
-    stroke: #334155;
+    stroke: var(--land-border);
     stroke-width: 0.6;
   }
 
