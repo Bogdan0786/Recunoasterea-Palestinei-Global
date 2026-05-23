@@ -18,6 +18,31 @@ $htmlHeader = @'
 <!DOCTYPE html>
 <html lang="ro">
 <head>
+<script>
+window.onerror = function(message, source, lineno, colno, error) {
+  var errDiv = document.createElement('div');
+  errDiv.style.position = 'fixed';
+  errDiv.style.top = '0';
+  errDiv.style.left = '0';
+  errDiv.style.width = '100%';
+  errDiv.style.background = '#ef4444';
+  errDiv.style.color = '#ffffff';
+  errDiv.style.padding = '20px';
+  errDiv.style.zIndex = '9999999';
+  errDiv.style.fontFamily = 'monospace';
+  errDiv.style.fontSize = '14px';
+  errDiv.style.whiteSpace = 'pre-wrap';
+  errDiv.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+  errDiv.innerHTML = '<h2 style="margin-bottom:10px;">🚨 EROARE DETECTATĂ PE LAPTOPUL TĂU:</h2>' +
+                     '<p style="margin:5px 0;"><b>Mesaj:</b> ' + message + '</p>' +
+                     '<p style="margin:5px 0;"><b>Sursă:</b> ' + source + '</p>' +
+                     '<p style="margin:5px 0;"><b>Linie:</b> ' + lineno + ' | <b>Coloană:</b> ' + colno + '</p>' +
+                     '<p style="margin:5px 0;"><b>Stack Trace:</b> ' + (error ? error.stack : 'N/A') + '</p>' +
+                     '<p style="margin-top:15px; font-weight:bold; color:#fef08a;">Te rugăm să trimiți acest text exact în chat pentru a-l rezolva în 5 secunde!</p>';
+  document.body.insertBefore(errDiv, document.body.firstChild);
+  return false;
+};
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recunoașterea Palestinei în Europa — Hartă Juridică Interactivă</title>
