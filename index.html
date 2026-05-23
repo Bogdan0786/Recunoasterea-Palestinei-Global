@@ -294,7 +294,7 @@
     stroke-width: 0.6;
   }
 
-  .country:hover { fill: var(--paper-dark); }
+  .country:hover { fill: var(--paper-dark) !important; }
 
   .marker circle {
     display: none !important;
@@ -1060,7 +1060,7 @@
   }
 </style>
 </head>
-<body>
+<body class="light-theme">
 
 <header>
   <div class="header-inner">
@@ -1078,7 +1078,7 @@
           <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--accent); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1;">— creat de Popa Bogdan</span>
         </div>
       </div>
-      <button id="theme-toggle" class="theme-btn">☀️ Light Mode</button>
+      <button id="theme-toggle" class="theme-btn">🌙 Dark Mode</button>
     </div>
   </div>
 </header>
@@ -1101,7 +1101,8 @@
     <div class="map-loading" id="loading">Se încarcă harta mondială…</div>
     
     <div class="map-mode-toggle">
-      <button id="btn-2d" class="toggle-btn active">2D Proiecție</button>
+      <button id="btn-2d-eur" class="toggle-btn active">2D Europa</button>
+      <button id="btn-2d-glob" class="toggle-btn">2D Planiglob</button>
       <button id="btn-3d" class="toggle-btn">3D Glob</button>
     </div>
 
@@ -1572,67 +1573,43 @@ function translateCountryNameToRomanian(engName) {
     'kenya': 'Kenya',
     'somalia': 'Somalia',
     'madagascar': 'Madagascar',
-    'south africa': 'Africa de Sud',
-    'algeria': 'Algeria',
-    'morocco': 'Maroc',
-    'mauritania': 'Mauritania',
-    'mali': 'Mali',
-    'niger': 'Niger',
-    'chad': 'Ciad',
-    'angola': 'Angola',
-    'namibia': 'Namibia',
-    'botswana': 'Botswana',
-    'zimbabwe': 'Zimbabwe',
-    'saudi arabia': 'Arabia SauditÄƒ',
-    'yemen': 'Yemen',
-    'oman': 'Oman',
-    'turkey': 'Turcia',
-    'syria': 'Siria',
-    'iraq': 'Irak',
-    'iran': 'Iran',
-    'afghanistan': 'Afganistan',
-    'pakistan': 'Pakistan',
-    'india': 'India',
-    'china': 'China',
-    'mongolia': 'Mongolia',
-    'russia': 'Rusia',
-    'kazakhstan': 'Kazahstan',
-    'japan': 'Japonia',
-    'south korea': 'Coreea de Sud',
-    'north korea': 'Coreea de Nord',
-    'vietnam': 'Vietnam',
-    'laos': 'Laos',
-    'thailand': 'Tailanda',
-    'cambodia': 'Cambodgia',
-    'malaysia': 'Malaezia',
-    'indonesia': 'Indonezia',
-    'philippines': 'Filipine',
-    'australia': 'Australia',
-    'new zealand': 'Noua ZeelandÄƒ',
-    'dem. rep. congo': 'R.D. Congo',
-    'congo': 'Congo',
-    'cameroon': 'Camerun',
-    'nigeria': 'Nigeria',
-    'ghana': 'Ghana',
-    'ivory coast': 'Coasta de FildeÈ™',
-    'senegal': 'Senegal',
-    'papua new guinea': 'Papua Noua Guinee'
+    'southfunction getFlagEmoji(engName) {
+  const map = {
+    'united states of america': '🇺🇸', 'united states': '🇺🇸',
+    'canada': '🇨🇦', 'mexico': '🇲🇽', 'colombia': '🇨🇴', 'venezuela': '🇻🇪',
+    'ecuador': '🇪🇨', 'peru': '🇵🇪', 'bolivia': '🇧🇴', 'chile': '🇨🇱',
+    'argentina': '🇦🇷', 'paraguay': '🇵🇾', 'uruguay': '🇺🇾', 'brazil': '🇧🇷',
+    'cuba': '🇨🇺', 'egypt': '🇪🇬', 'libya': '🇱🇾', 'sudan': '🇸🇩',
+    'ethiopia': '🇪🇹', 'kenya': '🇰🇪', 'somalia': '🇸🇴', 'madagascar': '🇲🇬',
+    'south africa': '🇿🇦', 'algeria': '🇩🇿', 'morocco': '🇲🇦', 'mauritania': '🇲🇷',
+    'mali': '🇲🇱', 'niger': '🇳🇪', 'chad': '🇹🇩', 'angola': '🇦🇴',
+    'namibia': '🇳🇦', 'botswana': '🇧🇼', 'zimbabwe': '🇿🇼', 'saudi arabia': '🇸🇦',
+    'yemen': '🇾🇪', 'oman': '🇴🇲', 'turkey': '🇹🇷', 'syria': '🇸🇾',
+    'iraq': '🇮🇶', 'iran': '🇮🇷', 'afghanistan': '🇦🇫', 'pakistan': '🇵🇰',
+    'india': '🇮🇳', 'china': '🇨🇳', 'mongolia': '🇲🇳', 'russia': '🇷🇺',
+    'kazakhstan': '🇰🇿', 'japan': '🇯🇵', 'south korea': '🇰🇷', 'north korea': '🇰🇵',
+    'vietnam': '🇻🇳', 'laos': '🇱🇦', 'thailand': '🇹🇭', 'cambodia': '🇰🇭',
+    'malaysia': '🇲🇾', 'indonesia': '🇮🇩', 'philippines': '🇵🇭', 'australia': '🇦🇺',
+    'new zealand': '🇳🇿', 'greenland': '🇬🇱', 'cameroon': '🇨🇲', 'eritrea': '🇪🇷',
+    'fiji': '🇫🇯', 'kiribati': '🇰🇮', 'marshall islands': '🇲🇭',
+    'micronesia': '🇫🇲', 'nauru': '🇳🇷', 'palau': '🇵🇼', 'papua new guinea': '🇵🇬',
+    'samoa': '🇼🇸', 'solomon islands': '🇸🇧', 'tonga': '🇹🇴', 'tuvalu': '🇹🇻'
   };
   const key = engName.toLowerCase();
-  return map[key] || engName.charAt(0).toUpperCase() + engName.slice(1);
+  return map[key] || '🏳️';
 }
 
-function getFlagEmoji(engName) {
-  const map = {
-    'united states of america': 'ðŸ‡ºðŸ‡¸', 'united states': 'ðŸ‡ºðŸ‡¸',
-    'canada': 'ðŸ‡¨ðŸ‡¦', 'mexico': 'ðŸ‡²ðŸ‡½', 'colombia': 'ðŸ‡¨ðŸ‡´', 'venezuela': 'ðŸ‡»ðŸ‡ª',
-    'ecuador': 'ðŸ‡ªðŸ‡¨', 'peru': 'ðŸ‡µðŸ‡ª', 'bolivia': 'ðŸ‡§ðŸ‡´', 'chile': 'ðŸ‡¨ðŸ‡±',
-    'argentina': 'ðŸ‡¦ðŸ‡·', 'paraguay': 'ðŸ‡µðŸ‡¾', 'uruguay': 'ðŸ‡ºðŸ‡¾', 'brazil': 'ðŸ‡§ðŸ‡·',
-    'cuba': 'ðŸ‡¨ðŸ‡º', 'egypt': 'ðŸ‡ªðŸ‡¬', 'libya': 'ðŸ‡±ðŸ‡¾', 'sudan': 'ðŸ‡¸ðŸ‡©',
-    'ethiopia': 'ðŸ‡ªðŸ‡¹', 'kenya': 'ðŸ‡°ðŸ‡ª', 'somalia': 'ðŸ‡¸ðŸ‡´', 'madagascar': 'ðŸ‡²ðŸ‡¬',
-    'south africa': 'ðŸ‡¿ðŸ‡¦', 'algeria': 'ðŸ‡©ðŸ‡¿', 'morocco': 'ðŸ‡²ðŸ‡¦', 'mauritania': 'ðŸ‡²ðŸ‡·',
-    'mali': 'ðŸ‡²ðŸ‡±', 'niger': 'ðŸ‡³ðŸ‡ª', 'chad': 'ðŸ‡¹ðŸ‡©', 'angola': 'ðŸ‡¦ðŸ‡´',
-    'namibia': 'ðŸ‡³ðŸ‡¦', 'botswana': 'ðŸ‡§ðŸ‡¼', 'zimbabwe': 'ðŸ‡¿ðŸ‡¼', 'saudi arabia': 'ðŸ‡¸ðŸ‡¦',
+function findCountryData(d, name) {
+  // 1. Căutăm în baza de date Europeană detaliată
+  const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
+  if (t) return t;
+
+  // 2. Căutăm în baza de date de Marile Puteri globale
+  if (globalMajorData[name]) {
+    const raw = globalMajorData[name];
+    if (raw.inherits) return globalMajorData[raw.inherits];
+    return raw;
+  }na': 'ðŸ‡§ðŸ‡¼', 'zimbabwe': 'ðŸ‡¿ðŸ‡¼', 'saudi arabia': 'ðŸ‡¸ðŸ‡¦',
     'yemen': 'ðŸ‡¾ðŸ‡ª', 'oman': 'ðŸ‡´ðŸ‡²', 'turkey': 'ðŸ‡¹ðŸ‡·', 'syria': 'ðŸ‡¸ðŸ‡¾',
     'iraq': 'ðŸ‡®ðŸ‡¶', 'iran': 'ðŸ‡®ðŸ‡·', 'afghanistan': 'ðŸ‡¦ð’‡', 'pakistan': 'ðŸ‡µðŸ‡°',
     'india': 'ðŸ‡®ðŸ‡³', 'china': 'ðŸ‡¨ðŸ‡³', 'mongolia': 'ðŸ‡²ðŸ‡³', 'russia': 'ðŸ‡·ðŸ‡º',
@@ -1698,6 +1675,36 @@ function findCountryData(d, name) {
     ue: 'Stat partener non-european.',
     schengen: 'Regim de vize standard.'
   };
+}
+
+function getTerritoryById(id) {
+  // 1. Căutăm în baza de date Europeană detaliată
+  const t = teritorii.find(x => x.id === id);
+  if (t) return t;
+
+  // 2. Căutăm în baza de date de Marile Puteri globale
+  for (const name in globalMajorData) {
+    const raw = globalMajorData[name];
+    if (raw.inherits) continue;
+    if (raw.id === id) return raw;
+  }
+
+  // 3. Căutăm în restul lumii folosind topojson data
+  const worldDataNode = document.getElementById('world-data');
+  if (worldDataNode) {
+    const worldData = JSON.parse(worldDataNode.textContent);
+    const countries = topojson.feature(worldData, worldData.objects.countries);
+    const feature = countries.features.find(f => {
+      const name = f.properties.name ? f.properties.name.toLowerCase() : '';
+      return name.replace(/[^a-z]/g, '') === id;
+    });
+    if (feature) {
+      const name = feature.properties.name ? feature.properties.name.toLowerCase() : '';
+      return findCountryData(feature, name);
+    }
+  }
+
+  return null;
 }
 
 // Datele complete ale celor 44 de State Europene (inclusiv detalii demografice si de recunoastere)
@@ -2815,17 +2822,22 @@ function renderMap() {
   svg.attr('viewBox', `0 0 ${W} ${H}`).attr('width', W).attr('height', H);
   svg.selectAll('*').remove(); // Curățăm SVG-ul la inițializare
   
-  // Inițializare Proiecție bazată pe mod (2D plană adaptată pe Europa sau 3D sferică)
-  if (currentMode === '2d') {
-    // Proiecție geoEquirectangular perfect centrată pe continentul European
+  // Inițializare Proiecție bazată pe mod (2D Europa, 2D Planiglob sau 3D Glob)
+  if (currentMode === '2d-eur') {
     projection = d3.geoEquirectangular()
       .scale(W * 1.15)
       .center([15, 52])
       .translate([W / 2, H / 2.1])
       .precision(0.1);
+  } else if (currentMode === '2d-glob') {
+    projection = d3.geoEquirectangular()
+      .scale(W / 6.2)
+      .center([0, 0])
+      .translate([W / 2, H / 2])
+      .precision(0.1);
   } else {
     projection = d3.geoOrthographic()
-      .scale(Math.min(W, H) * 0.95) // Zoom mare pentru a focaliza perfect Europa pe glob
+      .scale(Math.min(W, H) * 0.45)
       .translate([W / 2, H / 2])
       .clipAngle(90) // Previne randarea țărilor de pe spatele globului pe fața acestuia!
       .rotate([-rotationState[0], -rotationState[1], rotationState[2]])
@@ -2867,29 +2879,45 @@ function renderMap() {
       if (targetNames.includes(name) || d.id === '642' || d.id === '826') {
         cls += ' europe-focus';
       }
+      const countryData = findCountryData(d, name);
+      if (countryData) {
+        cls += ` ${countryData.categorie}`;
+      }
       return cls;
     })
     .attr('d', pathGenerator)
     .attr('fill', d => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      const t = teritorii.find(x => x.numeEn.toLowerCase() === name || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
-      if (t) {
-        return `var(--${t.categorie})`;
+      const countryData = findCountryData(d, name);
+      if (countryData) {
+        return `var(--${countryData.categorie})`;
       }
-      return null; // Va folosi culoarea din CSS
+      return 'var(--land)'; // Default fallback land color
     })
     .on('mouseenter', (event, d) => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      const t = teritorii.find(x => x.numeEn.toLowerCase() === name || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
+      const countryData = findCountryData(d, name);
       
-      if (t) {
+      if (countryData) {
         tooltip.innerHTML = `
-          <div class="flag-name"><span>${t.flag}</span>${t.nume}</div>
-          <div class="status-tag" style="background:var(--${t.categorie}); color:${t.categorie === 'rec' ? '#000000' : '#ffffff'}">${t.categorie === 'rec' ? 'Recunoaște' : (t.categorie === 'norec' ? 'Nu recunoaște' : 'Contestat')}</div>
-          <div class="note-text">${t.note || ''}</div>
+          <div class="flag-name"><span>${countryData.flag}</span>${countryData.nume}</div>
+          <div class="status-tag" style="background:var(--${countryData.categorie}); color:${countryData.categorie === 'rec' ? '#000000' : '#ffffff'}">${countryData.categorie === 'rec' ? 'Recunoaște' : (countryData.categorie === 'norec' ? 'Nu recunoaște' : 'Contestat')}</div>
+          <div class="note-text">${countryData.note || ''}</div>
         `;
         tooltip.style.opacity = '1';
       }
+    })
+    .on('mousemove', event => {
+      const r = container.getBoundingClientRect();
+      let left = event.clientX - r.left + 15;
+      let top = event.clientY - r.top - 40;
+      
+      if (left + 220 > r.width) {
+        left = event.clientX - r.left - 235;
+      }
+      
+      tooltip.style.left = left + 'px';
+      tooltip.style.top = top + 'px';
     })
     .on('mousemove', event => {
       const r = container.getBoundingClientRect();
@@ -2908,12 +2936,12 @@ function renderMap() {
     })
     .on('click', (event, d) => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      const t = teritorii.find(x => x.numeEn.toLowerCase() === name || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
-      if (t) selectTerritory(t.id);
+      const countryData = findCountryData(d, name);
+      if (countryData) selectTerritory(countryData.id);
     });
 
   // Încărcarea și configurarea comportamentului de Zoom & Pan (exclusiv în 2D)
-  if (currentMode === '2d') {
+  if (currentMode.startsWith('2d')) {
     zoomBehavior = d3.zoom()
       .scaleExtent([1, 10])
       .on('zoom', (event) => {
@@ -3018,8 +3046,23 @@ function buildMarkers() {
 function updateMarkerPositions() {
   if (!cachedMarkers) return;
 
+  // Determină factorul de zoom curent
+  let zoomScale = 1;
+  if (currentMode.startsWith('2d')) {
+    const node = svg.node();
+    if (node) {
+      zoomScale = d3.zoomTransform(node).k;
+    }
+  } else {
+    // În 3D, comparăm scala curentă cu cea de bază
+    const rect = container.getBoundingClientRect();
+    const baseScale = Math.min(rect.width, rect.height) * 0.45;
+    zoomScale = projection.scale() / baseScale;
+  }
+  const showLabels = zoomScale >= 2.0;
+
   cachedMarkers.each(function(t) {
-    const isVisible = currentMode === '2d' || isVisibleOnGlobe(t.coords);
+    const isVisible = currentMode.startsWith('2d') || isVisibleOnGlobe(t.coords);
     const projected = projection(t.coords);
     const g = d3.select(this);
 
@@ -3031,7 +3074,9 @@ function updateMarkerPositions() {
       const radius = getMarkerRadius(t);
       g.select('.halo').attr('r', radius * 1.5);
       g.select('.core').attr('r', radius);
-      g.select('.marker-label').attr('y', -(radius + 6));
+      g.select('.marker-label')
+       .attr('y', -(radius + 6))
+       .style('display', showLabels ? 'block' : 'none');
     } else {
       g.style('display', 'none');
     }
@@ -3111,7 +3156,7 @@ function resetAutoRotationTimeout() {
 
 // 8. Controale Fizice Harta (Zoom +/- și Reset)
 document.getElementById('zoom-in').addEventListener('click', () => {
-  if (currentMode === '2d') {
+  if (currentMode.startsWith('2d')) {
     svg.transition().duration(400).call(zoomBehavior.scaleBy, 1.6);
   } else {
     projection.scale(projection.scale() * 1.3);
@@ -3120,7 +3165,7 @@ document.getElementById('zoom-in').addEventListener('click', () => {
 });
 
 document.getElementById('zoom-out').addEventListener('click', () => {
-  if (currentMode === '2d') {
+  if (currentMode.startsWith('2d')) {
     svg.transition().duration(400).call(zoomBehavior.scaleBy, 0.6);
   } else {
     projection.scale(Math.max(100, projection.scale() * 0.7));
@@ -3129,15 +3174,52 @@ document.getElementById('zoom-out').addEventListener('click', () => {
 });
 
 document.getElementById('zoom-reset').addEventListener('click', () => {
-  if (currentMode === '2d') {
+  if (currentMode.startsWith('2d')) {
     svg.transition().duration(800).call(zoomBehavior.transform, d3.zoomIdentity);
   } else {
     rotationState = [15, -50, 0];
     const rect = container.getBoundingClientRect();
-    projection.scale(Math.min(rect.width, rect.height) * 0.95).rotate([-rotationState[0], -rotationState[1], rotationState[2]]);
+    projection.scale(Math.min(rect.width, rect.height) * 0.45).rotate([-rotationState[0], -rotationState[1], rotationState[2]]);
     updateProjection();
   }
 });
+
+let cachedSearchList = null;
+function getGlobalSearchList() {
+  if (cachedSearchList) return cachedSearchList;
+  
+  const list = [...teritorii];
+  
+  // Adăugăm marile puteri
+  for (const name in globalMajorData) {
+    const raw = globalMajorData[name];
+    if (raw.inherits) continue;
+    if (!list.some(x => x.id === raw.id)) {
+      list.push(raw);
+    }
+  }
+  
+  // Adăugăm dinamic toate celelalte țări din world-data
+  const worldDataNode = document.getElementById('world-data');
+  if (worldDataNode) {
+    const worldData = JSON.parse(worldDataNode.textContent);
+    const countries = topojson.feature(worldData, worldData.objects.countries);
+    countries.features.forEach(f => {
+      const name = f.properties.name ? f.properties.name.toLowerCase() : '';
+      if (!name) return;
+      const id = name.replace(/[^a-z]/g, '');
+      if (!list.some(x => x.id === id)) {
+        const countryData = findCountryData(f, name);
+        if (countryData) {
+          list.push(countryData);
+        }
+      }
+    });
+  }
+  
+  cachedSearchList = list;
+  return list;
+}
 
 // 9. Căutare Instantă cu Autocomplete
 searchInput.addEventListener('input', (event) => {
@@ -3147,12 +3229,12 @@ searchInput.addEventListener('input', (event) => {
     return;
   }
 
-  const activeList = teritorii.filter(t => t.popVal > 0);
+  const activeList = getGlobalSearchList();
   const filtered = activeList.filter(t => 
-    t.nume.toLowerCase().includes(query) || 
-    t.numeEn.toLowerCase().includes(query) || 
-    t.capitala.toLowerCase().includes(query) || 
-    t.categorieLabel.toLowerCase().includes(query)
+    (t.nume && t.nume.toLowerCase().includes(query)) || 
+    (t.numeEn && t.numeEn.toLowerCase().includes(query)) || 
+    (t.capitala && t.capitala.toLowerCase().includes(query)) || 
+    (t.categorieLabel && t.categorieLabel.toLowerCase().includes(query))
   );
 
   if (filtered.length === 0) {
@@ -3307,7 +3389,7 @@ renderRankings();
 // 11. Selecție Țară și Fișă Tab-uri
 function selectTerritory(id) {
   activeTerritoryId = id;
-  const t = teritorii.find(x => x.id === id);
+  const t = getTerritoryById(id);
   if (!t) return;
 
   // Clasa activă pe hartă
@@ -3321,7 +3403,7 @@ function selectTerritory(id) {
   }
 
   // Focalizare sferică (3D) sau Centrare (2D)
-  if (currentMode === '2d') {
+  if (currentMode.startsWith('2d')) {
     zoomToCoords(t.coords, 4);
   } else {
     rotateToCoords(t.coords);
@@ -3553,7 +3635,7 @@ document.querySelectorAll('.chip').forEach(chip => {
   });
 });
 
-// Comutatoare ProiecÈ›ii (2D Europa / 2D Planiglob / 3D Glob)
+// Comutatoare Proiecții (2D Europa / 2D Planiglob / 3D Glob)
 document.getElementById('btn-2d-eur').addEventListener('click', function() {
   if (currentMode === '2d-eur') return;
   document.getElementById('btn-2d-glob').classList.remove('active');
