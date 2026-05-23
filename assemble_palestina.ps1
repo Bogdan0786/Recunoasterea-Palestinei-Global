@@ -25,8 +25,7 @@ $htmlHeader = @'
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://unpkg.com/topojson@3"></script>
+<!-- INLINE_SCRIPTS_PLACEHOLDER -->
 
 <style>
   :root {
@@ -3068,9 +3067,20 @@ window.addEventListener('resize', () => {
 </html>
 '@
 
+Write-Host "Citesc bibliotecile locale d3.min.js si topojson.min.js pentru inline embedding..."
+$d3Path = "C:\Users\Bogdan\.gemini\antigravity\scratch\harta-palestina\d3.min.js"
+$topojsonPath = "C:\Users\Bogdan\.gemini\antigravity\scratch\harta-palestina\topojson.min.js"
+
+$d3Content = [System.IO.File]::ReadAllText($d3Path, [System.Text.Encoding]::UTF8)
+$topojsonContent = [System.IO.File]::ReadAllText($topojsonPath, [System.Text.Encoding]::UTF8)
+
+$inlineScripts = "<script>`n$d3Content`n</script>`n<script>`n$topojsonContent`n</script>"
+
 Write-Host "Scriu fisierul asamblat in $destPath..."
-$newContent = $htmlHeader + "`n" + $jsonBlock + "`n" + $htmlFooter
+$mergedContent = $htmlHeader + "`n" + $jsonBlock + "`n" + $htmlFooter
+$newContent = $mergedContent.Replace("<!-- INLINE_SCRIPTS_PLACEHOLDER -->", $inlineScripts)
+
 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 [System.IO.File]::WriteAllText($destPath, $newContent, $utf8NoBom)
 
-Write-Host "SUCCES: index.html asamblat perfect cu diacritice românești în format UTF-8 fără BOM!"
+Write-Host "SUCCES: index.html asamblat perfect cu diacritice românești în format UTF-8 fără BOM (100% self-contained)!"
