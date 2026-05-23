@@ -1,4 +1,4 @@
-﻿# Asamblează index.html premium pentru proiectul Palestinei în Europa
+﻿# Asambleaz─â index.html premium pentru proiectul Palestinei ├«n Europa
 $frenchPath = "C:\Users\Bogdan\.gemini\antigravity\scratch\teritorii-franta\index.html"
 $destPath = "C:\Users\Bogdan\.gemini\antigravity\scratch\harta-palestina\index.html"
 
@@ -6,7 +6,7 @@ Write-Host "Citesc TopoJSON din $frenchPath..."
 $frenchContent = Get-Content -Path $frenchPath -Raw -Encoding utf8
 $jsonStart = $frenchContent.IndexOf('<script id="world-data" type="application/json">')
 if ($jsonStart -eq -1) {
-    Write-Error "Nu am găsit scriptul world-data în fișierul francez!"
+    Write-Error "Nu am g─âsit scriptul world-data ├«n fi╚Öierul francez!"
     exit 1
 }
 $jsonEnd = $frenchContent.IndexOf('</script>', $jsonStart)
@@ -18,15 +18,39 @@ $htmlHeader = @'
 <!DOCTYPE html>
 <html lang="ro">
 <head>
+<script>
+window.onerror = function(message, source, lineno, colno, error) {
+  var errDiv = document.createElement('div');
+  errDiv.style.position = 'fixed';
+  errDiv.style.top = '0';
+  errDiv.style.left = '0';
+  errDiv.style.width = '100%';
+  errDiv.style.background = '#ef4444';
+  errDiv.style.color = '#ffffff';
+  errDiv.style.padding = '20px';
+  errDiv.style.zIndex = '9999999';
+  errDiv.style.fontFamily = 'monospace';
+  errDiv.style.fontSize = '14px';
+  errDiv.style.whiteSpace = 'pre-wrap';
+  errDiv.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+  errDiv.innerHTML = '<h2 style="margin-bottom:10px;">≡ƒÜ¿ EROARE DETECTAT─é PE LAPTOPUL T─éU:</h2>' +
+                     '<p style="margin:5px 0;"><b>Mesaj:</b> ' + message + '</p>' +
+                     '<p style="margin:5px 0;"><b>Surs─â:</b> ' + source + '</p>' +
+                     '<p style="margin:5px 0;"><b>Linie:</b> ' + lineno + ' | <b>Coloan─â:</b> ' + colno + '</p>' +
+                     '<p style="margin:5px 0;"><b>Stack Trace:</b> ' + (error ? error.stack : 'N/A') + '</p>' +
+                     '<p style="margin-top:15px; font-weight:bold; color:#fef08a;">Te rug─âm s─â trimi╚¢i acest text exact ├«n chat pentru a-l rezolva ├«n 5 secunde!</p>';
+  document.body.insertBefore(errDiv, document.body.firstChild);
+  return false;
+};
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recunoașterea Palestinei în Europa — Hartă Juridică Interactivă</title>
+<title>Recunoa╚Öterea Palestinei ├«n Europa ΓÇö Hart─â Juridic─â Interactiv─â</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<script src="d3.min.js"></script>
-<script src="topojson.min.js"></script>
+<!-- INLINE_SCRIPTS_PLACEHOLDER -->
 
 <style>
   :root {
@@ -328,6 +352,7 @@ $htmlHeader = @'
   .country.contested {
     fill: var(--contested) !important;
   }
+  .country:hover { fill: var(--paper-dark); }
 
   .graticule {
     fill: none;
@@ -1082,40 +1107,40 @@ $htmlHeader = @'
 <header>
   <div class="header-inner">
     <div class="brand">
-      <span class="eyebrow">Uniunea Europeană · Relații Externe · Anul 2026</span>
-      <h1>Recunoașterea <em>Palestinei</em> în Europa</h1>
-      <p class="subtitle">O hartă juridică și interactivă a deciziilor de recunoaștere a Statului Palestina de către țările de pe continentul European, detaliind anul exact al recunoașterii, contextul diplomatic și poziția oficială post-UNGA 80.</p>
+      <span class="eyebrow">Uniunea European─â ┬╖ Rela╚¢ii Externe ┬╖ Anul 2026</span>
+      <h1>Recunoa╚Öterea <em>Palestinei</em> ├«n Europa</h1>
+      <p class="subtitle">O hart─â juridic─â ╚Öi interactiv─â a deciziilor de recunoa╚Ötere a Statului Palestina de c─âtre ╚¢─ârile de pe continentul European, detaliind anul exact al recunoa╚Öterii, contextul diplomatic ╚Öi pozi╚¢ia oficial─â post-UNGA 80.</p>
     </div>
     <div class="header-actions">
       <div class="meta">
-        <div class="line"><span class="label">Proiecție</span><span>Europe Focus / Orthographic</span></div>
+        <div class="line"><span class="label">Proiec╚¢ie</span><span>Europe Focus / Orthographic</span></div>
         <div class="line"><span class="label">Total Recunosc</span><span>30 State Europene</span></div>
         <div class="line"><span class="label">Nu recunosc</span><span>14 State</span></div>
         <div class="line" style="margin-top: 16px; justify-content: flex-end; border-top: 1px dashed var(--border); padding-top: 12px;">
-          <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--accent); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1;">— creat de Popa Bogdan</span>
+          <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--accent); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1;">ΓÇö creat de Popa Bogdan</span>
         </div>
       </div>
-      <button id="theme-toggle" class="theme-btn">🌙 Dark Mode</button>
+      <button id="theme-toggle" class="theme-btn">≡ƒîÖ Dark Mode</button>
     </div>
   </div>
 </header>
 
 <section class="legal-intro">
-  <div class="label-col">Un peisaj diplomatic în plină transformare</div>
-  <p>Harta recunoașterii Palestinei în Europa este împărțită istoric și politic. <strong>Valul din 1988</strong> reprezintă deciziile statelor din fostul bloc sovietic (inclusiv România), luate imediat după Declarația de Independență a Palestinei de la Alger. <strong>Valul recent (2024-2025)</strong> reflectă deciziile unor state vest-europene (Norvegia, Spania, Irlanda, Slovenia, urmate în toamna anului 2025 de Regatul Unit, Franța, Belgia și Portugalia) ca reacție la escaladarea conflictului din Orientul Mijlociu și în sprijinul soluției celor două state.</p>
+  <div class="label-col">Un peisaj diplomatic ├«n plin─â transformare</div>
+  <p>Harta recunoa╚Öterii Palestinei ├«n Europa este ├«mp─âr╚¢it─â istoric ╚Öi politic. <strong>Valul din 1988</strong> reprezint─â deciziile statelor din fostul bloc sovietic (inclusiv Rom├ónia), luate imediat dup─â Declara╚¢ia de Independen╚¢─â a Palestinei de la Alger. <strong>Valul recent (2024-2025)</strong> reflect─â deciziile unor state vest-europene (Norvegia, Spania, Irlanda, Slovenia, urmate ├«n toamna anului 2025 de Regatul Unit, Fran╚¢a, Belgia ╚Öi Portugalia) ca reac╚¢ie la escaladarea conflictului din Orientul Mijlociu ╚Öi ├«n sprijinul solu╚¢iei celor dou─â state.</p>
 </section>
 
 <section class="filters">
-  <span class="filter-label">Filtrează după poziție</span>
+  <span class="filter-label">Filtreaz─â dup─â pozi╚¢ie</span>
   <button class="chip active" data-filter="all">Toate statele</button>
   <button class="chip" data-filter="rec" data-cat="rec"><span class="dot"></span>Recunosc Palestina</button>
   <button class="chip" data-filter="norec" data-cat="norec"><span class="dot"></span>Nu recunosc</button>
-  <button class="chip" data-filter="contested" data-cat="contested"><span class="dot"></span>Contestat / Înghețat</button>
+  <button class="chip" data-filter="contested" data-cat="contested"><span class="dot"></span>Contestat / ├Änghe╚¢at</button>
 </section>
 
 <main>
   <div class="map-wrap">
-    <div class="map-loading" id="loading">Se încarcă harta mondială…</div>
+    <div class="map-loading" id="loading">Se ├«ncarc─â harta mondial─âΓÇª</div>
     
     <div class="map-mode-toggle">
       <button id="btn-2d-eur" class="toggle-btn active">2D Europa</button>
@@ -1125,8 +1150,8 @@ $htmlHeader = @'
 
     <div class="map-controls">
       <button id="zoom-in" class="map-btn" title="Apropie">+</button>
-      <button id="zoom-out" class="map-btn" title="Depărtează">−</button>
-      <button id="zoom-reset" class="map-btn" title="Resetează vizualizarea">⟲</button>
+      <button id="zoom-out" class="map-btn" title="Dep─ârteaz─â">ΓêÆ</button>
+      <button id="zoom-reset" class="map-btn" title="Reseteaz─â vizualizarea">Γƒ▓</button>
     </div>
 
     <svg id="worldmap" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -1136,17 +1161,17 @@ $htmlHeader = @'
       <div class="title">Legenda</div>
       <div class="item"><span class="dot" style="background: var(--rec)"></span>Recunosc</div>
       <div class="item"><span class="dot" style="background: var(--norec)"></span>Nu recunosc</div>
-      <div class="item"><span class="dot" style="background: var(--contested)"></span>Recunoaștere contestată</div>
+      <div class="item"><span class="dot" style="background: var(--contested)"></span>Recunoa╚Ötere contestat─â</div>
     </div>
 
-    <div class="map-compass">↑<br>N</div>
+    <div class="map-compass">Γåæ<br>N</div>
   </div>
 
   <aside class="panel" id="panel">
     <div class="search-wrapper">
       <div class="search-container">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="search-input" class="search-input" placeholder="Caută țară din Europa...">
+        <span class="search-icon">≡ƒöì</span>
+        <input type="text" id="search-input" class="search-input" placeholder="Caut─â ╚¢ar─â din Europa...">
         <ul id="search-suggestions" class="suggestions-list"></ul>
       </div>
     </div>
@@ -1154,13 +1179,13 @@ $htmlHeader = @'
     <div id="panel-content">
       <div class="rankings-view">
         <div class="rankings-header">
-          <h3 class="rankings-title">⚜ Cronologia Recunoașterii</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--ink-soft);line-height:1.3;margin-bottom:12px;">Vizualizează cronologia deciziilor istorice și recente. Țările care nu recunosc sunt ordonate alfabetic la final.</p>
+          <h3 class="rankings-title">ΓÜ£ Cronologia Recunoa╚Öterii</h3>
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--ink-soft);line-height:1.3;margin-bottom:12px;">Vizualizeaz─â cronologia deciziilor istorice ╚Öi recente. ╚Ü─ârile care nu recunosc sunt ordonate alfabetic la final.</p>
         </div>
         <div class="rankings-selector">
-          <button class="rank-btn active" data-metric="year">An Recunoaștere</button>
-          <button class="rank-btn" data-metric="pop">Populație</button>
-          <button class="rank-btn" data-metric="sup">Suprafață</button>
+          <button class="rank-btn active" data-metric="year">An Recunoa╚Ötere</button>
+          <button class="rank-btn" data-metric="pop">Popula╚¢ie</button>
+          <button class="rank-btn" data-metric="sup">Suprafa╚¢─â</button>
         </div>
         <div id="rank-list-container" class="rank-list">
           <!-- Dynamic ranked items will be rendered here by Javascript -->
@@ -1172,26 +1197,27 @@ $htmlHeader = @'
 
 <footer>
   <div>
-    Această hartă interactivă reprezintă un instrument juridic și documentar cu privire la recunoașterea internațională a Statului Palestina pe continentul European. Informațiile reflectă deciziile oficiale de politică externă publicate de guvernele respective și dezbaterile conexe.
+    Aceast─â hart─â interactiv─â reprezint─â un instrument juridic ╚Öi documentar cu privire la recunoa╚Öterea interna╚¢ional─â a Statului Palestina pe continentul European. Informa╚¢iile reflect─â deciziile oficiale de politic─â extern─â publicate de guvernele respective ╚Öi dezbaterile conexe.
   </div>
   <div class="refs">
-    <strong>Surse diplomatice &amp; de presă</strong>
+    <strong>Surse diplomatice &amp; de pres─â</strong>
     UN General Assembly Resolution 43/177 (1988)<br>
     UNGA Resolution ES-10/23 (2024)<br>
-    Deciziile oficiale guvernamentale (Spania, Norvegia, Irlanda, Slovenia — 2024)<br>
-    Declarațiile comune de recunoaștere (Franța, UK, Belgia, Portugalia — sept. 2025)<br>
+    Deciziile oficiale guvernamentale (Spania, Norvegia, Irlanda, Slovenia ΓÇö 2024)<br>
+    Declara╚¢iile comune de recunoa╚Ötere (Fran╚¢a, UK, Belgia, Portugalia ΓÇö sept. 2025)<br>
     Wikipedia "International recognition of the State of Palestine"<br><br>
     <strong>Date cartografice</strong>
-    Natural Earth 110m · CC0 Public Domain<br><br>
+    Natural Earth 110m ┬╖ CC0 Public Domain<br><br>
     <strong>Dezvoltator</strong>
-    <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--accent); font-weight: 600; display: block; margin-top: 4px; letter-spacing: -0.02em; line-height: 1.2;">— creat de Popa Bogdan</span>
+    <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--accent); font-weight: 600; display: block; margin-top: 4px; letter-spacing: -0.02em; line-height: 1.2;">ΓÇö creat de Popa Bogdan</span>
   </div>
 </footer>
 '@
 
 $htmlFooter = @'
 <script>
-// DicÈ›ionare È™i baze de date pentru extinderea globalÄƒ a hÄƒrÈ›ii
+// Datele complete ale celor 44 de State Europene (inclusiv detalii demografice si de recunoastere)
+// Dictionare si baze de date pentru extinderea globala a hartii
 const nonEuropeanNonRecognizing = new Set([
   'united states of america', 'united states', 'israel', 'japan', 'republic of korea', 'south korea',
   'singapore', 'panama', 'paraguay', 'cameroon', 'eritrea', 'new zealand', 'fiji', 'kiribati',
@@ -1204,366 +1230,310 @@ const globalMajorData = {
     id: 'usa',
     nume: 'Statele Unite ale Americii',
     numeEn: 'United States of America',
-    flag: 'ðŸ‡ºðŸ‡¸',
+    flag: '\uD83C\uDDFA\uD83C\uDDF8',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaÈ™te Palestina',
+    categorieLabel: 'Nu recunoa\u0219te Palestina',
     lat: 37.0902,
     lon: -95.7129,
     coords: [-95.7129, 37.0902],
     capitala: 'Washington, D.C.',
-    populatie: 'â‰ˆ 335 000 000 loc.',
+    populatie: '\u2248 335 000 000 loc.',
     popVal: 335000000,
-    suprafata: '9 833 517 kmÂ²',
+    suprafata: '9 833 517 km\u00B2',
     supVal: 9833517,
-    zee: 'â€”',
-    moneda: 'Dolar American (USD)',
-    particularitati: 'Membru permanent al Consiliului de Securitate al ONU. Principalul aliat strategic al Israelului.',
-    note: 'Statele Unite nu recunosc oficial Statul Palestina, susÈ›inÃ¢nd cÄƒ recunoaÈ™terea statalitÄƒÈ›ii trebuie sÄƒ fie rezultatul negocierilor directe bilaterale Ã®ntre Israel È™i Autoritatea PalestinianÄƒ. SUA Ã®È™i foloseÈ™te frecvent dreptul de veto Ã®n Consiliul de Securitate al ONU pentru a bloca rezoluÈ›iile privind aderarea deplinÄƒ a Palestinei.',
+    zee: '\u2014',
+    moneda: 'Dolar american (USD)',
+    particularitati: 'Cel mai important aliat strategic al Israelului din emisfera vestic\u0103.',
+    note: 'Statele Unite ale Americii nu recunosc oficial Statul Palestina ca stat suveran, sus\u021Bin\u00E2nd c\u0103 statalitatea palestinian\u0103 trebuie s\u0103 fie rezultatul unor negocieri directe \u00EEntre Israel \u0219i Autoritatea Palestinian\u0103.',
     viza: {
-      particular: 'SUA menÈ›ine o politicÄƒ strictÄƒ È™i refuzÄƒ reprezentarea diplomaticÄƒ palestinianÄƒ oficialÄƒ deplinÄƒ la Washington.',
-      temei: 'Decizii prezidenÈ›iale È™i legislative federale privind sprijinul pentru Israel.',
-      regim: 'Cooperare bilateralÄƒ diplomaticÄƒ informalÄƒ.',
-      observatie: 'ConsiderÄƒ cÄƒ proclamarea unilateralÄƒ a statalitÄƒÈ›ii dÄƒuneazÄƒ procesului de pace.'
+      particular: 'Controleaz\u0103 direct asisten\u021Ba financiar\u0103 \u0219i are drept de veto \u00EEn Consiliul de Securitate al ONU.',
+      temei: 'Legisla\u021Bia federal\u0103 american\u0219 \u0219i acordurile strategice cu Israelul.',
+      regim: 'Delega\u021Bie general\u0103 a OEP activ\u0103 la Washington la nivel redus.',
+      observatie: 'Sprijin militar \u0219i diplomatic necondi\u021Bionat pentru Israel.'
     },
     ue: 'Stat partener strategic non-european.',
-    schengen: 'Regim CTA/Viza Waiver (ESTA) aplicat cetÄƒÈ›enilor din statele aliate.'
+    schengen: 'Regim de scutire de vize (ESTA) pentru statele din spa\u021Biul Schengen.'
   },
   'united states': { inherits: 'united states of america' },
   'china': {
-    id: 'china',
-    nume: 'China',
+    id: 'chn',
+    nume: 'Republica Popular\u0103 Chinez\u0103',
     numeEn: 'China',
-    flag: 'ðŸ‡¨ðŸ‡³',
+    flag: '\uD83C\uDDE8\uD83C\uDDF3',
     categorie: 'rec',
-    categorieLabel: 'RecunoaÈ™te Palestina',
+    categorieLabel: 'Recunoa\u0219te Palestina',
     lat: 35.8617,
     lon: 104.1954,
     coords: [104.1954, 35.8617],
     capitala: 'Beijing',
-    populatie: 'â‰ˆ 1 411 000 000 loc.',
+    populatie: '\u2248 1 411 000 000 loc.',
     popVal: 1411000000,
-    suprafata: '9 596 961 kmÂ²',
+    suprafata: '9 596 961 km\u00B2',
     supVal: 9596961,
     zee: '1988',
-    moneda: 'Renminbi (CNY)',
-    particularitati: 'Membru permanent al Consiliului de Securitate al ONU. SusÈ›inÄƒtor istoric major al cauzei palestiniene.',
-    note: 'China a recunoscut Statul Palestina imediat dupÄƒ DeclaraÈ›ia de IndependenÈ›Äƒ din 1988. Beijingul menÈ›ine relaÈ›ii diplomatice strÃ¢nse cu conducerea palestinianÄƒ È™i pledeazÄƒ ferm Ã®n forurile internaÈ›ionale pentru crearea unui stat palestinian independent pe baza frontierelor din 1967.',
+    moneda: 'Renminbi / Yuan (CNY)',
+    particularitati: 'Sprijin istoric consecvent pentru cauza palestinian\u0103 \u00EEn forurile ONU.',
+    note: 'China a recunoscut oficial Statul Palestina \u00EEn noiembrie 1988, imediat dup\u00E3 Declara\u021Bia de Independen\u021B\u0103, \u0219i men\u021Bine rela\u021Bii diplomatice depline, promov\u00E2nd solu\u021Bia celor dou\u0103 state \u0219i o participare mai larg\u0103 la conferin\u021Bele de pace.',
     viza: {
-      particular: 'Ambasada Palestinei funcÈ›ioneazÄƒ activ la Beijing cu statut diplomatic deplin.',
-      temei: 'Solidaritate ideologicÄƒ È™i geopoliticÄƒ istoricÄƒ.',
-      regim: 'RelaÈ›ii diplomatice depline stabilite Ã®n 1988.',
-      observatie: 'Pledoarie activÄƒ pentru o conferinÈ›Äƒ internaÈ›ionalÄƒ de pace extinsÄƒ.'
+      particular: 'Ambasada Palestinei func\u021Bioneaz\u0103 activ la Beijing, primind statut diplomatic complet.',
+      temei: 'Rela\u021Bii istorice consolidate de la era Mao Zedong \u0219i sprijin geopolitic regional.',
+      regim: 'Vizite diplomatice frecvente \u0219i acorduri economice bilaterale.',
+      observatie: 'China sprijin\u0103 calitatea de membru deplin al Palestinei la ONU.'
     },
-    ue: 'Partener comercial global major.',
-    schengen: 'Regim de vize standard.'
-  },
-  'russia': {
-    id: 'russia',
-    nume: 'Rusia',
-    numeEn: 'Russia',
-    flag: 'ðŸ‡·ðŸ‡º',
-    categorie: 'rec',
-    categorieLabel: 'RecunoaÈ™te Palestina',
-    lat: 61.524,
-    lon: 105.3188,
-    coords: [105.3188, 61.524],
-    capitala: 'Moscova',
-    populatie: 'â‰ˆ 146 000 000 loc.',
-    popVal: 146000000,
-    suprafata: '17 098 246 kmÂ²',
-    supVal: 17098246,
-    zee: '1988',
-    moneda: 'RublÄƒ RuseascÄƒ (RUB)',
-    particularitati: 'Membru permanent al Consiliului de Securitate al ONU. MoÈ™teneÈ™te recunoaÈ™terea acordatÄƒ de URSS.',
-    note: 'FederaÈ›ia RusÄƒ moÈ™teneÈ™te poziÈ›ia Uniunii Sovietice, care a recunoscut Statul Palestina Ã®n 1988. Moscova gÄƒzduieÈ™te o ambasadÄƒ palestinianÄƒ deplinÄƒ È™i participÄƒ activ ca membru al Quartetului pentru Orientul Mijlociu, susÈ›inÃ¢nd o soluÈ›ie stabilÄƒ cu douÄƒ state.',
-    viza: {
-      particular: 'AmbasadÄƒ palestinianÄƒ funcÈ›ionalÄƒ Ã®n centrul Moscovei.',
-      temei: 'MoÈ™tenire diplomaticÄƒ a blocului sovietic È™i sprijin tradiÈ›ional.',
-      regim: 'Bilateral diplomatic deplin.',
-      observatie: 'SusÈ›ine crearea statului palestinian independent cu capitala Ã®n Ierusalimul de Est.'
-    },
-    ue: 'RelaÈ›ii tensionate / Regim geopolitic disputat.',
-    schengen: 'Regim de vize standard.'
-  },
-  'india': {
-    id: 'india',
-    nume: 'India',
-    numeEn: 'India',
-    flag: 'ðŸ‡®ðŸ‡³',
-    categorie: 'rec',
-    categorieLabel: 'RecunoaÈ™te Palestina',
-    lat: 20.5937,
-    lon: 78.9629,
-    coords: [78.9629, 20.5937],
-    capitala: 'New Delhi',
-    populatie: 'â‰ˆ 1 408 000 000 loc.',
-    popVal: 1408000000,
-    suprafata: '3 287 263 kmÂ²',
-    supVal: 3287263,
-    zee: '1988',
-    moneda: 'Rupie IndianÄƒ (INR)',
-    particularitati: 'Prima È›arÄƒ non-arabÄƒ care a recunoscut OrganizaÈ›ia pentru Eliberarea Palestinei (OLP) Ã®n 1974.',
-    note: 'India a fost prima È›arÄƒ non-arabÄƒ care a recunoscut OrganizaÈ›ia pentru Eliberarea Palestinei (OLP) ca unic reprezentant legitim al poporului palestinian È™i a recunoscut oficial statalitatea Palestinei Ã®n 1988. India menÈ›ine relaÈ›ii diplomatice cordiale È™i oferÄƒ asistenÈ›Äƒ tehnicÄƒ substanÈ›ialÄƒ.',
-    viza: {
-      particular: 'Misiune diplomaticÄƒ palestinianÄƒ completÄƒ la New Delhi.',
-      temei: 'Sprijin istoric tradiÈ›ional din perioada miÈ™cÄƒrii de nealiniere.',
-      regim: 'RelaÈ›ii bilaterale excelente.',
-      observatie: 'MenÈ›ine totodatÄƒ relaÈ›ii economice È™i tehnologice strÃ¢nse cu Israelul.'
-    },
-    ue: 'Partener strategic comercial major.',
-    schengen: 'Regim de vize standard.'
+    ue: 'Partener comercial major \u0219i concurent strategic global.',
+    schengen: 'Regim de vize obligatoriu standard.'
   },
   'brazil': {
-    id: 'brazil',
+    id: 'bra',
     nume: 'Brazilia',
     numeEn: 'Brazil',
-    flag: 'ðŸ‡§ðŸ‡·',
+    flag: '\uD83C\uDDE7\uD83C\uDDF7',
     categorie: 'rec',
-    categorieLabel: 'RecunoaÈ™te Palestina',
+    categorieLabel: 'Recunoa\u0219te Palestina',
     lat: -14.235,
     lon: -51.9253,
     coords: [-51.9253, -14.235],
-    capitala: 'BrasÃ­lia',
-    populatie: 'â‰ˆ 214 000 000 loc.',
-    popVal: 214000000,
-    suprafata: '8 515 767 kmÂ²',
+    capitala: 'Bras\u00EDlia',
+    populatie: '\u2248 215 000 000 loc.',
+    popVal: 215000000,
+    suprafata: '8 515 767 km\u00B2',
     supVal: 8515767,
     zee: '2010',
-    moneda: 'Real Brazilian (BRL)',
-    particularitati: 'A declanÈ™at valul istoric de recunoaÈ™teri Ã®n America LatinÄƒ Ã®n 2010.',
-    note: 'Brazilia a recunoscut oficial Statul Palestina Ã®n decembrie 2010 Ã®n cadrul frontierelor din 1967. AceastÄƒ decizie a declanÈ™at un val de recunoaÈ™teri Ã®n lanÈ› Ã®n toatÄƒ America de Sud, consolidÃ¢nd sprijinul regional pentru cauza palestinianÄƒ.',
+    moneda: 'Real brazilian (BRL)',
+    particularitati: 'Lider regional \u00EEn promovarea recunoa\u0219terii Palestinei \u00EEn America Latin\u0103.',
+    note: 'Brazilia a recunoscut oficial Statul Palestina \u00EEn decembrie 2010, \u00EEn grani\u021Bele din 1967, declan\u0219\u00E2nd un val de recunoa\u0219teri similare \u00EEn \u00EEntreaga Americ\u0103 de Sud.',
     viza: {
-      particular: 'Ambasada Palestinei funcÈ›ioneazÄƒ activ la BrasÃ­lia.',
-      temei: 'Schimbare strategicÄƒ de politicÄƒ externÄƒ orientatÄƒ spre Sudul Global.',
-      regim: 'Bilateral diplomatic deplin.',
-      observatie: 'SusÈ›ine activ rezoluÈ›iile ONU privind autodeterminarea palestinienilor.'
+      particular: 'Ambasada Palestinei func\u021Bioneaz\u0103 activ la Bras\u00EDlia.',
+      temei: 'Schimbare strategic\u0103 de politic\u0103 extern\u0103 orientat\u0103 spre Sudul Global.',
+      regim: 'Reprezentare diplomatic\u0103 deplin\u0103 stabilit\u0103 din 2010.',
+      observatie: 'Sprijin\u0103 activ rezolu\u021Biile ONU pentru suveranitatea palestinian\u0103.'
     },
-    ue: 'Partener de cooperare global.',
-    schengen: 'Acord de scutire de vize pentru È™ederi de scurtÄƒ duratÄƒ cu statele UE.'
+    ue: 'Stat partener non-european comercial major.',
+    schengen: 'Acord de scutire de vize pentru \u0219ederi de scurt\u0103 durat\u0103 cu statele UE.'
   },
   'canada': {
-    id: 'canada',
+    id: 'can',
     nume: 'Canada',
     numeEn: 'Canada',
-    flag: 'ðŸ‡¨ðŸ‡¦',
+    flag: '\uD83C\uDDE8\uD83C\uDDE6',
     categorie: 'rec',
-    categorieLabel: 'RecunoaÈ™te Palestina',
+    categorieLabel: 'Recunoa\u0219te Palestina',
     lat: 56.1304,
     lon: -106.3468,
     coords: [-106.3468, 56.1304],
     capitala: 'Ottawa',
-    populatie: 'â‰ˆ 38 000 000 loc.',
-    popVal: 38000000,
-    suprafata: '9 984 670 kmÂ²',
+    populatie: '\u2248 39 000 000 loc.',
+    popVal: 39000000,
+    suprafata: '9 984 670 km\u00B2',
     supVal: 9984670,
     zee: '2025',
-    moneda: 'Dolar Canadian (CAD)',
-    particularitati: 'RecunoaÈ™tere istoricÄƒ extinsÄƒ Ã®n toamna anului 2025 alÄƒturi de Marea Britanie È™i Australia.',
-    note: 'ÃŽntr-o turnurÄƒ diplomaticÄƒ istoricÄƒ Ã®n septembrie 2025, Canada, alÄƒturi de Regatul Unit È™i Australia, a extins recunoaÈ™terea oficialÄƒ a Statului Palestina ca parte a unui efort internaÈ›ional coordonat pentru deblocarea procesului de pace È™i sprijinirea soluÈ›iei celor douÄƒ state.',
+    moneda: 'Dolar canadian (CAD)',
+    particularitati: 'Recunoa\u0219tere istoric\u0103 extins\u0103 \u00EEn toamna anului 2025 al\u0103turi de Marea Britanie \u0219i Australia.',
+    note: '\u00EEntr-o turnur\u0103 diplomatic\u0103 istoric\u0103 \u00EEn septembrie 2025, Canada, al\u0103turi de Regatul Unit \u0219i Australia, a extins recunoa\u0219terea oficial\u0103 a Statului Palestina ca parte a unui efort interna\u021Bional coordonat pentru deblocarea procesului de pace \u0219i sprijinirea solu\u021Biei celor dou\u0103 state.',
     viza: {
-      particular: 'Reprezentare diplomaticÄƒ deplinÄƒ stabilitÄƒ recent.',
-      temei: 'Efort diplomatic comun G7/Commonwealth.',
-      regim: 'RelaÈ›ii diplomatice depline recent stabilite.',
-      observatie: 'Trecere de la o politicÄƒ istoric de abÈ›inere la un rol proactiv.'
+      particular: 'Reprezentare diplomatic\u0103 deplin\u0103 stabilit\u0103 recent.',
+      temei: 'Decizie comun\u0103 guvernamental\u0103 de aliniere interna\u021Bional\u0103.',
+      regim: 'Misiune diplomatic\u0103 palestinian\u0103 deplin\u0103 la Ottawa.',
+      observatie: 'Trecere de la o politic\u0103 istoric\u0103 de ab\u021Binere la un rol proactiv.'
     },
-    ue: 'Partener strategic G7.',
-    schengen: 'Regim de cÄƒlÄƒtorie fÄƒrÄƒ vize (eTA).'
+    ue: 'Partener strategic transatlantic de top.',
+    schengen: 'Regim de c\u0103l\u0103torie f\u0103r\u0103 vize (eTA).'
   },
   'australia': {
-    id: 'australia',
+    id: 'aus',
     nume: 'Australia',
     numeEn: 'Australia',
-    flag: 'ðŸ‡¦ðŸ‡º',
+    flag: '\uD83C\uDDE6\uD83C\uDDFA',
     categorie: 'rec',
-    categorieLabel: 'RecunoaÈ™te Palestina',
+    categorieLabel: 'Recunoa\u0219te Palestina',
     lat: -25.2744,
     lon: 133.7751,
     coords: [133.7751, -25.2744],
     capitala: 'Canberra',
-    populatie: 'â‰ˆ 26 000 000 loc.',
+    populatie: '\u2248 26 000 000 loc.',
     popVal: 26000000,
-    suprafata: '7 692 024 kmÂ²',
+    suprafata: '7 692 024 km\u00B2',
     supVal: 7692024,
     zee: '2025',
-    moneda: 'Dolar Australian (AUD)',
-    particularitati: 'RecunoaÈ™tere coordonatÄƒ Ã®n septembrie 2025 Ã®n sprijinul soluÈ›iei a douÄƒ state.',
-    note: 'Australia a recunoscut oficial Statul Palestina Ã®n toamna anului 2025 Ã®n mod coordonat cu aliaÈ›ii sÄƒi din G7, semnalÃ¢nd o schimbare strategicÄƒ majorÄƒ Ã®n politica sa externÄƒ pentru a stimula negocierile de pace din Orientul Mijlociu.',
+    moneda: 'Dolar australian (AUD)',
+    particularitati: 'Recunoa\u0219tere coordonat\u0103 \u00EEn septembrie 2025 \u00EEn sprijinul solu\u021Biei a dou\u0103 state.',
+    note: 'Australia a recunoscut oficial Statul Palestina \u00EEn toamna anului 2025 \u00EEn mod coordonat cu alia\u021Bii s\u0103i din G7, semnal\u00E2nd o schimbare strategic\u0103 major\u0103 \u00EEn politica sa extern\u0103 pentru a stimula negocierile de pace din Orientul Mijlociu.',
     viza: {
-      particular: 'StabileÈ™te relaÈ›ii diplomatice bilaterale depline cu Ramallah.',
-      temei: 'Schimbare strategicÄƒ guvernamentalÄƒ pentru stabilitatea regionalÄƒ.',
-      regim: 'Diplomatic bilateral deplin.',
-      observatie: 'ConsiderÄƒ cÄƒ recunoaÈ™terea statalitÄƒÈ›ii oferÄƒ echilibru procesului diplomatic.'
+      particular: 'Reprezentare diplomatic\u0103 deschis\u0103 la Canberra.',
+      temei: 'Schimbare strategic\u0103 guvernamental\u0103 pentru stabilitatea regional\u0103.',
+      regim: 'Rela\u021Bii diplomatice bilaterale complete.',
+      observatie: 'Consider\u0103 c\u0103 recunoa\u0219terea statalit\u0103\u021Bii ofer\u0103 echilibru procesului diplomatic.'
     },
-    ue: 'Partener strategic transcontinental.',
-    schengen: 'Regim de vize simplificat (eVisitor).'
+    ue: 'Partener strategic global non-european.',
+    schengen: 'Regim de vize obligatoriu standard.'
   },
   'japan': {
-    id: 'japan',
+    id: 'jpn',
     nume: 'Japonia',
     numeEn: 'Japan',
-    flag: 'ðŸ‡¯ðŸ‡µ',
+    flag: '\uD83C\uDDEF\uD83C\uDDF5',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaÈ™te Palestina',
+    categorieLabel: 'Nu recunoa\u0219te Palestina',
     lat: 36.2048,
     lon: 138.2529,
     coords: [138.2529, 36.2048],
     capitala: 'Tokyo',
-    populatie: 'â‰ˆ 125 000 000 loc.',
+    populatie: '\u2248 125 000 000 loc.',
     popVal: 125000000,
-    suprafata: '377 975 kmÂ²',
+    suprafata: '377 975 km\u00B2',
     supVal: 377975,
-    zee: 'â€”',
-    moneda: 'Yen Japonez (JPY)',
-    particularitati: 'Unul dintre cei mai importanÈ›i donatori de asistenÈ›Äƒ pentru dezvoltare din Palestina.',
-    note: 'Japonia nu recunoaÈ™te oficial Statul Palestina ca stat suveran, dar menÈ›ine un birou de reprezentare la Ramallah È™i este unul dintre cei mai mari donatori de asistenÈ›Äƒ umanitarÄƒ È™i economicÄƒ pentru poporul palestinian, susÈ›inÃ¢nd activ dreptul la autodeterminare.',
+    zee: '\u2014',
+    moneda: 'Yen japonez (JPY)',
+    particularitati: 'Unul dintre cei mai importan\u021Bi donatori de asisten\u021B\u0103 pentru dezvoltare din Palestina.',
+    note: 'Japonia nu recunoa\u0219te oficial Statul Palestina ca stat suveran, dar men\u021Bine un birou de reprezentare la Ramallah \u0219i este unul dintre cei mai mari donatori de asisten\u021B\u0103 umanitar\u0103 \u0219i economic\u0103 pentru poporul palestinian, sus\u021Bin\u00E2nd activ dreptul la autodeterminare.',
     viza: {
-      particular: 'MenÈ›ine un birou de reprezentare la Ramallah È™i colaboreazÄƒ strÃ¢ns pe teme de dezvoltare.',
-      temei: 'SusÈ›inere fermÄƒ a soluÈ›iei a douÄƒ state È™i a dreptului la autodeterminare.',
-      regim: 'RelaÈ›ii diplomatice informale, dar extrem de substanÈ›iale economic.',
-      observatie: 'ImplementeazÄƒ iniÈ›iativa strategicÄƒ â€žCoridorul pentru Pace È™i Prosperitateâ€.'
+      particular: 'Men\u021Bine un birou de reprezentare la Ramallah \u0219i colaboreaz\u0103 str\u00E2ns pe teme de dezvoltare.',
+      temei: 'Sus\u021Binere ferm\u0103 a solu\u021Biei a dou\u0103 state \u0219i a dreptului la autodeterminare.',
+      regim: 'Rela\u021Bii guvernamentale prin Reprezentan\u021Ba din Tokyo \u0219i Ramallah.',
+      observatie: 'Implementeaz\u0103 ini\u021Biativa strategic\u0103 \u201ECoridorul pentru Pace \u0219i Prosperitate\u201D.'
     },
-    ue: 'Partener strategic G7.',
-    schengen: 'Regim de cÄƒlÄƒtorie fÄƒrÄƒ vize Ã®n spaÈ›iul Schengen.'
+    ue: 'Partener comercial \u0219i industrial major non-european.',
+    schengen: 'Regim de c\u0103l\u0103torie f\u0103r\u0103 vize \u00EEn spa\u021Biul Schengen.'
   },
   'saudi arabia': {
-    id: 'saudiarabia',
-    nume: 'Arabia SauditÄƒ',
+    id: 'sau',
+    nume: 'Arabia Saudit\u0103',
     numeEn: 'Saudi Arabia',
-    flag: 'ðŸ‡¸ðŸ‡¦',
+    flag: '\uD83C\uDDF8\uD83C\uDDE6',
     categorie: 'rec',
-    categorieLabel: 'RecunoaÈ™te Palestina',
+    categorieLabel: 'Recunoa\u0219te Palestina',
     lat: 23.8859,
     lon: 45.0792,
     coords: [45.0792, 23.8859],
     capitala: 'Riad',
-    populatie: 'â‰ˆ 35 000 000 loc.',
-    popVal: 35000000,
-    suprafata: '2 149 690 kmÂ²',
+    populatie: '\u2248 36 000 000 loc.',
+    popVal: 36000000,
+    suprafata: '2 149 690 km\u00B2',
     supVal: 2149690,
     zee: '1988',
-    moneda: 'Riyal Saudit (SAR)',
-    particularitati: 'Lider al IniÈ›iativei Arabe de Pace.',
-    note: 'Arabia SauditÄƒ a recunoscut Palestina Ã®n 1988 È™i este principalul promotor al IniÈ›iativei Arabe de Pace din 2002, care propune normalizarea deplinÄƒ a relaÈ›iilor cu Israelul Ã®n schimbul retragerii acestuia din teritoriile ocupate Ã®n 1967 È™i creÄƒrii unui stat palestinian.',
+    moneda: 'Riyal saudit (SAR)',
+    particularitati: 'Lider al lumii arabe \u0219i promotor principal al Ini\u021Biativei Arabe de Pace.',
+    note: 'Arabia Saudit\u0103 a recunoscut Palestina \u00EEn 1988 \u0219i este principalul promotor al Ini\u021Biativei Arabe de Pace din 2002, care propune normalizarea deplin\u0103 a rela\u021Biilor cu Israelul \u00EEn schimbul retragerii acestuia din teritoriile ocupate \u00EEn 1967 \u0219i cre\u0103rii unui stat palestinian.',
     viza: {
-      particular: 'MenÈ›ine o ambasadÄƒ palestinianÄƒ deplinÄƒ la Riad È™i sprijinÄƒ puternic bugetul AutoritÄƒÈ›ii.',
-      temei: 'Solidaritate islamicÄƒ È™i arabÄƒ strategicÄƒ.',
-      regim: 'Diplomatic bilateral deplin.',
-      observatie: 'CondiÈ›ioneazÄƒ normalizarea istoricÄƒ a relaÈ›iilor cu Israelul de crearea statului palestinian.'
+      particular: 'Men\u021Bine o ambasad\u0103 palestinian\u0103 deplin\u0103 la Riad \u0219i sprijin\u0103 puternic bugetul Autorit\u0103\u021Bii.',
+      temei: 'Solidaritate islamic\u0103 \u0219i arab\u0103 strategic\u0103.',
+      regim: 'Reprezentare diplomatic\u0103 deplin\u0103.',
+      observatie: 'Condi\u021Bioneaz\u0103 normalizarea istoric\u0103 a rela\u021Biilor cu Israelul de crearea statului palestinian.'
     },
-    ue: 'Partener economic È™i energetic crucial.',
-    schengen: 'Regim de vize standard.'
+    ue: 'Partener energetic \u0219i geopolitic important.',
+    schengen: 'Regim de vize obligatoriu standard.'
   },
   'egypt': {
-    id: 'egypt',
+    id: 'egy',
     nume: 'Egipt',
     numeEn: 'Egypt',
-    flag: 'ðŸ‡ªðŸ‡¬',
+    flag: '\uD83C\uDDE9\uD83C\uDDFE',
     categorie: 'rec',
-    categorieLabel: 'RecunoaÈ™te Palestina',
+    categorieLabel: 'Recunoa\u0219te Palestina',
     lat: 26.8206,
     lon: 30.8025,
     coords: [30.8025, 26.8206],
     capitala: 'Cairo',
-    populatie: 'â‰ˆ 109 000 000 loc.',
+    populatie: '\u2248 109 000 000 loc.',
     popVal: 109000000,
-    suprafata: '1 002 450 kmÂ²',
-    supVal: 1002450,
+    suprafata: '1 010 408 km\u00B2',
+    supVal: 1010408,
     zee: '1988',
-    moneda: 'LirÄƒ EgipteanÄƒ (EGP)',
-    particularitati: 'Controlul strategic al punctului de trecere Rafah spre FÃ¢È™ia Gaza.',
-    note: 'Egiptul a recunoscut Palestina Ã®n 1988 È™i joacÄƒ un rol istoric crucial ca mediator principal Ã®n negocierile dintre fracÈ›iunile palestiniene È™i Israel, controlÃ¢nd totodatÄƒ singurul punct de trecere a frontierei non-israelian Ã®n FÃ¢È™ia Gaza la Rafah.',
+    moneda: 'Lir\u0103 Egiptean\u0103 (EGP)',
+    particularitati: 'Proximitate strategic\u0103 \u0219i control istoric asupra punctului de trecere de la Rafah.',
+    note: 'Egiptul a recunoscut Palestina \u00EEn 1988 \u0219i joac\u0103 un rol istoric crucial ca mediator principal \u00EEn negocierile dintre frac\u021Biunile palestiniene \u0219i Israel, control\u00E2nd totodat\u0103 singurul punct de trecere a frontierei non-israelian \u00EEn F\u00E2\u0219ia Gaza la Rafah.',
     viza: {
-      particular: 'Reprezentare diplomaticÄƒ deplinÄƒ È™i legÄƒturi de securitate ultra-strÃ¢nse.',
-      temei: 'Securitate naÈ›ionalÄƒ, proximitate geograficÄƒ È™i solidaritate arabÄƒ.',
-      regim: 'Bilateral deplin istoric.',
-      observatie: 'Eforturi intense pentru unitatea politicÄƒ palestinianÄƒ (Reconcilierea Fatah-Hamas).'
+      particular: 'Reprezentare diplomatic\u0103 deplin\u0103 \u0219i leg\u0103turi de securitate ultra-str\u00E2nse.',
+      temei: 'Securitate na\u021Bional\u0103, proximitate geografic\u0103 \u0219i solidaritate arab\u0103.',
+      regim: 'Ambasad\u0103 deplin\u0103 la Cairo \u0219i misiune diplomatic\u0103 activ\u0103.',
+      observatie: 'Eforturi intense pentru unitatea politic\u0103 palestinian\u0103 (Reconcilierea Fatah-Hamas).'
     },
-    ue: 'Partener cheie Ã®n securitatea Mediteranei.',
-    schengen: 'Regim de vize standard.'
+    ue: 'Partener de vecin\u0103tate strategic major.',
+    schengen: 'Regim de vize obligatoriu standard.'
   },
   'turkey': {
-    id: 'turkey',
+    id: 'tur',
     nume: 'Turcia',
     numeEn: 'Turkey',
-    flag: 'ðŸ‡¹ðŸ‡·',
+    flag: '\uD83C\uDDF9\uD83C\uDDF7',
     categorie: 'rec',
-    categorieLabel: 'RecunoaÈ™te Palestina',
+    categorieLabel: 'Recunoa\u0219te Palestina',
     lat: 38.9637,
     lon: 35.2433,
     coords: [35.2433, 38.9637],
     capitala: 'Ankara',
-    populatie: 'â‰ˆ 85 000 000 loc.',
+    populatie: '\u2248 85 000 000 loc.',
     popVal: 85000000,
-    suprafata: '783 562 kmÂ²',
+    suprafata: '783 562 km\u00B2',
     supVal: 783562,
     zee: '1988',
-    moneda: 'LirÄƒ TurceascÄƒ (TRY)',
-    particularitati: 'Una dintre primele È›Äƒri care a recunoscut statalitatea Ã®n 1988.',
-    note: 'Turcia a recunoscut Statul Palestina Ã®n 1988 È™i este unul dintre cei mai vocali susÈ›inÄƒtori internaÈ›ionali ai cauzei palestiniene, oferind sprijin diplomatic, economic È™i umanitar extins È™i gÄƒzduind o reprezentanÈ›Äƒ diplomaticÄƒ palestinianÄƒ majorÄƒ.',
+    moneda: 'Lir\u0103 Turceasc\u0103 (TRY)',
+    particularitati: 'Una dintre primele \u021B\u0103ri care a recunoscut statalitatea \u00EEn 1988.',
+    note: 'Turcia a recunoscut Statul Palestina \u00EEn 1988 \u0219i este unul dintre cei mai vocali sus\u021Bin\u0103tori interna\u021Bionali ai cauzei palestiniene, oferind sprijin diplomatic, economic \u0219i umanitar extins \u0219i g\u0103zduind o reprezentan\u021B\u0103 diplomatic\u0103 palestinian\u0103 major\u0103.',
     viza: {
-      particular: 'Ambasada Palestinei funcÈ›ioneazÄƒ activ la Ankara, cu reprezentare extinsÄƒ.',
-      temei: 'AfinitÄƒÈ›i istorice otomane È™i solidaritate regionalÄƒ puternicÄƒ.',
-      regim: 'RelaÈ›ii diplomatice bilaterale depline.',
-      observatie: 'PoziÈ›ionare ca protector activ al locurilor sfinte din Ierusalim (Al-Aqsa).'
+      particular: 'Ambasada Palestinei func\u021Bioneaz\u0103 activ la Ankara, cu reprezentare extins\u0103.',
+      temei: 'Afinit\u0103\u021Bi istorice otomane \u0219i solidaritate regional\u0103 puternic\u0103.',
+      regim: 'Misiune diplomatic\u0103 complet\u0103 la nivel de Ambasador.',
+      observatie: 'Prezint\u0103 cauza palestinian\u0103 la toate nivelurile interna\u021Bionale.'
     },
-    ue: 'Stat candidat la Uniunea EuropeanÄƒ.',
-    schengen: 'Regim de vize standard.'
+    ue: 'Stat candidat la Uniunea European\u0103.',
+    schengen: 'Regim de vize obligatoriu standard.'
   },
   'south africa': {
-    id: 'southafrica',
+    id: 'zaf',
     nume: 'Africa de Sud',
     numeEn: 'South Africa',
-    flag: 'ðŸ‡¿ðŸ‡¦',
+    flag: '\uD83C\uDDF1\uD83C\uDDFB',
     categorie: 'rec',
-    categorieLabel: 'RecunoaÈ™te Palestina',
+    categorieLabel: 'Recunoa\u0219te Palestina',
     lat: -30.5595,
     lon: 22.9375,
     coords: [22.9375, -30.5595],
     capitala: 'Pretoria',
-    populatie: 'â‰ˆ 60 000 000 loc.',
+    populatie: '\u2248 60 000 000 loc.',
     popVal: 60000000,
-    suprafata: '1 221 037 kmÂ²',
+    suprafata: '1 221 037 km\u00B2',
     supVal: 1221037,
     zee: '1995',
-    moneda: 'Rand Sud-African (ZAR)',
-    particularitati: 'A iniÈ›iat cazul istoric de genocid Ã®mpotriva Israelului la CIJ Ã®n 2023.',
-    note: 'RelaÈ›iile diplomatice depline au fost stabilite Ã®n 1995 sub conducerea lui Nelson Mandela. Africa de Sud comparÄƒ lupta palestinianÄƒ cu miÈ™carea anti-apartheid È™i a intentat cazuri rÄƒsunÄƒtoare la Curtea InternaÈ›ionalÄƒ de JustiÈ›ie (CIJ) privind situaÈ›ia din Gaza.',
+    moneda: 'Rand sud-african (ZAR)',
+    particularitati: 'Promotor istoric al drepturilor palestiniene Ã®n cadrul cauzelor CIJ.',
+    note: 'Rela\u021Biile diplomatice depline au fost stabilite \u00EEn 1995 sub conducerea lui Nelson Mandela. Africa de Sud compar\u0103 lupta palestinian\u0103 cu mi\u0219carea anti-apartheid \u0219i a intentat cazuri r\u0103sun\u0103toare la Curtea Interna\u021Bional\u0103 de Justi\u021Bie (CIJ) privind situa\u021Bia din Gaza.',
     viza: {
-      particular: 'LegÄƒturi strÃ¢nse Ã®ntre partidul de guvernÄƒmÃ¢nt ANC È™i conducerea palestinianÄƒ.',
-      temei: 'Filozofia eliberÄƒrii naÈ›ionale È™i solidaritatea anti-apartheid.',
-      regim: 'RelaÈ›ii diplomatice bilaterale depline.',
-      observatie: 'Vocal deosebit Ã®n forurile juridice internaÈ›ionale.'
+      particular: 'Leg\u0103turi str\u00E2nse \u00EEntre partidul de guvern\u0103m\u00E2nt ANC \u0219i conducerea palestinian\u0103.',
+      temei: 'Filozofia eliber\u0103rii na\u021Bionale \u0219i solidaritatea anti-apartheid.',
+      regim: 'Ambasad\u0103 palestinian\u0103 activ\u0103 la Pretoria.',
+      observatie: 'A intentat ac\u021Biunea legal\u0103 istoric\u0103 din 2023-2024 la Curtea de la Haga.'
     },
-    ue: 'Partener comercial major Ã®n Africa.',
-    schengen: 'Regim de vize standard.'
+    ue: 'Partener strategic major non-european.',
+    schengen: 'Regim de vize obligatoriu standard.'
   },
   'israel': {
-    id: 'israel',
+    id: 'isr',
     nume: 'Israel',
     numeEn: 'Israel',
-    flag: 'ðŸ‡®ðŸ‡±',
+    flag: '\uD83C\uDDEE\uD83C\uDDF1',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaÈ™te Palestina',
+    categorieLabel: 'Nu recunoa\u0219te Palestina',
     lat: 31.0461,
     lon: 34.8516,
     coords: [34.8516, 31.0461],
-    capitala: 'Ierusalim (ContestatÄƒ)',
-    populatie: 'â‰ˆ 9 500 000 loc.',
-    popVal: 95000000,
-    suprafata: '20 770 kmÂ²',
+    capitala: 'Ierusalim (Contestat\u0103)',
+    populatie: '\u2248 9 500 000 loc.',
+    popVal: 9500000,
+    suprafata: '20 770 km\u00B2',
     supVal: 20770,
-    zee: 'â€”',
-    moneda: 'Nou È˜echel Israelian (ILS)',
-    particularitati: 'Stat direct implicat Ã®n conflictul de frontierÄƒ È™i suveranitate.',
-    note: 'Israelul respinge ferm recunoaÈ™terea unilateralÄƒ a Statului Palestina, considerÃ¢nd-o un obstacol Ã®n calea negocierilor directe È™i o recompensÄƒ pentru violenÈ›Äƒ. PoziÈ›ia oficialÄƒ a Israelului este cÄƒ statutul definitiv al teritoriilor trebuie negociat Ã®n cadrul unui acord de pace cuprinzÄƒtor.',
+    zee: '\u2014',
+    moneda: 'Nou \u0218echel Israelian (ILS)',
+    particularitati: 'Stat direct implicat \u00EEn conflictul de frontier\u0103 \u0219i suveranitate.',
+    note: 'Israelul respinge ferm recunoa\u0219terea unilateral\u0103 a Statului Palestina, consider\u00E2nd-o un obstacol \u00EEn calea negocierilor directe \u0219i o recompens\u0103 pentru violen\u021B\u0103. Pozi\u021Bia oficial\u0103 a Israelului este c\u0103 statutul definitiv al teritoriilor trebuie negociat \u00EEn cadrul unui acord de pace cuprinz\u0103tor.',
     viza: {
-      particular: 'ControleazÄƒ direct securitatea frontierelor, cÄƒile de comunicaÈ›ie È™i spaÈ›iul aerian Ã®n Cisiordania È™i Gaza.',
-      temei: 'PoziÈ›ii de securitate naÈ›ionalÄƒ, drepturi istorice revendicate È™i acordurile de la Oslo.',
-      regim: 'Administrare militarÄƒ È™i civilÄƒ disputatÄƒ Ã®n Teritoriile Ocupate.',
-      observatie: 'PoziÈ›ie oficialÄƒ guvernamentalÄƒ de respingere a deciziilor unilaterale de recunoaÈ™tere.'
+      particular: 'Controleaz\u0103 direct securitatea frontierelor, c\u0103ile de comunica\u021Bie \u0219i spa\u021Biul aerian \u00EEn Cisiordania \u0219i Gaza.',
+      temei: 'Pozi\u021Bii de securitate na\u021Bional\u0103, drepturi istorice revendicate \u0219i acordurile de la Oslo.',
+      regim: 'Administrare militar\u0103 \u0219i civil\u0103 disputat\u0103 \u00EEn Teritoriile Ocupate.',
+      observatie: 'Pozi\u021Bie oficial\u0103 guvernamental\u0103 de respingere a deciziilor unilaterale de recunoa\u0219tere.'
     },
-    ue: 'Partener de asociere economicÄƒ È™i tehnologicÄƒ ultra-strÃ¢ns.',
-    schengen: 'Acord de cÄƒlÄƒtorie fÄƒrÄƒ vize cu spaÈ›iul Schengen.'
+    ue: 'Partener de asociere economic\u0103 \u0219i tehnologic\u0103 ultra-str\u00E2ns.',
+    schengen: 'Acord de c\u0103l\u0103torie f\u0103r\u0103 vize cu spa\u021Biul Schengen.'
   }
 };
 
@@ -1592,71 +1562,95 @@ function translateCountryNameToRomanian(engName) {
     'kenya': 'Kenya',
     'somalia': 'Somalia',
     'madagascar': 'Madagascar',
-    'southfunction getFlagEmoji(engName) {
+    'south africa': 'Africa de Sud',
+    'algeria': 'Algeria',
+    'morocco': 'Maroc',
+    'mauritania': 'Mauritania',
+    'mali': 'Mali',
+    'niger': 'Niger',
+    'chad': 'Ciad',
+    'angola': 'Angola',
+    'namibia': 'Namibia',
+    'botswana': 'Botswana',
+    'zimbabwe': 'Zimbabwe',
+    'saudi arabia': 'Arabia Saudit\u0103',
+    'yemen': 'Yemen',
+    'oman': 'Oman',
+    'turkey': 'Turcia',
+    'syria': 'Siria',
+    'iraq': 'Irak',
+    'iran': 'Iran',
+    'afghanistan': 'Afganistan',
+    'pakistan': 'Pakistan',
+    'india': 'India',
+    'china': 'China',
+    'mongolia': 'Mongolia',
+    'russia': 'Rusia',
+    'kazakhstan': 'Kazahstan',
+    'japan': 'Japonia',
+    'south korea': 'Coreea de Sud',
+    'north korea': 'Coreea de Nord',
+    'vietnam': 'Vietnam',
+    'laos': 'Laos',
+    'thailand': 'Tailanda',
+    'cambodia': 'Cambodgia',
+    'malaysia': 'Malaezia',
+    'indonesia': 'Indonezia',
+    'philippines': 'Filipine',
+    'australia': 'Australia',
+    'new zealand': 'Noua Zeeland\u0103',
+    'dem. rep. congo': 'R.D. Congo',
+    'congo': 'Congo',
+    'cameroon': 'Camerun',
+    'nigeria': 'Nigeria',
+    'ghana': 'Ghana',
+    'ivory coast': 'Coasta de Filde\u0219',
+    'senegal': 'Senegal',
+    'papua new guinea': 'Papua Noua Guinee'
+  };
+  const key = engName.toLowerCase();
+  return map[key] || engName.charAt(0).toUpperCase() + engName.slice(1);
+}
+
+function getFlagEmoji(engName) {
   const map = {
-    'united states of america': '🇺🇸', 'united states': '🇺🇸',
-    'canada': '🇨🇦', 'mexico': '🇲🇽', 'colombia': '🇨🇴', 'venezuela': '🇻🇪',
-    'ecuador': '🇪🇨', 'peru': '🇵🇪', 'bolivia': '🇧🇴', 'chile': '🇨🇱',
-    'argentina': '🇦🇷', 'paraguay': '🇵🇾', 'uruguay': '🇺🇾', 'brazil': '🇧🇷',
-    'cuba': '🇨🇺', 'egypt': '🇪🇬', 'libya': '🇱🇾', 'sudan': '🇸🇩',
-    'ethiopia': '🇪🇹', 'kenya': '🇰🇪', 'somalia': '🇸🇴', 'madagascar': '🇲🇬',
-    'south africa': '🇿🇦', 'algeria': '🇩🇿', 'morocco': '🇲🇦', 'mauritania': '🇲🇷',
-    'mali': '🇲🇱', 'niger': '🇳🇪', 'chad': '🇹🇩', 'angola': '🇦🇴',
-    'namibia': '🇳🇦', 'botswana': '🇧🇼', 'zimbabwe': '🇿🇼', 'saudi arabia': '🇸🇦',
-    'yemen': '🇾🇪', 'oman': '🇴🇲', 'turkey': '🇹🇷', 'syria': '🇸🇾',
-    'iraq': '🇮🇶', 'iran': '🇮🇷', 'afghanistan': '🇦🇫', 'pakistan': '🇵🇰',
-    'india': '🇮🇳', 'china': '🇨🇳', 'mongolia': '🇲🇳', 'russia': '🇷🇺',
-    'kazakhstan': '🇰🇿', 'japan': '🇯🇵', 'south korea': '🇰🇷', 'north korea': '🇰🇵',
-    'vietnam': '🇻🇳', 'laos': '🇱🇦', 'thailand': '🇹🇭', 'cambodia': '🇰🇭',
-    'malaysia': '🇲🇾', 'indonesia': '🇮🇩', 'philippines': '🇵🇭', 'australia': '🇦🇺',
-    'new zealand': '🇳🇿', 'greenland': '🇬🇱', 'cameroon': '🇨🇲', 'eritrea': '🇪🇷',
-    'fiji': '🇫🇯', 'kiribati': '🇰🇮', 'marshall islands': '🇲🇭',
-    'micronesia': '🇫🇲', 'nauru': '🇳🇷', 'palau': '🇵🇼', 'papua new guinea': '🇵🇬',
-    'samoa': '🇼🇸', 'solomon islands': '🇸🇧', 'tonga': '🇹🇴', 'tuvalu': '🇹🇻'
+    'united states of america': '\uD83C\uDDFA\uD83C\uDDF8', 'united states': '\uD83C\uDDFA\uD83C\uDDF8',
+    'canada': '\uD83C\uDDE8\uD83C\uDDE6', 'mexico': '\uD83C\uDDF2\uD83C\uDDFD', 'colombia': '\uD83C\uDDE8\uD83C\uDDF4', 'venezuela': '\uD83C\uDDFB\uD83C\uDDEA',
+    'ecuador': '\uD83C\uDDEA\uD83C\uDDE8', 'peru': '\uD83C\uDDF5\uD83C\uDDEA', 'bolivia': '\uD83C\uDDE7\uD83C\uDDF4', 'chile': '\uD83C\uDDE8\uD83C\uDDF1',
+    'argentina': '\uD83C\uDDE6\uD83C\uDDF7', 'paraguay': '\uD83C\uDDF5\uD83C\uDDFE', 'uruguay': '\uD83C\uDDFA\uD83C\uDDFE', 'brazil': '\uD83C\uDDE7\uD83C\uDDF7',
+    'cuba': '\uD83C\uDDE8\uD83C\uDDFA', 'egypt': '\uD83C\uDDE9\uD83C\uDDFE', 'libya': '\uD83C\uDDF1\uD83C\uDDFE', 'sudan': '\uD83C\uDDF8\uD83C\uDDE9',
+    'ethiopia': '\uD83C\uDDEA\uD83C\uDDF9', 'kenya': '\uD83C\uDDF0\uD83C\uDDEA', 'somalia': '\uD83C\uDDF8\uD83C\uDDF4', 'madagascar': '\uD83C\uDDF2\uD83C\uDDF6',
+    'south africa': '\uD83C\uDDFF\uD83C\uDDE6', 'algeria': '\uD83C\uDDE9\uD83C\uDDFF', 'morocco': '\uD83C\uDDF2\uD83C\uDDF6', 'mauritania': '\uD83C\uDDF2\uD83C\uDDF7',
+    'mali': '\uD83C\uDDF2\uD83C\uDDF1', 'niger': '\uD83C\uDDF3\uD83C\uDDEA', 'chad': '\uD83C\uDDF9\uD83C\uDDE9', 'angola': '\uD83C\uDDE6\uD83C\uDDF4',
+    'namibia': '\uD83C\uDDF3\uD83C\uDDF6', 'botswana': '\uD83C\uDDE7\uD83C\uDDFC', 'zimbabwe': '\uD83C\uDDFF\uD83C\uDDFC', 'saudi arabia': '\uD83C\uDDF8\uD83C\uDDE6',
+    'yemen': '\uD83C\uDDFE\uD83C\uDDEA', 'oman': '\uD83C\uDDF4\uD83C\uDDF2', 'turkey': '\uD83C\uDDF9\uD83C\uDDF7', 'syria': '\uD83C\uDDF8\uD83C\uDDFE',
+    'iraq': '\uD83C\uDDEE\uD83C\uDDF6', 'iran': '\uD83C\uDDEE\uD83C\uDDF7', 'afghanistan': '\uD83C\uDDE6\uD83C\uDDFB', 'pakistan': '\uD83C\uDDF5\uD83C\uDDF0',
+    'india': '\uD83C\uDDEE\uD83C\uDDF3', 'china': '\uD83C\uDDE8\uD83C\uDDF3', 'mongolia': '\uD83C\uDDF2\uD83C\uDDF3', 'russia': '\uD83C\uDDFF\uD83C\uDDFA',
+    'kazakhstan': '\uD83C\uDDF0\uD83C\uDDFF', 'japan': '\uD83C\uDDEF\uD83C\uDDF5', 'south korea': '\uD83C\uDDF0\uD83C\uDDF7', 'north korea': '\uD83C\uDDF0\uD83C\uDDF5',
+    'vietnam': '\uD83C\uDDFB\uD83C\uDDF3', 'laos': '\uD83C\uDDF1\uD83C\uDDE6', 'thailand': '\uD83C\uDDF9\uD83C\uDDFD', 'cambodia': '\uD83C\uDDF0\uD83C\uDDFD',
+    'malaysia': '\uD83C\uDDF2\uD83C\uDDFE', 'indonesia': '\uD83C\uDDEE\uD83C\uDDF9', 'philippines': '\uD83C\uDDF5\uD83C\uDDFD', 'australia': '\uD83C\uDDE6\uD83C\uDDFA',
+    'new zealand': '\uD83C\uDDF3\uD83C\uDDFF', 'greenland': '\uD83C\uDDE6\uD83C\uDDF1', 'cameroon': '\uD83C\uDDE8\uD83C\uDDF2', 'eritrea': '\uD83C\uDDEA\uD83C\uDDF7',
+    'fiji': '\uD83C\uDDEB\uD83C\uDDEF', 'kiribati': '\uD83C\uDDF0\uD83C\uDDEE', 'marshall islands': '\uD83C\uDDF2\uD83C\uDDFD',
+    'micronesia': '\uD83C\uDDEB\uD83C\uDDF2', 'nauru': '\uD83C\uDDF3\uD83C\uDDF7', 'palau': '\uD83C\uDDF5\uD83C\uDDFC', 'papua new guinea': '\uD83C\uDDF5\uD83C\uDDFB',
+    'samoa': '\uD83C\uDDFB\uD83C\uDDF8', 'solomon islands': '\uD83C\uDDF8\uD83C\uDDE7', 'tonga': '\uD83C\uDDF9\uD83C\uDDF4', 'tuvalu': '\uD83C\uDDF9\uD83C\uDDFB'
   };
   const key = engName.toLowerCase();
-  return map[key] || '🏳️';
+  return map[key] || '\uD83C\uDFF3\uFE0F';
 }
 
 function findCountryData(d, name) {
-  // 1. Căutăm în baza de date Europeană detaliată
+  // 1. Cautam in baza de date Europeana detaliata
   const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
   if (t) return t;
 
-  // 2. Căutăm în baza de date de Marile Puteri globale
-  if (globalMajorData[name]) {
-    const raw = globalMajorData[name];
-    if (raw.inherits) return globalMajorData[raw.inherits];
-    return raw;
-  }na': 'ðŸ‡§ðŸ‡¼', 'zimbabwe': 'ðŸ‡¿ðŸ‡¼', 'saudi arabia': 'ðŸ‡¸ðŸ‡¦',
-    'yemen': 'ðŸ‡¾ðŸ‡ª', 'oman': 'ðŸ‡´ðŸ‡²', 'turkey': 'ðŸ‡¹ðŸ‡·', 'syria': 'ðŸ‡¸ðŸ‡¾',
-    'iraq': 'ðŸ‡®ðŸ‡¶', 'iran': 'ðŸ‡®ðŸ‡·', 'afghanistan': 'ðŸ‡¦ð’‡', 'pakistan': 'ðŸ‡µðŸ‡°',
-    'india': 'ðŸ‡®ðŸ‡³', 'china': 'ðŸ‡¨ðŸ‡³', 'mongolia': 'ðŸ‡²ðŸ‡³', 'russia': 'ðŸ‡·ðŸ‡º',
-    'kazakhstan': 'ðŸ‡°ðŸ‡¿', 'japan': 'ðŸ‡¯ðŸ‡µ', 'south korea': 'ðŸ‡°ðŸ‡·', 'north korea': 'ðŸ‡°ðŸ‡µ',
-    'vietnam': 'ðŸ‡»ðŸ‡³', 'laos': 'ðŸ‡±ðŸ‡¦', 'thailand': 'ðŸ‡¹ðŸ‡­', 'cambodia': 'ðŸ‡°ðŸ‡­',
-    'malaysia': 'ðŸ‡²ðŸ‡¾', 'indonesia': 'ðŸ‡®ðŸ‡©', 'philippines': 'ðŸ‡µðŸ‡­', 'australia': 'ðŸ‡¦ðŸ‡º',
-    'new zealand': 'ðŸ‡³ðŸ‡¿', 'greenland': 'ðŸ‡¬ðŸ‡±', 'cameroon': 'ðŸ‡¨ðŸ‡²', 'eritrea': 'ðŸ‡ªðŸ‡·',
-    'fiji': 'ðŸ‡«ðŸ‡¯', 'kiribati': 'ðŸ‡°ðŸ‡®', 'marshall islands': 'ðŸ‡²ðŸ‡­',
-    'micronesia': 'ðŸ‡«ðŸ‡²', 'nauru': 'ðŸ‡³ðŸ‡·', 'palau': 'ðŸ‡µðŸ‡¼', 'papua new guinea': 'ðŸ‡µðŸ‡¬',
-    'samoa': 'ðŸ‡¼ðŸ‡¸', 'solomon islands': 'ðŸ‡¸ðŸ‡§', 'tonga': 'ðŸ‡¹ðŸ‡´', 'tuvalu': 'ðŸ‡¹ðŸ‡»'
-  };
-  const key = engName.toLowerCase();
-  return map[key] || 'ðŸ³ï¸';
-}
-
-function findCountryData(d, name) {
-  // 1. CÄƒutÄƒm Ã®n baza de date EuropeanÄƒ detaliatÄƒ
-  const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
-  if (t) return t;
-
-  // 2. CÄƒutÄƒm Ã®n baza de date de Marile Puteri globale
+  // 2. Cautam in baza de date de Marile Puteri globale
   if (globalMajorData[name]) {
     const raw = globalMajorData[name];
     if (raw.inherits) return globalMajorData[raw.inherits];
     return raw;
   }
 
-  // 3. GenerÄƒm dinamic date de bazÄƒ pentru restul lumii
+  // 3. Generam dinamic date de baza pentru restul lumii
   if (!d.properties || !d.properties.name) return null;
   
   const isNonRecognizing = nonEuropeanNonRecognizing.has(name);
@@ -1670,45 +1664,43 @@ function findCountryData(d, name) {
     numeEn: d.properties.name,
     flag: flagEmoji,
     categorie: isNonRecognizing ? 'norec' : 'rec',
-    categorieLabel: isNonRecognizing ? 'Nu recunoaÈ™te Palestina' : 'RecunoaÈ™te Palestina',
+    categorieLabel: isNonRecognizing ? 'Nu recunoa\u0219te Palestina' : 'Recunoa\u0219te Palestina',
     lat: centroid[1] || 0,
     lon: centroid[0] || 0,
     coords: centroid || [0, 0],
     capitala: 'N/A',
-    populatie: 'â€”',
-    popVal: 0,
-    suprafata: 'â€”',
-    supVal: 0,
-    zee: isNonRecognizing ? 'â€”' : '1988 (Val Istoric)',
-    moneda: 'MonedÄƒ LocalÄƒ',
-    particularitati: 'Stat suveran membru al comunitÄƒÈ›ii globale.',
-    note: isNonRecognizing 
-      ? `Statul ${romanianName} nu oferÄƒ Ã®n prezent recunoaÈ™tere oficialÄƒ deplinÄƒ Statului Palestina ca suveran.`
-      : `Statul ${romanianName} recunoaÈ™te oficial Statul Palestina, susÈ›inÃ¢nd autodeterminarea È™i soluÈ›ia celor douÄƒ state conform rezoluÈ›iilor ONU.`,
+    populatie: '\u2248 335 000 000 loc.',
+    popVal: 335000000,
+    suprafata: '9 833 517 km\u00B2',
+    supVal: 9833517,
+    zee: '\u2014',
+    moneda: 'Dolar american (USD)',
+    particularitati: 'Cel mai important aliat strategic al Israelului din emisfera vestic\u0103.',
+    note: 'Statele Unite ale Americii nu recunosc oficial Statul Palestina ca stat suveran, sus\u021Bin\u00E2nd c\u0103 statalitatea palestinian\u0103 trebuie s\u0103 fie rezultatul unor negocieri directe \u00EEntre Israel \u0219i Autoritatea Palestinian\u0103.',
     viza: {
-      particular: 'RelaÈ›ii diplomatice conform statutului naÈ›ional de recunoaÈ™tere.',
-      temei: 'Principii generale de drept internaÈ›ional.',
-      regim: 'Cooperare diplomaticÄƒ generalÄƒ.',
-      observatie: 'Statut administrativ standard.'
+      particular: 'Controleaz\u0103 direct asisten\u021Ba financiar\u0103 \u0219i are drept de veto \u00EEn Consiliul de Securitate al ONU.',
+      temei: 'Legisla\u021Bia federal\u0103 american\u0219 \u0219i acordurile strategice cu Israelul.',
+      regim: 'Delega\u021Bie general\u0103 a OEP activ\u0103 la Washington la nivel redus.',
+      observatie: 'Sprijin militar \u0219i diplomatic necondi\u021Bionat pentru Israel.'
     },
-    ue: 'Stat partener non-european.',
+    ue: 'Stat partener strategic non-european.',
     schengen: 'Regim de vize standard.'
   };
 }
 
 function getTerritoryById(id) {
-  // 1. Căutăm în baza de date Europeană detaliată
+  // 1. Cautam in baza de date Europeana detaliata
   const t = teritorii.find(x => x.id === id);
   if (t) return t;
 
-  // 2. Căutăm în baza de date de Marile Puteri globale
+  // 2. Cautam in baza de date de Marile Puteri globale
   for (const name in globalMajorData) {
     const raw = globalMajorData[name];
     if (raw.inherits) continue;
     if (raw.id === id) return raw;
   }
 
-  // 3. Căutăm în restul lumii folosind topojson data
+  // 3. Cautam in restul lumii folosind topojson data
   const worldDataNode = document.getElementById('world-data');
   if (worldDataNode) {
     const worldData = JSON.parse(worldDataNode.textContent);
@@ -1725,711 +1717,710 @@ function getTerritoryById(id) {
 
   return null;
 }
-
-// Datele complete ale celor 44 de State Europene (inclusiv detalii demografice si de recunoastere)
 const teritorii = [
   {
     id: 'romania',
-    nume: 'România',
+    nume: 'Rom├ónia',
     numeEn: 'Romania',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 45.9432,
     lon: 24.9668,
     coords: [24.9668, 45.9432],
-    capitala: 'București',
-    populatie: '≈ 19 000 000 loc.',
+    capitala: 'Bucure╚Öti',
+    populatie: 'Γëê 19 000 000 loc.',
     popVal: 19000000,
-    suprafata: '238 397 km²',
+    suprafata: '238 397 km┬▓',
     supVal: 238397,
     zee: '1988',
     zeeVal: 1988,
-    note: 'Recunoaștere istorică la 24 noiembrie 1988 de către Republica Socialistă România, imediat după declarația de independență de la Alger. Relațiile diplomatice sunt menținute activ, existând Ambasada Palestinei la București și Reprezentanța României la Ramallah.',
+    note: 'Recunoa╚Ötere istoric─â la 24 noiembrie 1988 de c─âtre Republica Socialist─â Rom├ónia, imediat dup─â declara╚¢ia de independen╚¢─â de la Alger. Rela╚¢iile diplomatice sunt men╚¢inute activ, exist├ónd Ambasada Palestinei la Bucure╚Öti ╚Öi Reprezentan╚¢a Rom├óniei la Ramallah.',
     ue: 'Stat membru al Uniunii Europene (din 2007).',
-    schengen: 'Membru al Spațiul Schengen (aerian/maritim din martie 2024).',
-    moneda: 'Leu românesc (RON)',
+    schengen: 'Membru al Spa╚¢iul Schengen (aerian/maritim din martie 2024).',
+    moneda: 'Leu rom├ónesc (RON)',
     viza: {
-      temei: 'Decizia MAE de menținere a continuității recunoașterii după 1989',
-      regim: 'Relații diplomatice depline la nivel de Ambasadă',
-      particular: 'România sprijină constant soluția celor două state și negocierile directe',
-      observatie: 'Studenții palestinieni beneficiază istoric de burse de studii în România'
+      temei: 'Decizia MAE de men╚¢inere a continuit─â╚¢ii recunoa╚Öterii dup─â 1989',
+      regim: 'Rela╚¢ii diplomatice depline la nivel de Ambasad─â',
+      particular: 'Rom├ónia sprijin─â constant solu╚¢ia celor dou─â state ╚Öi negocierile directe',
+      observatie: 'Studen╚¢ii palestinieni beneficiaz─â istoric de burse de studii ├«n Rom├ónia'
     },
-    particularitati: 'Una dintre puținele țări din UE care recunosc oficial Palestina dar mențin în același timp relații strategice extrem de strânse cu Israel.',
-    badges: ['Recunoaște (1988)', 'Membru UE', 'Ambasadă completă']
+    particularitati: 'Una dintre pu╚¢inele ╚¢─âri din UE care recunosc oficial Palestina dar men╚¢in ├«n acela╚Öi timp rela╚¢ii strategice extrem de str├ónse cu Israel.',
+    badges: ['Recunoa╚Öte (1988)', 'Membru UE', 'Ambasad─â complet─â']
   },
   {
     id: 'norway',
     nume: 'Norvegia',
     numeEn: 'Norway',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 60.472,
     lon: 8.4689,
     coords: [8.4689, 60.472],
     capitala: 'Oslo',
-    populatie: '≈ 5 400 000 loc.',
+    populatie: 'Γëê 5 400 000 loc.',
     popVal: 5400000,
-    suprafata: '385 207 km²',
+    suprafata: '385 207 km┬▓',
     supVal: 385207,
     zee: '2024',
     zeeVal: 2024,
-    note: 'Norvegia a anunțat recunoașterea oficială a Palestinei ca stat la 22 mai 2024, decizia intrând în vigoare la 28 mai 2024. Inițiativa a fost coordonată strâns cu Spania și Irlanda ca un semnal puternic în sprijinul păcii durabile în regiune.',
-    ue: 'Nu este membră UE, dar face parte din Spațiul Economic European (SEE).',
-    schengen: 'Membru deplin al Spațiului Schengen.',
-    moneda: 'Coroană norvegiană (NOK)',
+    note: 'Norvegia a anun╚¢at recunoa╚Öterea oficial─â a Palestinei ca stat la 22 mai 2024, decizia intr├ónd ├«n vigoare la 28 mai 2024. Ini╚¢iativa a fost coordonat─â str├óns cu Spania ╚Öi Irlanda ca un semnal puternic ├«n sprijinul p─âcii durabile ├«n regiune.',
+    ue: 'Nu este membr─â UE, dar face parte din Spa╚¢iul Economic European (SEE).',
+    schengen: 'Membru deplin al Spa╚¢iului Schengen.',
+    moneda: 'Coroan─â norvegian─â (NOK)',
     viza: {
-      temei: 'Declarația comună a Guvernului condus de Jonas Gahr Støre (mai 2024)',
-      regim: 'Relații diplomatice oficiale active',
-      particular: 'Norvegia a găzduit istoric Acordurile de la Oslo din 1993',
+      temei: 'Declara╚¢ia comun─â a Guvernului condus de Jonas Gahr St├╕re (mai 2024)',
+      regim: 'Rela╚¢ii diplomatice oficiale active',
+      particular: 'Norvegia a g─âzduit istoric Acordurile de la Oslo din 1993',
       observatie: 'Decizia a generat tensiuni diplomatice severe temporare cu guvernul israelian'
     },
-    particularitati: 'Poziția istorică de mediator (Acordurile Oslo 1993) oferă recunoașterii norvegiene o pondere simbolică excepțională.',
-    badges: ['Recunoaște (2024)', 'Non-UE', 'Schengen']
+    particularitati: 'Pozi╚¢ia istoric─â de mediator (Acordurile Oslo 1993) ofer─â recunoa╚Öterii norvegiene o pondere simbolic─â excep╚¢ional─â.',
+    badges: ['Recunoa╚Öte (2024)', 'Non-UE', 'Schengen']
   },
   {
     id: 'spain',
     nume: 'Spania',
     numeEn: 'Spain',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 40.4637,
     lon: -3.7492,
     coords: [-3.7492, 40.4637],
     capitala: 'Madrid',
-    populatie: '≈ 47 400 000 loc.',
+    populatie: 'Γëê 47 400 000 loc.',
     popVal: 47400000,
-    suprafata: '505 990 km²',
+    suprafata: '505 990 km┬▓',
     supVal: 505990,
     zee: '2024',
     zeeVal: 2024,
-    note: 'Spania a recunoscut oficial Statul Palestina la 28 mai 2024, sub conducerea premierului Pedro Sánchez. Decizia a fost descrisă ca o necesitate istorică pentru obținerea păcii și implementarea rezoluțiilor ONU.',
+    note: 'Spania a recunoscut oficial Statul Palestina la 28 mai 2024, sub conducerea premierului Pedro S├ínchez. Decizia a fost descris─â ca o necesitate istoric─â pentru ob╚¢inerea p─âcii ╚Öi implementarea rezolu╚¢iilor ONU.',
     ue: 'Stat membru al Uniunii Europene (din 1986).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Hotărârea Consiliului de Miniștri al Spaniei (mai 2024)',
-      regim: 'Recunoaștere oficială deplină ca stat suveran',
-      particular: 'Spania pledează activ pentru organizarea unei conferințe internaționale de pace',
-      observatie: 'Pedro Sánchez a călătorit personal în regiune pentru a susține decizia'
+      temei: 'Hot─âr├órea Consiliului de Mini╚Ötri al Spaniei (mai 2024)',
+      regim: 'Recunoa╚Ötere oficial─â deplin─â ca stat suveran',
+      particular: 'Spania pledeaz─â activ pentru organizarea unei conferin╚¢e interna╚¢ionale de pace',
+      observatie: 'Pedro S├ínchez a c─âl─âtorit personal ├«n regiune pentru a sus╚¢ine decizia'
     },
-    particularitati: 'Promotorul principal din Europa de Vest al recunoașterii, asumându-și un rol de lider diplomatic în UE.',
-    badges: ['Recunoaște (2024)', 'Membru UE', 'Schengen']
+    particularitati: 'Promotorul principal din Europa de Vest al recunoa╚Öterii, asum├óndu-╚Öi un rol de lider diplomatic ├«n UE.',
+    badges: ['Recunoa╚Öte (2024)', 'Membru UE', 'Schengen']
   },
   {
     id: 'ireland',
     nume: 'Irlanda',
     numeEn: 'Ireland',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 53.4129,
     lon: -8.2439,
     coords: [-8.2439, 53.4129],
     capitala: 'Dublin',
-    populatie: '≈ 5 000 000 loc.',
+    populatie: 'Γëê 5 000 000 loc.',
     popVal: 5000000,
-    suprafata: '70 273 km²',
+    suprafata: '70 273 km┬▓',
     supVal: 70273,
     zee: '2024',
     zeeVal: 2024,
-    note: 'Irlanda a recunoscut oficial Palestina la 28 mai 2024. Premierul Simon Harris a subliniat că poporul irlandez empatizează istoric profund cu lupta pentru autodeterminare și recunoaștere statală.',
+    note: 'Irlanda a recunoscut oficial Palestina la 28 mai 2024. Premierul Simon Harris a subliniat c─â poporul irlandez empatizeaz─â istoric profund cu lupta pentru autodeterminare ╚Öi recunoa╚Ötere statal─â.',
     ue: 'Stat membru al Uniunii Europene (din 1973).',
-    schengen: 'Nu face parte din Schengen (menține Common Travel Area cu UK).',
+    schengen: 'Nu face parte din Schengen (men╚¢ine Common Travel Area cu UK).',
     moneda: 'Euro (EUR)',
     viza: {
       temei: 'Decizia Guvernului Irlandez (mai 2024)',
-      regim: 'Relații diplomatice oficiale depline',
-      particular: 'Sprijin public masiv din partea societății civile irlandeze',
-      observatie: 'Irlanda a fost printre primele țări vest-europene care au cerut constant un stat palestinian'
+      regim: 'Rela╚¢ii diplomatice oficiale depline',
+      particular: 'Sprijin public masiv din partea societ─â╚¢ii civile irlandeze',
+      observatie: 'Irlanda a fost printre primele ╚¢─âri vest-europene care au cerut constant un stat palestinian'
     },
-    particularitati: 'Sensibilitatea istorică față de ocupație și colonizare face din Irlanda cel mai vocal susținător al cauzei palestiniene din Europa de Vest.',
-    badges: ['Recunoaște (2024)', 'Membru UE', 'Non-Schengen']
+    particularitati: 'Sensibilitatea istoric─â fa╚¢─â de ocupa╚¢ie ╚Öi colonizare face din Irlanda cel mai vocal sus╚¢in─âtor al cauzei palestiniene din Europa de Vest.',
+    badges: ['Recunoa╚Öte (2024)', 'Membru UE', 'Non-Schengen']
   },
   {
     id: 'sweden',
     nume: 'Suedia',
     numeEn: 'Sweden',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 60.1282,
     lon: 18.6435,
     coords: [18.6435, 60.1282],
     capitala: 'Stockholm',
-    populatie: '≈ 10 400 000 loc.',
+    populatie: 'Γëê 10 400 000 loc.',
     popVal: 10400000,
-    suprafata: '450 295 km²',
+    suprafata: '450 295 km┬▓',
     supVal: 450295,
     zee: '2014',
     zeeVal: 2014,
-    note: 'Suedia a devenit prima țară membră a Uniunii Europene (care a aderat după recunoaștere) care a recunoscut oficial Palestina la 30 octombrie 2014, sub guvernul social-democrat condus de Stefan Löfven.',
+    note: 'Suedia a devenit prima ╚¢ar─â membr─â a Uniunii Europene (care a aderat dup─â recunoa╚Ötere) care a recunoscut oficial Palestina la 30 octombrie 2014, sub guvernul social-democrat condus de Stefan L├╢fven.',
     ue: 'Stat membru al Uniunii Europene (din 1995).',
-    schengen: 'Membru al Spațiului Schengen.',
-    moneda: 'Coroană suedeză (SEK)',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
+    moneda: 'Coroan─â suedez─â (SEK)',
     viza: {
       temei: 'Decret oficial al Guvernului Suedez (octombrie 2014)',
-      regim: 'Ambasadă deplină la Stockholm și Consulat general la Ierusalim',
-      particular: 'Decizia a provocat înghețarea temporară a relațiilor diplomatice cu Israel în 2014',
-      observatie: 'Statutul a fost menținut în ciuda schimbărilor ulterioare de guvern'
+      regim: 'Ambasad─â deplin─â la Stockholm ╚Öi Consulat general la Ierusalim',
+      particular: 'Decizia a provocat ├«nghe╚¢area temporar─â a rela╚¢iilor diplomatice cu Israel ├«n 2014',
+      observatie: 'Statutul a fost men╚¢inut ├«n ciuda schimb─ârilor ulterioare de guvern'
     },
-    particularitati: 'Decizia din 2014 a spart gheața diplomatică în cadrul UE, deși a fost intens criticată de aliații occidentali la acea vreme.',
-    badges: ['Recunoaște (2014)', 'Membru UE', 'Schengen']
+    particularitati: 'Decizia din 2014 a spart ghea╚¢a diplomatic─â ├«n cadrul UE, de╚Öi a fost intens criticat─â de alia╚¢ii occidentali la acea vreme.',
+    badges: ['Recunoa╚Öte (2014)', 'Membru UE', 'Schengen']
   },
   {
     id: 'united kingdom',
     nume: 'Regatul Unit',
     numeEn: 'United Kingdom',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 55.3781,
     lon: -3.436,
     coords: [-3.436, 55.3781],
     capitala: 'Londra',
-    populatie: '≈ 67 000 000 loc.',
+    populatie: 'Γëê 67 000 000 loc.',
     popVal: 67000000,
-    suprafata: '243 610 km²',
+    suprafata: '243 610 km┬▓',
     supVal: 243610,
     zee: '2025',
     zeeVal: 2025,
-    note: 'Regatul Unit a recunoscut oficial Statul Palestina în septembrie 2025, o decizie istorică luată în timpul sesiunii UNGA 80 de către cabinetul condus de Partidul Laburist, abandonând poziția anterioară de recunoaștere doar ca rezultat al unui acord direct.',
-    ue: 'Fost membru UE (Brexited în 2020).',
+    note: 'Regatul Unit a recunoscut oficial Statul Palestina ├«n septembrie 2025, o decizie istoric─â luat─â ├«n timpul sesiunii UNGA 80 de c─âtre cabinetul condus de Partidul Laburist, abandon├ónd pozi╚¢ia anterioar─â de recunoa╚Ötere doar ca rezultat al unui acord direct.',
+    ue: 'Fost membru UE (Brexited ├«n 2020).',
     schengen: 'Nu este membru Schengen.',
-    moneda: 'Liră sterlină (GBP)',
+    moneda: 'Lir─â sterlin─â (GBP)',
     viza: {
-      temei: 'Declarația oficială de politică externă a Guvernului Majestății Sale (septembrie 2025)',
-      regim: 'Relații diplomatice depline, ridicarea misiunii palestiniene la statut de ambasadă',
-      particular: 'Decizie de cotitură istorică având în vedere responsabilitatea istorică a Mandatului Britanic (Declarația Balfour 1917)',
-      observatie: 'Anunț corelat și sprijinit de Franța în cadrul UNGA 80'
+      temei: 'Declara╚¢ia oficial─â de politic─â extern─â a Guvernului Majest─â╚¢ii Sale (septembrie 2025)',
+      regim: 'Rela╚¢ii diplomatice depline, ridicarea misiunii palestiniene la statut de ambasad─â',
+      particular: 'Decizie de cotitur─â istoric─â av├ónd ├«n vedere responsabilitatea istoric─â a Mandatului Britanic (Declara╚¢ia Balfour 1917)',
+      observatie: 'Anun╚¢ corelat ╚Öi sprijinit de Fran╚¢a ├«n cadrul UNGA 80'
     },
-    particularitati: 'O schimbare seismică în geopolitica mondială, având în vedere statutul UK de membru permanent al Consiliului de Securitate al ONU.',
-    badges: ['Recunoaște (2025)', 'Membru Permanent Consiliu Securitate', 'Balfour Legacy']
+    particularitati: 'O schimbare seismic─â ├«n geopolitica mondial─â, av├ónd ├«n vedere statutul UK de membru permanent al Consiliului de Securitate al ONU.',
+    badges: ['Recunoa╚Öte (2025)', 'Membru Permanent Consiliu Securitate', 'Balfour Legacy']
   },
   {
     id: 'france',
-    nume: 'Franța',
+    nume: 'Fran╚¢a',
     numeEn: 'France',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 46.2276,
     lon: 2.2137,
     coords: [2.2137, 46.2276],
     capitala: 'Paris',
-    populatie: '≈ 68 000 000 loc.',
+    populatie: 'Γëê 68 000 000 loc.',
     popVal: 68000000,
-    suprafata: '551 695 km²',
+    suprafata: '551 695 km┬▓',
     supVal: 551695,
     zee: '2025',
     zeeVal: 2025,
-    note: 'Franța a recunoscut oficial Statul Palestina în septembrie 2025. Președintele Emmanuel Macron a anunțat decizia istorică la Adunarea Generală a ONU (UNGA 80), precizând că Franța consideră că blocajul din regiune face imposibilă soluția celor două state fără acest act suveran.',
+    note: 'Fran╚¢a a recunoscut oficial Statul Palestina ├«n septembrie 2025. Pre╚Öedintele Emmanuel Macron a anun╚¢at decizia istoric─â la Adunarea General─â a ONU (UNGA 80), preciz├ónd c─â Fran╚¢a consider─â c─â blocajul din regiune face imposibil─â solu╚¢ia celor dou─â state f─âr─â acest act suveran.',
     ue: 'Stat membru al Uniunii Europene (fondator).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Declarația solemnă a Președintelui Republicii Franceze la UNGA 80 (septembrie 2025)',
-      regim: 'Relații diplomatice oficiale depline la nivel de Ambasador',
-      particular: 'Franța menține o rețea culturală și consulară istorică în Ierusalimul de Est',
-      observatie: 'A marcat o aliniere strategică deosebită cu Regatul Unit în toamna anului 2025'
+      temei: 'Declara╚¢ia solemn─â a Pre╚Öedintelui Republicii Franceze la UNGA 80 (septembrie 2025)',
+      regim: 'Rela╚¢ii diplomatice oficiale depline la nivel de Ambasador',
+      particular: 'Fran╚¢a men╚¢ine o re╚¢ea cultural─â ╚Öi consular─â istoric─â ├«n Ierusalimul de Est',
+      observatie: 'A marcat o aliniere strategic─â deosebit─â cu Regatul Unit ├«n toamna anului 2025'
     },
-    particularitati: 'A doua mare putere nucleară din Europa și membru permanent al CS al ONU care recunoaște Palestina.',
-    badges: ['Recunoaște (2025)', 'Membru UE', 'Schengen']
+    particularitati: 'A doua mare putere nuclear─â din Europa ╚Öi membru permanent al CS al ONU care recunoa╚Öte Palestina.',
+    badges: ['Recunoa╚Öte (2025)', 'Membru UE', 'Schengen']
   },
   {
     id: 'belgium',
     nume: 'Belgia',
     numeEn: 'Belgium',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 50.8503,
     lon: 4.3517,
     coords: [4.3517, 50.8503],
     capitala: 'Bruxelles',
-    populatie: '≈ 11 600 000 loc.',
+    populatie: 'Γëê 11 600 000 loc.',
     popVal: 11600000,
-    suprafata: '30 689 km²',
+    suprafata: '30 689 km┬▓',
     supVal: 30689,
     zee: '2025',
     zeeVal: 2025,
-    note: 'Belgia a recunoscut oficial Palestina în septembrie 2025, ca parte a unui val coordonat vest-european la ONU. Parlamentul belgian aprobase rezoluții favorabile încă din anii anteriori, condiționate însă de contextul politic.',
+    note: 'Belgia a recunoscut oficial Palestina ├«n septembrie 2025, ca parte a unui val coordonat vest-european la ONU. Parlamentul belgian aprobase rezolu╚¢ii favorabile ├«nc─â din anii anteriori, condi╚¢ionate ├«ns─â de contextul politic.',
     ue: 'Stat membru al Uniunii Europene (fondator).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
       temei: 'Decizia Guvernului Federal Belgian (septembrie 2025)',
-      regim: 'Relații diplomatice oficiale depline',
-      particular: 'Bruxelles găzduiește instituțiile UE, oferind deciziei un impact simbolic adițional',
-      observatie: 'Sprijin masiv din partea regiunilor Valonia și Flandra'
+      regim: 'Rela╚¢ii diplomatice oficiale depline',
+      particular: 'Bruxelles g─âzduie╚Öte institu╚¢iile UE, oferind deciziei un impact simbolic adi╚¢ional',
+      observatie: 'Sprijin masiv din partea regiunilor Valonia ╚Öi Flandra'
     },
-    particularitati: 'Capitala simbolică a Europei recunoaște acum oficial ambele state din conflict.',
-    badges: ['Recunoaște (2025)', 'Membru UE', 'Schengen']
+    particularitati: 'Capitala simbolic─â a Europei recunoa╚Öte acum oficial ambele state din conflict.',
+    badges: ['Recunoa╚Öte (2025)', 'Membru UE', 'Schengen']
   },
   {
     id: 'portugal',
     nume: 'Portugalia',
     numeEn: 'Portugal',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 39.3999,
     lon: -8.2245,
     coords: [-8.2245, 39.3999],
     capitala: 'Lisabona',
-    populatie: '≈ 10 300 000 loc.',
+    populatie: 'Γëê 10 300 000 loc.',
     popVal: 10300000,
-    suprafata: '92 090 km²',
+    suprafata: '92 090 km┬▓',
     supVal: 92090,
     zee: '2025',
     zeeVal: 2025,
-    note: 'Portugalia s-a alăturat valului istoric din septembrie 2025, recunoscând oficial Statul Palestina în marja Adunării Generale a ONU. Decizia a urmat recomandărilor repetate ale Parlamentului portughez.',
+    note: 'Portugalia s-a al─âturat valului istoric din septembrie 2025, recunosc├ónd oficial Statul Palestina ├«n marja Adun─ârii Generale a ONU. Decizia a urmat recomand─ârilor repetate ale Parlamentului portughez.',
     ue: 'Stat membru al Uniunii Europene (din 1986).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
       temei: 'Decret-Lege al Guvernului Republicii Portugheze (septembrie 2025)',
-      regim: 'Stabilirea de relații diplomatice formale',
-      particular: 'Aliniere deplină cu poziția Spaniei, vecina sa iberică',
-      observatie: 'Consens politic larg între principalele partide de stânga și centru-dreapta'
+      regim: 'Stabilirea de rela╚¢ii diplomatice formale',
+      particular: 'Aliniere deplin─â cu pozi╚¢ia Spaniei, vecina sa iberic─â',
+      observatie: 'Consens politic larg ├«ntre principalele partide de st├ónga ╚Öi centru-dreapta'
     },
-    particularitati: 'Finalizează reprezentarea completă a Peninsulei Iberice în tabăra țărilor care recunosc Palestina.',
-    badges: ['Recunoaște (2025)', 'Membru UE', 'Schengen']
+    particularitati: 'Finalizeaz─â reprezentarea complet─â a Peninsulei Iberice ├«n tab─âra ╚¢─ârilor care recunosc Palestina.',
+    badges: ['Recunoa╚Öte (2025)', 'Membru UE', 'Schengen']
   },
   {
     id: 'poland',
     nume: 'Polonia',
     numeEn: 'Poland',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 51.9194,
     lon: 19.1451,
     coords: [19.1451, 51.9194],
-    capitala: 'Varșovia',
-    populatie: '≈ 38 000 000 loc.',
+    capitala: 'Var╚Öovia',
+    populatie: 'Γëê 38 000 000 loc.',
     popVal: 38000000,
-    suprafata: '312 696 km²',
+    suprafata: '312 696 km┬▓',
     supVal: 312696,
     zee: '1988',
     zeeVal: 1988,
-    note: 'Polonia a recunoscut Palestina la 14 decembrie 1988 ca stat suveran în perioada regimului comunist (Republica Populară Polonă). Misiunea diplomatică a Palestinei la Varșovia a fost deschisă imediat după.',
+    note: 'Polonia a recunoscut Palestina la 14 decembrie 1988 ca stat suveran ├«n perioada regimului comunist (Republica Popular─â Polon─â). Misiunea diplomatic─â a Palestinei la Var╚Öovia a fost deschis─â imediat dup─â.',
     ue: 'Stat membru al Uniunii Europene (din 2004).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Zlot polonez (PLN)',
     viza: {
-      temei: 'Declarația formală a Guvernului Polonez din decembrie 1988',
-      regim: 'Relații diplomatice bilaterale depline',
-      particular: 'Polonia a menținut recunoașterea și după tranziția democratică din 1989',
-      observatie: 'Menține un dialog activ cu ambele părți ale conflictului'
+      temei: 'Declara╚¢ia formal─â a Guvernului Polonez din decembrie 1988',
+      regim: 'Rela╚¢ii diplomatice bilaterale depline',
+      particular: 'Polonia a men╚¢inut recunoa╚Öterea ╚Öi dup─â tranzi╚¢ia democratic─â din 1989',
+      observatie: 'Men╚¢ine un dialog activ cu ambele p─âr╚¢i ale conflictului'
     },
-    particularitati: 'Una dintre cele mai mari țări din flancul estic al UE care menține recunoașterea oficială din perioada Războiului Rece.',
-    badges: ['Recunoaște (1988)', 'Membru UE', 'Schengen']
+    particularitati: 'Una dintre cele mai mari ╚¢─âri din flancul estic al UE care men╚¢ine recunoa╚Öterea oficial─â din perioada R─âzboiului Rece.',
+    badges: ['Recunoa╚Öte (1988)', 'Membru UE', 'Schengen']
   },
   {
     id: 'bulgaria',
     nume: 'Bulgaria',
     numeEn: 'Bulgaria',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 42.7339,
     lon: 25.4858,
     coords: [25.4858, 42.7339],
     capitala: 'Sofia',
-    populatie: '≈ 6 900 000 loc.',
+    populatie: 'Γëê 6 900 000 loc.',
     popVal: 6900000,
-    suprafata: '110 994 km²',
+    suprafata: '110 994 km┬▓',
     supVal: 110994,
     zee: '1988',
     zeeVal: 1988,
-    note: 'Bulgaria a recunoscut oficial Statul Palestina la 25 noiembrie 1988. Relațiile diplomatice formale au fost stabilire în decembrie 1988 la nivel de ambasadă.',
+    note: 'Bulgaria a recunoscut oficial Statul Palestina la 25 noiembrie 1988. Rela╚¢iile diplomatice formale au fost stabilire ├«n decembrie 1988 la nivel de ambasad─â.',
     ue: 'Stat membru al Uniunii Europene (din 2007).',
-    schengen: 'Membru al Spațiului Schengen (aerian/maritim din martie 2024).',
-    moneda: 'Leva bulgărească (BGN)',
+    schengen: 'Membru al Spa╚¢iului Schengen (aerian/maritim din martie 2024).',
+    moneda: 'Leva bulg─âreasc─â (BGN)',
     viza: {
       temei: 'Decizia Consiliului de Stat al Republicii Populare Bulgaria (noiembrie 1988)',
-      regim: 'Ambasadă palestiniană deschisă la Sofia',
-      particular: 'Bulgaria sprijină rezoluțiile ONU privind pacea în Orientul Mijlociu',
-      observatie: 'Schimburi comerciale și educaționale istorice în perioada 1988-1990'
+      regim: 'Ambasad─â palestinian─â deschis─â la Sofia',
+      particular: 'Bulgaria sprijin─â rezolu╚¢iile ONU privind pacea ├«n Orientul Mijlociu',
+      observatie: 'Schimburi comerciale ╚Öi educa╚¢ionale istorice ├«n perioada 1988-1990'
     },
-    particularitati: 'Urmează linia diplomatică stabilită de țările din Pactul de la Varșovia în 1988.',
-    badges: ['Recunoaște (1988)', 'Membru UE', 'Schengen']
+    particularitati: 'Urmeaz─â linia diplomatic─â stabilit─â de ╚¢─ârile din Pactul de la Var╚Öovia ├«n 1988.',
+    badges: ['Recunoa╚Öte (1988)', 'Membru UE', 'Schengen']
   },
   {
     id: 'slovakia',
     nume: 'Slovacia',
     numeEn: 'Slovakia',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 48.669,
     lon: 19.699,
     coords: [19.699, 48.669],
     capitala: 'Bratislava',
-    populatie: '≈ 5 400 000 loc.',
+    populatie: 'Γëê 5 400 000 loc.',
     popVal: 5400000,
-    suprafata: '49 035 km²',
+    suprafata: '49 035 km┬▓',
     supVal: 49035,
     zee: '1988',
     zeeVal: 1988,
-    note: 'Slovacia a moștenit statutul de recunoaștere oficială de la fosta Cehoslovacie, care a recunoscut Palestina la 18 noiembrie 1988. La dizolvarea pașnică a federației în 1993, Slovacia a ales să continue relațiile depline.',
+    note: 'Slovacia a mo╚Ötenit statutul de recunoa╚Ötere oficial─â de la fosta Cehoslovacie, care a recunoscut Palestina la 18 noiembrie 1988. La dizolvarea pa╚Önic─â a federa╚¢iei ├«n 1993, Slovacia a ales s─â continue rela╚¢iile depline.',
     ue: 'Stat membru al Uniunii Europene (din 2004).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Declarația de succesiune a tratatelor internaționale din 1 ianuarie 1993',
-      regim: 'Relații diplomatice oficiale depline la nivel de Ambasadă',
-      particular: 'Slovacia are o poziție nuanțată, diferită de cea a Cehiei vecine',
-      observatie: 'Ambasada Palestinei este activă în Bratislava'
+      temei: 'Declara╚¢ia de succesiune a tratatelor interna╚¢ionale din 1 ianuarie 1993',
+      regim: 'Rela╚¢ii diplomatice oficiale depline la nivel de Ambasad─â',
+      particular: 'Slovacia are o pozi╚¢ie nuan╚¢at─â, diferit─â de cea a Cehiei vecine',
+      observatie: 'Ambasada Palestinei este activ─â ├«n Bratislava'
     },
-    particularitati: 'Spre deosebire de Cehia care contestă recunoașterea din 1988, Slovacia a menținut un caracter diplomatic neutru-pozitiv.',
-    badges: ['Recunoaște (1988)', 'Membru UE', 'Schengen']
+    particularitati: 'Spre deosebire de Cehia care contest─â recunoa╚Öterea din 1988, Slovacia a men╚¢inut un caracter diplomatic neutru-pozitiv.',
+    badges: ['Recunoa╚Öte (1988)', 'Membru UE', 'Schengen']
   },
   {
     id: 'ukraine',
     nume: 'Ucraina',
     numeEn: 'Ukraine',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 48.3794,
     lon: 31.1656,
     coords: [31.1656, 48.3794],
     capitala: 'Kiev',
-    populatie: '≈ 41 000 000 loc.',
+    populatie: 'Γëê 41 000 000 loc.',
     popVal: 41000000,
-    suprafata: '603 628 km²',
+    suprafata: '603 628 km┬▓',
     supVal: 603628,
     zee: '1988',
     zeeVal: 1988,
-    note: 'Ucraina (ca RSS Ucraineană în cadrul URSS) a votat și a recunoscut oficial independența Palestinei la 19 noiembrie 1988. După declararea independenței în 1991, statul ucrainean a reconfirmat statutul diplomatic.',
-    ue: 'Stat candidat la aderarea în Uniunea Europeană.',
+    note: 'Ucraina (ca RSS Ucrainean─â ├«n cadrul URSS) a votat ╚Öi a recunoscut oficial independen╚¢a Palestinei la 19 noiembrie 1988. Dup─â declararea independen╚¢ei ├«n 1991, statul ucrainean a reconfirmat statutul diplomatic.',
+    ue: 'Stat candidat la aderarea ├«n Uniunea European─â.',
     schengen: 'Nu face parte din Schengen.',
-    moneda: 'Hrivnă ucraineană (UAH)',
+    moneda: 'Hrivn─â ucrainean─â (UAH)',
     viza: {
-      temei: 'Decizia Parlamentului Ucrainean (Rada Supremă) din 1991',
-      regim: 'Misiune diplomatică activă la Kiev',
-      particular: 'Relațiile au continuat activ inclusiv în timpul conflictelor geopolitice din flancul estic',
-      observatie: 'Ucraina pledează pentru respectarea dreptului internațional în ambele cazuri'
+      temei: 'Decizia Parlamentului Ucrainean (Rada Suprem─â) din 1991',
+      regim: 'Misiune diplomatic─â activ─â la Kiev',
+      particular: 'Rela╚¢iile au continuat activ inclusiv ├«n timpul conflictelor geopolitice din flancul estic',
+      observatie: 'Ucraina pledeaz─â pentru respectarea dreptului interna╚¢ional ├«n ambele cazuri'
     },
-    particularitati: 'O poziție complexă, fiind un partener strategic major al SUA și având relații diplomatice solide cu ambele state.',
-    badges: ['Recunoaște (1988)', 'Candidat UE', 'Flancul Estic']
+    particularitati: 'O pozi╚¢ie complex─â, fiind un partener strategic major al SUA ╚Öi av├ónd rela╚¢ii diplomatice solide cu ambele state.',
+    badges: ['Recunoa╚Öte (1988)', 'Candidat UE', 'Flancul Estic']
   },
   {
     id: 'belarus',
     nume: 'Belarus',
     numeEn: 'Belarus',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 53.7098,
     lon: 27.9534,
     coords: [27.9534, 53.7098],
     capitala: 'Minsk',
-    populatie: '≈ 9 400 000 loc.',
+    populatie: 'Γëê 9 400 000 loc.',
     popVal: 9400000,
-    suprafata: '207 600 km²',
+    suprafata: '207 600 km┬▓',
     supVal: 207600,
     zee: '1988',
     zeeVal: 1988,
-    note: 'Belarus (ca RSS Bielorusă) a recunoscut Palestina în noiembrie 1988. Relațiile diplomatice depline au fost menținute fără întrerupere după dizolvarea URSS în 1991.',
-    ue: 'Nu este membru UE și nu este candidat.',
+    note: 'Belarus (ca RSS Bielorus─â) a recunoscut Palestina ├«n noiembrie 1988. Rela╚¢iile diplomatice depline au fost men╚¢inute f─âr─â ├«ntrerupere dup─â dizolvarea URSS ├«n 1991.',
+    ue: 'Nu este membru UE ╚Öi nu este candidat.',
     schengen: 'Nu face parte din Schengen.',
-    moneda: 'Rublă belarusă (BYN)',
+    moneda: 'Rubl─â belarus─â (BYN)',
     viza: {
-      temei: 'Succesiunea acordurilor sovietice în 1991',
-      regim: 'Ambasadă funcțională la Minsk',
-      particular: 'Belarus are o poziție fermă pro-palestiniană pe scena internațională',
+      temei: 'Succesiunea acordurilor sovietice ├«n 1991',
+      regim: 'Ambasad─â func╚¢ional─â la Minsk',
+      particular: 'Belarus are o pozi╚¢ie ferm─â pro-palestinian─â pe scena interna╚¢ional─â',
       observatie: 'Vizite guvernamentale bilaterale periodice'
     },
-    particularitati: 'Aliniere totală cu linia istorică a Moscovei în ceea ce privește geopolitica Orientului Mijlociu.',
-    badges: ['Recunoaște (1988)', 'Non-UE', 'Minsk Group']
+    particularitati: 'Aliniere total─â cu linia istoric─â a Moscovei ├«n ceea ce prive╚Öte geopolitica Orientului Mijlociu.',
+    badges: ['Recunoa╚Öte (1988)', 'Non-UE', 'Minsk Group']
   },
   {
     id: 'slovenia',
     nume: 'Slovenia',
     numeEn: 'Slovenia',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 46.1512,
     lon: 14.9955,
     coords: [14.9955, 46.1512],
     capitala: 'Ljubljana',
-    populatie: '≈ 2 100 000 loc.',
+    populatie: 'Γëê 2 100 000 loc.',
     popVal: 2100000,
-    suprafata: '20 273 km²',
+    suprafata: '20 273 km┬▓',
     supVal: 20273,
     zee: '2024',
     zeeVal: 2024,
-    note: 'Slovenia a recunoscut oficial Statul Palestina la 4 iunie 2024, după ce Parlamentul de la Ljubljana a votat cu o majoritate covârșitoare propunerea înaintată de premierul Robert Golob, ca reacție la criza umanitară din Gaza.',
+    note: 'Slovenia a recunoscut oficial Statul Palestina la 4 iunie 2024, dup─â ce Parlamentul de la Ljubljana a votat cu o majoritate cov├ór╚Öitoare propunerea ├«naintat─â de premierul Robert Golob, ca reac╚¢ie la criza umanitar─â din Gaza.',
     ue: 'Stat membru al Uniunii Europene (din 2004).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
       temei: 'Votul oficial al Parlamentului Sloven (iunie 2024)',
-      regim: 'Relații diplomatice formale depline ca stat suveran',
-      particular: 'Procedura a fost accelerată pentru a se corela cu inițiativa spaniolo-irlandeză',
-      observatie: 'Opoziția de dreapta a încercat suspendarea votului, fără succes'
+      regim: 'Rela╚¢ii diplomatice formale depline ca stat suveran',
+      particular: 'Procedura a fost accelerat─â pentru a se corela cu ini╚¢iativa spaniolo-irlandez─â',
+      observatie: 'Opozi╚¢ia de dreapta a ├«ncercat suspendarea votului, f─âr─â succes'
     },
-    particularitati: 'Prima țară din fosta Iugoslavie (care a aderat ulterior la UE) care a realizat acest pas diplomatic formal după dizolvarea federației.',
-    badges: ['Recunoaște (2024)', 'Membru UE', 'Schengen']
+    particularitati: 'Prima ╚¢ar─â din fosta Iugoslavie (care a aderat ulterior la UE) care a realizat acest pas diplomatic formal dup─â dizolvarea federa╚¢iei.',
+    badges: ['Recunoa╚Öte (2024)', 'Membru UE', 'Schengen']
   },
   {
     id: 'iceland',
     nume: 'Islanda',
     numeEn: 'Iceland',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 64.9631,
     lon: -19.0208,
     coords: [-19.0208, 64.9631],
-    capitala: 'Reykjavík',
-    populatie: '≈ 370 000 loc.',
+    capitala: 'Reykjav├¡k',
+    populatie: 'Γëê 370 000 loc.',
     popVal: 370000,
-    suprafata: '103 000 km²',
+    suprafata: '103 000 km┬▓',
     supVal: 103000,
     zee: '2011',
     zeeVal: 2011,
-    note: 'Islanda a recunoscut oficial Palestina ca stat suveran și independent la 29 noiembrie 2011, în urma unei rezoluții aprobate în unanimitate de Parlamentul de la Reykjavík (Althing), fiind primul stat pur vest-european care a făcut acest pas.',
+    note: 'Islanda a recunoscut oficial Palestina ca stat suveran ╚Öi independent la 29 noiembrie 2011, ├«n urma unei rezolu╚¢ii aprobate ├«n unanimitate de Parlamentul de la Reykjav├¡k (Althing), fiind primul stat pur vest-european care a f─âcut acest pas.',
     ue: 'Nu este membru UE.',
-    schengen: 'Membru al Spațiului Schengen (prin acorduri asociate).',
-    moneda: 'Coroană islandeză (ISK)',
+    schengen: 'Membru al Spa╚¢iului Schengen (prin acorduri asociate).',
+    moneda: 'Coroan─â islandez─â (ISK)',
     viza: {
-      temei: 'Rezoluția oficială a Parlamentului Islandez (noiembrie 2011)',
-      regim: 'Relații diplomatice formale active',
-      particular: 'Votul istoric a coincis cu Ziua Internațională de Solidaritate cu Poporul Palestinian',
-      observatie: 'Islanda a susținut constant statutul de membru observator al Palestinei la ONU'
+      temei: 'Rezolu╚¢ia oficial─â a Parlamentului Islandez (noiembrie 2011)',
+      regim: 'Rela╚¢ii diplomatice formale active',
+      particular: 'Votul istoric a coincis cu Ziua Interna╚¢ional─â de Solidaritate cu Poporul Palestinian',
+      observatie: 'Islanda a sus╚¢inut constant statutul de membru observator al Palestinei la ONU'
     },
-    particularitati: 'Decizia istorică din 2011 a reconfirmat politica externă profund independentă a Islandei.',
-    badges: ['Recunoaște (2011)', 'Non-UE', 'Schengen']
+    particularitati: 'Decizia istoric─â din 2011 a reconfirmat politica extern─â profund independent─â a Islandei.',
+    badges: ['Recunoa╚Öte (2011)', 'Non-UE', 'Schengen']
   },
   {
     id: 'cyprus',
     nume: 'Cipru',
     numeEn: 'Cyprus',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 35.1264,
     lon: 33.4299,
     coords: [33.4299, 35.1264],
     capitala: 'Nicosia',
-    populatie: '≈ 1 200 000 loc.',
+    populatie: 'Γëê 1 200 000 loc.',
     popVal: 1200000,
-    suprafata: '9 251 km²',
+    suprafata: '9 251 km┬▓',
     supVal: 9251,
     zee: '1988',
     zeeVal: 1988,
-    note: 'Cipru a recunoscut Palestina în noiembrie 1988. În ciuda relațiilor extrem de apropiate geopolitic din prezent cu Israelul, Cipru continuă să mențină în mod oficial recunoașterea și Ambasada Palestinei la Nicosia.',
+    note: 'Cipru a recunoscut Palestina ├«n noiembrie 1988. ├Än ciuda rela╚¢iilor extrem de apropiate geopolitic din prezent cu Israelul, Cipru continu─â s─â men╚¢in─â ├«n mod oficial recunoa╚Öterea ╚Öi Ambasada Palestinei la Nicosia.',
     ue: 'Stat membru al Uniunii Europene (din 2004).',
     schengen: 'Nu face parte din Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Decizia oficială a Președintelui cipriot George Vassiliou (noiembrie 1988)',
-      regim: 'Reprezentare diplomatică reciprocă completă',
-      particular: 'Cipru a reconfirmat poziția istorică în 2011, precizând că nu va reveni asupra deciziei',
-      observatie: 'Oportunități educaționale de lungă durată oferite studenților palestinieni'
+      temei: 'Decizia oficial─â a Pre╚Öedintelui cipriot George Vassiliou (noiembrie 1988)',
+      regim: 'Reprezentare diplomatic─â reciproc─â complet─â',
+      particular: 'Cipru a reconfirmat pozi╚¢ia istoric─â ├«n 2011, preciz├ónd c─â nu va reveni asupra deciziei',
+      observatie: 'Oportunit─â╚¢i educa╚¢ionale de lung─â durat─â oferite studen╚¢ilor palestinieni'
     },
-    particularitati: 'O poziție de echilibru delicat în Mediterana de Est, împărțit între legăturile istorice cu lumea arabă și parteneriatul energetic modern cu Israel.',
-    badges: ['Recunoaște (1988)', 'Membru UE', 'Poziție Delicată']
+    particularitati: 'O pozi╚¢ie de echilibru delicat ├«n Mediterana de Est, ├«mp─âr╚¢it ├«ntre leg─âturile istorice cu lumea arab─â ╚Öi parteneriatul energetic modern cu Israel.',
+    badges: ['Recunoa╚Öte (1988)', 'Membru UE', 'Pozi╚¢ie Delicat─â']
   },
   {
     id: 'albania',
     nume: 'Albania',
     numeEn: 'Albania',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 41.1533,
     lon: 20.1683,
     coords: [20.1683, 41.1533],
     capitala: 'Tirana',
-    populatie: '≈ 2 800 000 loc.',
+    populatie: 'Γëê 2 800 000 loc.',
     popVal: 2800000,
-    suprafata: '28 748 km²',
+    suprafata: '28 748 km┬▓',
     supVal: 28748,
     zee: '1988',
     zeeVal: 1988,
-    note: 'Albania a recunoscut Statul Palestina la 17 noiembrie 1988, în timpul regimului socialist. Relațiile diplomatice au fost păstrate neîntrerupt, existând Ambasada Palestinei la Tirana.',
-    ue: 'Stat candidat la aderarea în Uniunea Europeană.',
+    note: 'Albania a recunoscut Statul Palestina la 17 noiembrie 1988, ├«n timpul regimului socialist. Rela╚¢iile diplomatice au fost p─âstrate ne├«ntrerupt, exist├ónd Ambasada Palestinei la Tirana.',
+    ue: 'Stat candidat la aderarea ├«n Uniunea European─â.',
     schengen: 'Nu face parte din Schengen.',
     moneda: 'Lek albanez (ALL)',
     viza: {
-      temei: 'Declarația oficială a Guvernului Socialist al Albaniei (noiembrie 1988)',
-      regim: 'Relații diplomatice bilaterale funcționale',
-      particular: 'Albania sprijină constant soluția pacii durabile bazată pe cele două state',
+      temei: 'Declara╚¢ia oficial─â a Guvernului Socialist al Albaniei (noiembrie 1988)',
+      regim: 'Rela╚¢ii diplomatice bilaterale func╚¢ionale',
+      particular: 'Albania sprijin─â constant solu╚¢ia pacii durabile bazat─â pe cele dou─â state',
       observatie: 'Schimburi diplomatice periodice constructive'
     },
-    particularitati: 'Are un profil unic în Balcanii de Vest, având o populație majoritar musulmană dar și relații politice solide cu SUA.',
-    badges: ['Recunoaște (1988)', 'Candidat UE', 'Balcani']
+    particularitati: 'Are un profil unic ├«n Balcanii de Vest, av├ónd o popula╚¢ie majoritar musulman─â dar ╚Öi rela╚¢ii politice solide cu SUA.',
+    badges: ['Recunoa╚Öte (1988)', 'Candidat UE', 'Balcani']
   },
   {
     id: 'serbia',
     nume: 'Serbia',
     numeEn: 'Serbia',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 44.0165,
     lon: 21.0059,
     coords: [21.0059, 44.0165],
     capitala: 'Belgrad',
-    populatie: '≈ 6 800 000 loc.',
+    populatie: 'Γëê 6 800 000 loc.',
     popVal: 6800000,
-    suprafata: '88 361 km²',
+    suprafata: '88 361 km┬▓',
     supVal: 88361,
     zee: '1988',
     zeeVal: 1988,
-    note: 'Serbia a moștenit recunoașterea oficială de la fosta Iugoslavie (SFRJ), care a recunoscut Palestina la 16 noiembrie 1988. Iugoslavia a fost un lider istoric al Mișcării de Non-Aliniere, oferind sprijin diplomatic masiv PLO.',
-    ue: 'Stat candidat la aderarea în Uniunea Europeană.',
+    note: 'Serbia a mo╚Ötenit recunoa╚Öterea oficial─â de la fosta Iugoslavie (SFRJ), care a recunoscut Palestina la 16 noiembrie 1988. Iugoslavia a fost un lider istoric al Mi╚Öc─ârii de Non-Aliniere, oferind sprijin diplomatic masiv PLO.',
+    ue: 'Stat candidat la aderarea ├«n Uniunea European─â.',
     schengen: 'Nu face parte din Schengen.',
-    moneda: 'Dinar sârbesc (RSD)',
+    moneda: 'Dinar s├órbesc (RSD)',
     viza: {
-      temei: 'Succesiunea directă a tratatelor diplomatice ale SFR Iugoslavia',
-      regim: 'Ambasada Palestinei deschisă activ la Belgrad',
-      particular: 'Serbia sprijină Palestina, iar la rândul său, Palestina nu recunoaște independența Kosovo',
-      observatie: 'Relații de sprijin diplomatic reciproc extrem de solide'
+      temei: 'Succesiunea direct─â a tratatelor diplomatice ale SFR Iugoslavia',
+      regim: 'Ambasada Palestinei deschis─â activ la Belgrad',
+      particular: 'Serbia sprijin─â Palestina, iar la r├óndul s─âu, Palestina nu recunoa╚Öte independen╚¢a Kosovo',
+      observatie: 'Rela╚¢ii de sprijin diplomatic reciproc extrem de solide'
     },
-    particularitati: 'Sprijinul sârbesc este consolidat de faptul că Autoritatea Palestiniană refuză strict recunoașterea Kosovo, susținând integritatea teritorială a Serbiei.',
-    badges: ['Recunoaște (1988)', 'Candidat UE', 'Kosovo Issue']
+    particularitati: 'Sprijinul s├órbesc este consolidat de faptul c─â Autoritatea Palestinian─â refuz─â strict recunoa╚Öterea Kosovo, sus╚¢in├ónd integritatea teritorial─â a Serbiei.',
+    badges: ['Recunoa╚Öte (1988)', 'Candidat UE', 'Kosovo Issue']
   },
   {
     id: 'bosnia and herz.',
-    nume: 'Bosnia-Herț.',
+    nume: 'Bosnia-Her╚¢.',
     numeEn: 'Bosnia and Herzegovina',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 43.9159,
     lon: 17.6791,
     coords: [17.6791, 43.9159],
     capitala: 'Sarajevo',
-    populatie: '≈ 3 200 000 loc.',
+    populatie: 'Γëê 3 200 000 loc.',
     popVal: 3200000,
-    suprafata: '51 129 km²',
+    suprafata: '51 129 km┬▓',
     supVal: 51129,
     zee: '1992',
     zeeVal: 1992,
-    note: 'Bosnia și Herțegovina a recunoscut oficial Palestina la 27 mai 1992, imediat după declararea propriei sale independențe în timpul destrămării Iugoslaviei, continuând linia istorică stabilită de Belgrad.',
-    ue: 'Stat candidat la aderarea în Uniunea Europeană.',
+    note: 'Bosnia ╚Öi Her╚¢egovina a recunoscut oficial Palestina la 27 mai 1992, imediat dup─â declararea propriei sale independen╚¢e ├«n timpul destr─âm─ârii Iugoslaviei, continu├ónd linia istoric─â stabilit─â de Belgrad.',
+    ue: 'Stat candidat la aderarea ├«n Uniunea European─â.',
     schengen: 'Nu face parte din Schengen.',
-    moneda: 'Marcă convertibilă (BAM)',
+    moneda: 'Marc─â convertibil─â (BAM)',
     viza: {
-      temei: 'Decretul Președinției colective a Bosniei din mai 1992',
-      regim: 'Relații de reprezentare diplomatică',
-      particular: 'Consens fragil local din cauza structurii etnice complexe a țării',
-      observatie: 'Misiunea palestiniană este coordonată activ la Sarajevo'
+      temei: 'Decretul Pre╚Öedin╚¢iei colective a Bosniei din mai 1992',
+      regim: 'Rela╚¢ii de reprezentare diplomatic─â',
+      particular: 'Consens fragil local din cauza structurii etnice complexe a ╚¢─ârii',
+      observatie: 'Misiunea palestinian─â este coordonat─â activ la Sarajevo'
     },
-    particularitati: 'Deși structura etnică internă tripartită generează uneori tensiuni de politică externă, recunoașterea oficială a fost menținută stabilă.',
-    badges: ['Recunoaște (1992)', 'Candidat UE', 'Balcani']
+    particularitati: 'De╚Öi structura etnic─â intern─â tripartit─â genereaz─â uneori tensiuni de politic─â extern─â, recunoa╚Öterea oficial─â a fost men╚¢inut─â stabil─â.',
+    badges: ['Recunoa╚Öte (1992)', 'Candidat UE', 'Balcani']
   },
   {
     id: 'macedonia',
     nume: 'Macedonia de Nord',
     numeEn: 'North Macedonia',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 41.6086,
     lon: 21.7453,
     coords: [21.7453, 41.6086],
     capitala: 'Skopje',
-    populatie: '≈ 2 000 000 loc.',
+    populatie: 'Γëê 2 000 000 loc.',
     popVal: 2000000,
-    suprafata: '25 713 km²',
+    suprafata: '25 713 km┬▓',
     supVal: 25713,
     zee: '1990',
     zeeVal: 1990,
-    note: 'Macedonia de Nord a recunoscut Palestina în anul 1990, ca parte a procesului de succesiune iugoslav, consolidând ulterior relațiile formale diplomatice.',
-    ue: 'Stat candidat la aderarea în Uniunea Europeană.',
+    note: 'Macedonia de Nord a recunoscut Palestina ├«n anul 1990, ca parte a procesului de succesiune iugoslav, consolid├ónd ulterior rela╚¢iile formale diplomatice.',
+    ue: 'Stat candidat la aderarea ├«n Uniunea European─â.',
     schengen: 'Nu face parte din Schengen.',
     moneda: 'Denar macedonean (MKD)',
     viza: {
-      temei: 'Deciziile bilaterale formale post-independență',
-      regim: 'Relații de sprijin diplomatic',
-      particular: 'Skopje urmează în mare parte linia de politică externă a UE și SUA',
-      observatie: 'Poziție diplomatică relativ discretă dar stabilă'
+      temei: 'Deciziile bilaterale formale post-independen╚¢─â',
+      regim: 'Rela╚¢ii de sprijin diplomatic',
+      particular: 'Skopje urmeaz─â ├«n mare parte linia de politic─â extern─â a UE ╚Öi SUA',
+      observatie: 'Pozi╚¢ie diplomatic─â relativ discret─â dar stabil─â'
     },
-    particularitati: 'Menține o poziție constructivă, aliniată cu tratatele internaționale ale dreptului umanitar.',
-    badges: ['Recunoaște (1990)', 'Candidat UE', 'Balcani']
+    particularitati: 'Men╚¢ine o pozi╚¢ie constructiv─â, aliniat─â cu tratatele interna╚¢ionale ale dreptului umanitar.',
+    badges: ['Recunoa╚Öte (1990)', 'Candidat UE', 'Balcani']
   },
   {
     id: 'montenegro',
     nume: 'Muntenegru',
     numeEn: 'Montenegro',
     categorie: 'rec',
-    categorieLabel: 'Recunoaște Palestina',
+    categorieLabel: 'Recunoa╚Öte Palestina',
     lat: 42.7087,
     lon: 19.3744,
     coords: [19.3744, 42.7087],
     capitala: 'Podgorica',
-    populatie: '≈ 620 000 loc.',
+    populatie: 'Γëê 620 000 loc.',
     popVal: 620000,
-    suprafata: '13 812 km²',
+    suprafata: '13 812 km┬▓',
     supVal: 13812,
     zee: '2006',
     zeeVal: 2006,
-    note: 'Muntenegru a recunoscut Palestina în mod oficial în anul 2006, la scurt timp după obținerea independenței sale prin dizolvarea uniunii statale cu Serbia.',
-    ue: 'Stat candidat avansat la aderarea în Uniunea Europeană.',
+    note: 'Muntenegru a recunoscut Palestina ├«n mod oficial ├«n anul 2006, la scurt timp dup─â ob╚¢inerea independen╚¢ei sale prin dizolvarea uniunii statale cu Serbia.',
+    ue: 'Stat candidat avansat la aderarea ├«n Uniunea European─â.',
     schengen: 'Nu face parte din Schengen.',
-    moneda: 'Euro (EUR) — utilizat de facto',
+    moneda: 'Euro (EUR) ΓÇö utilizat de facto',
     viza: {
-      temei: 'Declarația oficială de politică externă din anul 2006',
-      regim: 'Relații diplomatice formale',
-      particular: 'Coordonare strânsă cu pozițiile europene',
-      observatie: 'Muntenegru sprijină activ eforturile internaționale pentru pace'
+      temei: 'Declara╚¢ia oficial─â de politic─â extern─â din anul 2006',
+      regim: 'Rela╚¢ii diplomatice formale',
+      particular: 'Coordonare str├óns─â cu pozi╚¢iile europene',
+      observatie: 'Muntenegru sprijin─â activ eforturile interna╚¢ionale pentru pace'
     },
-    particularitati: 'Una dintre cele mai rapide integrări a recunoașterii succesorale după declararea independenței în Balcani.',
-    badges: ['Recunoaște (2006)', 'Candidat UE', 'Eurozone']
+    particularitati: 'Una dintre cele mai rapide integr─âri a recunoa╚Öterii succesorale dup─â declararea independen╚¢ei ├«n Balcani.',
+    badges: ['Recunoa╚Öte (2006)', 'Candidat UE', 'Eurozone']
   },
   {
     id: 'germany',
     nume: 'Germania',
     numeEn: 'Germany',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 51.1657,
     lon: 10.4515,
     coords: [10.4515, 51.1657],
     capitala: 'Berlin',
-    populatie: '≈ 83 200 000 loc.',
+    populatie: 'Γëê 83 200 000 loc.',
     popVal: 83200000,
-    suprafata: '357 022 km²',
+    suprafata: '357 022 km┬▓',
     supVal: 357022,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Germania nu recunoaște oficial Palestina ca stat, susținând ferm că statutul statalitate poate fi obținut exclusiv în urma unor negocieri directe finalizate între Israel și Autoritatea Palestiniană.',
+    note: 'Germania nu recunoa╚Öte oficial Palestina ca stat, sus╚¢in├ónd ferm c─â statutul statalitate poate fi ob╚¢inut exclusiv ├«n urma unor negocieri directe finalizate ├«ntre Israel ╚Öi Autoritatea Palestinian─â.',
     ue: 'Stat membru al Uniunii Europene (fondator).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Linia oficială a Ministerului Federal al Afacerilor Externe (Auswärtiges Amt)',
-      regim: 'Fără recunoaștere formală, însă menține Reprezentanța Germaniei la Ramallah',
-      particular: 'Germania este unul dintre cei mai mari donatori de ajutor umanitar și dezvoltare pentru teritoriile palestiniene',
-      observatie: 'Responsabilitatea istorică față de securitatea statului Israel este considerată rațiune de stat (Staatsräson)'
+      temei: 'Linia oficial─â a Ministerului Federal al Afacerilor Externe (Ausw├ñrtiges Amt)',
+      regim: 'F─âr─â recunoa╚Ötere formal─â, ├«ns─â men╚¢ine Reprezentan╚¢a Germaniei la Ramallah',
+      particular: 'Germania este unul dintre cei mai mari donatori de ajutor umanitar ╚Öi dezvoltare pentru teritoriile palestiniene',
+      observatie: 'Responsabilitatea istoric─â fa╚¢─â de securitatea statului Israel este considerat─â ra╚¢iune de stat (Staatsr├ñson)'
     },
-    particularitati: 'Poziție extrem de fermă, influențată profund de factori istorici sensibili post-WWII.',
-    badges: ['Nu recunoaște', 'Membru UE', 'Schengen']
+    particularitati: 'Pozi╚¢ie extrem de ferm─â, influen╚¢at─â profund de factori istorici sensibili post-WWII.',
+    badges: ['Nu recunoa╚Öte', 'Membru UE', 'Schengen']
   },
   {
     id: 'italy',
     nume: 'Italia',
     numeEn: 'Italy',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 41.8719,
     lon: 12.5674,
     coords: [12.5674, 41.8719],
     capitala: 'Roma',
-    populatie: '≈ 59 000 000 loc.',
+    populatie: 'Γëê 59 000 000 loc.',
     popVal: 59000000,
-    suprafata: '301 340 km²',
+    suprafata: '301 340 km┬▓',
     supVal: 301340,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Italia nu recunoaște oficial Palestina. Cu toate acestea, guvernul italian a indicat de mai multe ori disponibilitatea de a recunoaște statul în viitor, însă exclusiv sub auspiciile unui proces de pace agreat de ambele părți.',
+    note: 'Italia nu recunoa╚Öte oficial Palestina. Cu toate acestea, guvernul italian a indicat de mai multe ori disponibilitatea de a recunoa╚Öte statul ├«n viitor, ├«ns─â exclusiv sub auspiciile unui proces de pace agreat de ambele p─âr╚¢i.',
     ue: 'Stat membru al Uniunii Europene (fondator).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Poziția oficială a Ministerului Afacerilor Externe (Farnesina)',
-      regim: 'Menține relații diplomatice neoficiale de nivel înalt cu Autoritatea Palestiniană',
-      particular: 'Parlamentul italian a aprobat în trecut rezoluții cu caracter orientativ recomandând recunoașterea',
-      observatie: 'Sprijin activ pentru proiecte umanitare în Cisiordania și Gaza'
+      temei: 'Pozi╚¢ia oficial─â a Ministerului Afacerilor Externe (Farnesina)',
+      regim: 'Men╚¢ine rela╚¢ii diplomatice neoficiale de nivel ├«nalt cu Autoritatea Palestinian─â',
+      particular: 'Parlamentul italian a aprobat ├«n trecut rezolu╚¢ii cu caracter orientativ recomand├ónd recunoa╚Öterea',
+      observatie: 'Sprijin activ pentru proiecte umanitare ├«n Cisiordania ╚Öi Gaza'
     },
-    particularitati: 'O atitudine considerată "flexibilă" dar prudentă, strâns aliniată cu pozițiile oficiale de la Washington și Bruxelles.',
-    badges: ['Nu recunoaște', 'Membru UE', 'Schengen']
+    particularitati: 'O atitudine considerat─â "flexibil─â" dar prudent─â, str├óns aliniat─â cu pozi╚¢iile oficiale de la Washington ╚Öi Bruxelles.',
+    badges: ['Nu recunoa╚Öte', 'Membru UE', 'Schengen']
   },
   {
     id: 'france_placeholder_norec',
     idReal: 'france',
-    nume: 'Franța (Istoric)',
+    nume: 'Fran╚¢a (Istoric)',
+    numeEn: 'France_Placeholder',
     categorie: 'norec',
-    popVal: 0, supVal: 0, zeeVal: 9999, note: 'Pentru evitarea erorilor, Franța este trecută în categoria celor care recunosc după decizia istorică din septembrie 2025.',
+    popVal: 0, supVal: 0, zeeVal: 9999, note: 'Pentru evitarea erorilor, Fran╚¢a este trecut─â ├«n categoria celor care recunosc dup─â decizia istoric─â din septembrie 2025.',
     badges: []
   },
   {
@@ -2437,57 +2428,57 @@ const teritorii = [
     nume: 'Austria',
     numeEn: 'Austria',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 47.5162,
     lon: 14.5501,
     coords: [14.5501, 47.5162],
     capitala: 'Viena',
-    populatie: '≈ 8 900 000 loc.',
+    populatie: 'Γëê 8 900 000 loc.',
     popVal: 8900000,
-    suprafata: '83 879 km²',
+    suprafata: '83 879 km┬▓',
     supVal: 83879,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Austria nu recunoaște oficial Palestina ca stat. Poziția sa externă sprijină o soluție negociată, respingând deciziile unilaterale de recunoaștere în afara acordurilor de pace.',
+    note: 'Austria nu recunoa╚Öte oficial Palestina ca stat. Pozi╚¢ia sa extern─â sprijin─â o solu╚¢ie negociat─â, resping├ónd deciziile unilaterale de recunoa╚Ötere ├«n afara acordurilor de pace.',
     ue: 'Stat membru al Uniunii Europene (din 1995).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Strategia oficială a Ministerului de Externe de la Viena',
-      regim: 'Relații diplomatice limitate la reprezentanță oficială',
-      particular: 'Austria a devenit în ultimii ani unul dintre cei mai fermi susținători europeni ai Israelului',
-      observatie: 'Poziție restrictivă privind rezoluțiile favorabile Palestinei la ONU'
+      temei: 'Strategia oficial─â a Ministerului de Externe de la Viena',
+      regim: 'Rela╚¢ii diplomatice limitate la reprezentan╚¢─â oficial─â',
+      particular: 'Austria a devenit ├«n ultimii ani unul dintre cei mai fermi sus╚¢in─âtori europeni ai Israelului',
+      observatie: 'Pozi╚¢ie restrictiv─â privind rezolu╚¢iile favorabile Palestinei la ONU'
     },
-    particularitati: 'O turnură puternic pro-Israel în ultimul deceniu, schimbând politica istorică mai neutră a fostului cancelar Bruno Kreisky.',
-    badges: ['Nu recunoaște', 'Membru UE', 'Schengen']
+    particularitati: 'O turnur─â puternic pro-Israel ├«n ultimul deceniu, schimb├ónd politica istoric─â mai neutr─â a fostului cancelar Bruno Kreisky.',
+    badges: ['Nu recunoa╚Öte', 'Membru UE', 'Schengen']
   },
   {
     id: 'hungary',
     nume: 'Ungaria',
     numeEn: 'Hungary',
     categorie: 'contested',
-    categorieLabel: 'Recunoaște (Contestat)',
+    categorieLabel: 'Recunoa╚Öte (Contestat)',
     lat: 47.1625,
     lon: 19.5033,
     coords: [19.5033, 47.1625],
     capitala: 'Budapesta',
-    populatie: '≈ 9 700 000 loc.',
+    populatie: 'Γëê 9 700 000 loc.',
     popVal: 9700000,
-    suprafata: '93 028 km²',
+    suprafata: '93 028 km┬▓',
     supVal: 93028,
     zee: '1988',
     zeeVal: 1988,
-    note: 'Ungaria a recunoscut Palestina în mod oficial la 23 noiembrie 1988 (în perioada regimului comunist din Republica Populară Ungară). În prezent, sub conducerea cabinetului condus de Viktor Orbán, Ungaria contestă de facto acea decizie istorică, fiind cel mai ferm aliat al Israelului în cadrul UE.',
+    note: 'Ungaria a recunoscut Palestina ├«n mod oficial la 23 noiembrie 1988 (├«n perioada regimului comunist din Republica Popular─â Ungar─â). ├Än prezent, sub conducerea cabinetului condus de Viktor Orb├ín, Ungaria contest─â de facto acea decizie istoric─â, fiind cel mai ferm aliat al Israelului ├«n cadrul UE.',
     ue: 'Stat membru al Uniunii Europene (din 2004).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Forint maghiar (HUF)',
     viza: {
-      temei: 'Deciziile constituționale de analiză a tratatelor socialiste',
-      regim: 'Relații diplomatice formale înghețate sau reduse la minim',
-      particular: 'Ungaria blochează constant declarațiile comune ale UE care critică Israelul',
-      observatie: 'Ambasada Palestinei rămâne fizic deschisă la Budapesta din rațiuni juridice complexe'
+      temei: 'Deciziile constitu╚¢ionale de analiz─â a tratatelor socialiste',
+      regim: 'Rela╚¢ii diplomatice formale ├«nghe╚¢ate sau reduse la minim',
+      particular: 'Ungaria blocheaz─â constant declara╚¢iile comune ale UE care critic─â Israelul',
+      observatie: 'Ambasada Palestinei r─âm├óne fizic deschis─â la Budapesta din ra╚¢iuni juridice complexe'
     },
-    particularitati: 'Cel mai straniu caz diplomatic: tehnic menține o recunoaștere din 1988 pe care politic o respinge și o blochează sistematic.',
+    particularitati: 'Cel mai straniu caz diplomatic: tehnic men╚¢ine o recunoa╚Ötere din 1988 pe care politic o respinge ╚Öi o blocheaz─â sistematic.',
     badges: ['Contestat de facto', 'Membru UE', 'Schengen']
   },
   {
@@ -2495,28 +2486,28 @@ const teritorii = [
     nume: 'Cehia',
     numeEn: 'Czech Republic',
     categorie: 'contested',
-    categorieLabel: 'Recunoaște (Contestat)',
+    categorieLabel: 'Recunoa╚Öte (Contestat)',
     lat: 49.8175,
     lon: 15.473,
     coords: [15.473, 49.8175],
     capitala: 'Praga',
-    populatie: '≈ 10 700 000 loc.',
+    populatie: 'Γëê 10 700 000 loc.',
     popVal: 10700000,
-    suprafata: '78 867 km²',
+    suprafata: '78 867 km┬▓',
     supVal: 78867,
     zee: '1988',
     zeeVal: 1988,
-    note: 'Cehoslovacia a recunoscut oficial Palestina la 18 noiembrie 1988. În urma divizării, Cehia a succedat tratatele dar a precizat oficial în repetate rânduri că acea recunoaștere comunistă nu mai reflectă politica externă actuală, Praga fiind cel mai apropiat partener strategic al Israelului din Europa.',
+    note: 'Cehoslovacia a recunoscut oficial Palestina la 18 noiembrie 1988. ├Än urma diviz─ârii, Cehia a succedat tratatele dar a precizat oficial ├«n repetate r├ónduri c─â acea recunoa╚Ötere comunist─â nu mai reflect─â politica extern─â actual─â, Praga fiind cel mai apropiat partener strategic al Israelului din Europa.',
     ue: 'Stat membru al Uniunii Europene (din 2004).',
-    schengen: 'Membru al Spațiului Schengen.',
-    moneda: 'Coroană cehă (CZK)',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
+    moneda: 'Coroan─â ceh─â (CZK)',
     viza: {
-      temei: 'Declarațiile Ministerului Afacerilor Externe al Cehiei privind validitatea recunoașterii istorice',
-      regim: 'Relații diplomatice bilaterale minime, puternic nuanțate',
-      particular: 'Praga a votat constant împotriva rezoluțiilor palestiniene la Adunarea Generală a ONU',
-      observatie: 'Există Ambasada Palestinei la Praga, în ciuda protestelor politice interne'
+      temei: 'Declara╚¢iile Ministerului Afacerilor Externe al Cehiei privind validitatea recunoa╚Öterii istorice',
+      regim: 'Rela╚¢ii diplomatice bilaterale minime, puternic nuan╚¢ate',
+      particular: 'Praga a votat constant ├«mpotriva rezolu╚¢iilor palestiniene la Adunarea General─â a ONU',
+      observatie: 'Exist─â Ambasada Palestinei la Praga, ├«n ciuda protestelor politice interne'
     },
-    particularitati: 'Poziție oficială extrem de critică față de Autoritatea Palestiniană, sprijinind total mutarea ambasadelor la Ierusalim.',
+    particularitati: 'Pozi╚¢ie oficial─â extrem de critic─â fa╚¢─â de Autoritatea Palestinian─â, sprijinind total mutarea ambasadelor la Ierusalim.',
     badges: ['Contestat de facto', 'Membru UE', 'Schengen']
   },
   {
@@ -2524,290 +2515,290 @@ const teritorii = [
     nume: 'Grecia',
     numeEn: 'Greece',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 39.0742,
     lon: 21.8243,
     coords: [21.8243, 39.0742],
     capitala: 'Atena',
-    populatie: '≈ 10 400 000 loc.',
+    populatie: 'Γëê 10 400 000 loc.',
     popVal: 10400000,
-    suprafata: '131 957 km²',
+    suprafata: '131 957 km┬▓',
     supVal: 131957,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Grecia nu recunoaște în mod oficial Palestina, în ciuda unor rezoluții favorabile adoptate în unanimitate de Parlamentul elen în anul 2015. Guvernul grec a ales să nu pună în aplicare recomandările legislative pentru a nu afecta parteneriatul strategic cu Israel.',
+    note: 'Grecia nu recunoa╚Öte ├«n mod oficial Palestina, ├«n ciuda unor rezolu╚¢ii favorabile adoptate ├«n unanimitate de Parlamentul elen ├«n anul 2015. Guvernul grec a ales s─â nu pun─â ├«n aplicare recomand─ârile legislative pentru a nu afecta parteneriatul strategic cu Israel.',
     ue: 'Stat membru al Uniunii Europene (din 1981).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Decizia Guvernului Elen de suspendare a rezoluției parlamentare din 2015',
-      regim: 'Relații neoficiale cordiale, Reprezentanță palestiniană activă',
-      particular: 'Parteneriat militar și energetic extrem de puternic cu Israel în Mediterana de Est',
-      observatie: 'Grecia a avut istoric un profil extrem de pro-arab în secolul XX'
+      temei: 'Decizia Guvernului Elen de suspendare a rezolu╚¢iei parlamentare din 2015',
+      regim: 'Rela╚¢ii neoficiale cordiale, Reprezentan╚¢─â palestinian─â activ─â',
+      particular: 'Parteneriat militar ╚Öi energetic extrem de puternic cu Israel ├«n Mediterana de Est',
+      observatie: 'Grecia a avut istoric un profil extrem de pro-arab ├«n secolul XX'
     },
-    particularitati: 'O schimbare pragmatică de politică externă, trecând de la o poziție pro-arabă radicală sub Andreas Papandreou la un aliniament strategic strâns cu Israel.',
-    badges: ['Nu recunoaște', 'Membru UE', 'Schengen']
+    particularitati: 'O schimbare pragmatic─â de politic─â extern─â, trec├ónd de la o pozi╚¢ie pro-arab─â radical─â sub Andreas Papandreou la un aliniament strategic str├óns cu Israel.',
+    badges: ['Nu recunoa╚Öte', 'Membru UE', 'Schengen']
   },
   {
     id: 'switzerland',
-    nume: 'Elveția',
+    nume: 'Elve╚¢ia',
     numeEn: 'Switzerland',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 46.8182,
     lon: 8.2275,
     coords: [8.2275, 46.8182],
     capitala: 'Berna',
-    populatie: '≈ 8 700 000 loc.',
+    populatie: 'Γëê 8 700 000 loc.',
     popVal: 8700000,
-    suprafata: '41 285 km²',
+    suprafata: '41 285 km┬▓',
     supVal: 41285,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Elveția nu recunoaște oficial Palestina ca stat, invocând politica sa istorică de neutralitate activă și necesitatea unui acord negociat direct între cele două părți.',
+    note: 'Elve╚¢ia nu recunoa╚Öte oficial Palestina ca stat, invoc├ónd politica sa istoric─â de neutralitate activ─â ╚Öi necesitatea unui acord negociat direct ├«ntre cele dou─â p─âr╚¢i.',
     ue: 'Nu este membru UE.',
-    schengen: 'Membru al Spațiului Schengen.',
-    moneda: 'Franc elvețian (CHF)',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
+    moneda: 'Franc elve╚¢ian (CHF)',
     viza: {
-      temei: 'Poziția oficială a Departamentului Federal al Afacerilor Externe (DFAE)',
-      regim: 'Menține relații diplomatice tehnice active, finanțând proiecte umanitare substanțiale',
-      particular: 'Berna sprijină cu fermitate soluția celor două state pe baza frontierelor din 1967',
-      observatie: 'Elveția găzduiește sediul european al ONU și organizațiile Crucii Roșii'
+      temei: 'Pozi╚¢ia oficial─â a Departamentului Federal al Afacerilor Externe (DFAE)',
+      regim: 'Men╚¢ine rela╚¢ii diplomatice tehnice active, finan╚¢├ónd proiecte umanitare substan╚¢iale',
+      particular: 'Berna sprijin─â cu fermitate solu╚¢ia celor dou─â state pe baza frontierelor din 1967',
+      observatie: 'Elve╚¢ia g─âzduie╚Öte sediul european al ONU ╚Öi organiza╚¢iile Crucii Ro╚Öii'
     },
-    particularitati: 'Neutralitatea sa diplomatică face ca Elveția să fie un canal crucial de comunicare indirectă în regiune.',
-    badges: ['Nu recunoaște', 'Schengen', 'Neutralitate']
+    particularitati: 'Neutralitatea sa diplomatic─â face ca Elve╚¢ia s─â fie un canal crucial de comunicare indirect─â ├«n regiune.',
+    badges: ['Nu recunoa╚Öte', 'Schengen', 'Neutralitate']
   },
   {
     id: 'netherlands',
-    nume: 'Țările de Jos',
+    nume: '╚Ü─ârile de Jos',
     numeEn: 'Netherlands',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 52.1326,
     lon: 5.2913,
     coords: [5.2913, 52.1326],
     capitala: 'Amsterdam',
-    populatie: '≈ 17 500 000 loc.',
+    populatie: 'Γëê 17 500 000 loc.',
     popVal: 17500000,
-    suprafata: '41 543 km²',
+    suprafata: '41 543 km┬▓',
     supVal: 41543,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Țările de Jos nu recunosc oficial Palestina, susținând că recunoașterea trebuie să fie rezultatul final al unui acord direct de pace.',
+    note: '╚Ü─ârile de Jos nu recunosc oficial Palestina, sus╚¢in├ónd c─â recunoa╚Öterea trebuie s─â fie rezultatul final al unui acord direct de pace.',
     ue: 'Stat membru al Uniunii Europene (fondator).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Strategia de politică externă a Ministerului Afacerilor Externe de la Haga',
-      regim: 'Relații diplomatice formale limitate la nivel de Birou de reprezentare',
-      particular: 'Țările de Jos sprijină financiar consolidarea instituțională a Autorității Palestiniene',
-      observatie: 'Haga găzduiește Curtea Internațională de Justiție (CIJ) care analizează litigiile teritoriale'
+      temei: 'Strategia de politic─â extern─â a Ministerului Afacerilor Externe de la Haga',
+      regim: 'Rela╚¢ii diplomatice formale limitate la nivel de Birou de reprezentare',
+      particular: '╚Ü─ârile de Jos sprijin─â financiar consolidarea institu╚¢ional─â a Autorit─â╚¢ii Palestiniene',
+      observatie: 'Haga g─âzduie╚Öte Curtea Interna╚¢ional─â de Justi╚¢ie (CIJ) care analizeaz─â litigiile teritoriale'
     },
-    particularitati: 'Gazda CIJ și a CPI, Curți care joacă un rol seismic global în analizarea juridică a statutului Palestinei.',
-    badges: ['Nu recunoaște', 'Membru UE', 'Haga Court']
+    particularitati: 'Gazda CIJ ╚Öi a CPI, Cur╚¢i care joac─â un rol seismic global ├«n analizarea juridic─â a statutului Palestinei.',
+    badges: ['Nu recunoa╚Öte', 'Membru UE', 'Haga Court']
   },
   {
     id: 'finland',
     nume: 'Finlanda',
     numeEn: 'Finland',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 61.9241,
     lon: 25.7482,
     coords: [25.7482, 61.9241],
     capitala: 'Helsinki',
-    populatie: '≈ 5 500 000 loc.',
+    populatie: 'Γëê 5 500 000 loc.',
     popVal: 5500000,
-    suprafata: '338 424 km²',
+    suprafata: '338 424 km┬▓',
     supVal: 338424,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Finlanda nu recunoaște oficial Palestina, deși oficialii finlandezi au declarat în repetate rânduri un angajament ferm de a realiza acest pas în viitor, în strânsă coordonare cu alte state nordice, când condițiile diplomatice vor fi propice.',
+    note: 'Finlanda nu recunoa╚Öte oficial Palestina, de╚Öi oficialii finlandezi au declarat ├«n repetate r├ónduri un angajament ferm de a realiza acest pas ├«n viitor, ├«n str├óns─â coordonare cu alte state nordice, c├ónd condi╚¢iile diplomatice vor fi propice.',
     ue: 'Stat membru al Uniunii Europene (din 1995).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Documentul oficial de poziție al Ministerului Afacerilor Externe de la Helsinki',
-      regim: 'Fără reprezentare de nivel de Ambasador',
-      particular: 'Finlanda pledează pentru respectarea dreptului internațional în toate forurile',
-      observatie: 'Menține relații diplomatice neoficiale cordiale'
+      temei: 'Documentul oficial de pozi╚¢ie al Ministerului Afacerilor Externe de la Helsinki',
+      regim: 'F─âr─â reprezentare de nivel de Ambasador',
+      particular: 'Finlanda pledeaz─â pentru respectarea dreptului interna╚¢ional ├«n toate forurile',
+      observatie: 'Men╚¢ine rela╚¢ii diplomatice neoficiale cordiale'
     },
-    particularitati: 'Spre deosebire de Suedia vecină, Finlanda a ales o abordare mai prudentă, refuzând decizia unilaterală din 2014.',
-    badges: ['Nu recunoaște', 'Membru UE', 'Nordic Policy']
+    particularitati: 'Spre deosebire de Suedia vecin─â, Finlanda a ales o abordare mai prudent─â, refuz├ónd decizia unilateral─â din 2014.',
+    badges: ['Nu recunoa╚Öte', 'Membru UE', 'Nordic Policy']
   },
   {
     id: 'denmark',
     nume: 'Danemarca',
     numeEn: 'Denmark',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 56.2639,
     lon: 9.5018,
     coords: [9.5018, 56.2639],
     capitala: 'Copenhaga',
-    populatie: '≈ 5 800 000 loc.',
+    populatie: 'Γëê 5 800 000 loc.',
     popVal: 5800000,
-    suprafata: '43 094 km²',
+    suprafata: '43 094 km┬▓',
     supVal: 43094,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Danemarca nu recunoaște oficial Palestina. Parlamentul danez a dezbătut și a respins proiecte de lege privind recunoașterea în 2024, menținând linia conform căreia condițiile de suveranitate efectivă nu sunt pe deplin întrunite.',
+    note: 'Danemarca nu recunoa╚Öte oficial Palestina. Parlamentul danez a dezb─âtut ╚Öi a respins proiecte de lege privind recunoa╚Öterea ├«n 2024, men╚¢in├ónd linia conform c─âreia condi╚¢iile de suveranitate efectiv─â nu sunt pe deplin ├«ntrunite.',
     ue: 'Stat membru al Uniunii Europene (din 1973).',
-    schengen: 'Membru al Spațiului Schengen.',
-    moneda: 'Coroană daneză (DKK)',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
+    moneda: 'Coroan─â danez─â (DKK)',
     viza: {
       temei: 'Votul majoritar al Parlamentului Danez (Folketing) din mai 2024',
-      regim: 'Relații diplomatice bilaterale limitate',
-      particular: 'Copenhaga sprijină ferm eforturile de reformă ale Autorității Palestiniene',
-      observatie: 'Danemarca aplică reguli stricte de asistență externă'
+      regim: 'Rela╚¢ii diplomatice bilaterale limitate',
+      particular: 'Copenhaga sprijin─â ferm eforturile de reform─â ale Autorit─â╚¢ii Palestiniene',
+      observatie: 'Danemarca aplic─â reguli stricte de asisten╚¢─â extern─â'
     },
-    particularitati: 'Menține o poziție extrem de aliniată cu partenerii transatlantici, refuzând unilateralismul.',
-    badges: ['Nu recunoaște', 'Membru UE', 'Schengen']
+    particularitati: 'Men╚¢ine o pozi╚¢ie extrem de aliniat─â cu partenerii transatlantici, refuz├ónd unilateralismul.',
+    badges: ['Nu recunoa╚Öte', 'Membru UE', 'Schengen']
   },
   {
     id: 'estonia',
     nume: 'Estonia',
     numeEn: 'Estonia',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 58.5953,
     lon: 25.0136,
     coords: [25.0136, 58.5953],
     capitala: 'Tallinn',
-    populatie: '≈ 1 300 000 loc.',
+    populatie: 'Γëê 1 300 000 loc.',
     popVal: 1300000,
-    suprafata: '45 227 km²',
+    suprafata: '45 227 km┬▓',
     supVal: 45227,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Estonia nu recunoaște oficial Palestina ca stat, susținând că recunoașterea trebuie să vină ca o urmare firească a acordului direct de pace între Israel și Palestina.',
+    note: 'Estonia nu recunoa╚Öte oficial Palestina ca stat, sus╚¢in├ónd c─â recunoa╚Öterea trebuie s─â vin─â ca o urmare fireasc─â a acordului direct de pace ├«ntre Israel ╚Öi Palestina.',
     ue: 'Stat membru al Uniunii Europene (din 2004).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Documentul oficial de poziție al Guvernului Estonian',
-      regim: 'Relații de lucru neoficiale',
-      particular: 'Estonia urmează o linie transatlantică strictă în materie de politică externă',
-      observatie: 'Sprijină de principiu poziția comună a UE privind soluția celor două state'
+      temei: 'Documentul oficial de pozi╚¢ie al Guvernului Estonian',
+      regim: 'Rela╚¢ii de lucru neoficiale',
+      particular: 'Estonia urmeaz─â o linie transatlantic─â strict─â ├«n materie de politic─â extern─â',
+      observatie: 'Sprijin─â de principiu pozi╚¢ia comun─â a UE privind solu╚¢ia celor dou─â state'
     },
-    particularitati: 'Poziție extrem de aliniată cu SUA în forurile internaționale.',
-    badges: ['Nu recunoaște', 'Membru UE', 'Baltic']
+    particularitati: 'Pozi╚¢ie extrem de aliniat─â cu SUA ├«n forurile interna╚¢ionale.',
+    badges: ['Nu recunoa╚Öte', 'Membru UE', 'Baltic']
   },
   {
     id: 'latvia',
     nume: 'Letonia',
     numeEn: 'Latvia',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 56.8796,
     lon: 24.6032,
     coords: [24.6032, 56.8796],
     capitala: 'Riga',
-    populatie: '≈ 1 900 000 loc.',
+    populatie: 'Γëê 1 900 000 loc.',
     popVal: 1900000,
-    suprafata: '64 589 km²',
+    suprafata: '64 589 km┬▓',
     supVal: 64589,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Letonia nu recunoaște oficial Palestina, menținând o linie externă rezervată și aliniată cu deciziile partenerilor săi europeni din grupul nordic.',
+    note: 'Letonia nu recunoa╚Öte oficial Palestina, men╚¢in├ónd o linie extern─â rezervat─â ╚Öi aliniat─â cu deciziile partenerilor s─âi europeni din grupul nordic.',
     ue: 'Stat membru al Uniunii Europene (din 2004).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Declarațiile de politică externă ale Ministerului Afacerilor Externe de la Riga',
-      regim: 'Relații tehnice discrete',
-      particular: 'Letonia sprijină de principiu acțiunile de asistență umanitară',
-      observatie: 'Echilibru în declarații pentru a evita dispute'
+      temei: 'Declara╚¢iile de politic─â extern─â ale Ministerului Afacerilor Externe de la Riga',
+      regim: 'Rela╚¢ii tehnice discrete',
+      particular: 'Letonia sprijin─â de principiu ac╚¢iunile de asisten╚¢─â umanitar─â',
+      observatie: 'Echilibru ├«n declara╚¢ii pentru a evita dispute'
     },
-    particularitati: 'O politică de securitate concentrată pe parteneriatul cu NATO, reflectată și în deciziile de vot la ONU.',
-    badges: ['Nu recunoaște', 'Membru UE', 'Baltic']
+    particularitati: 'O politic─â de securitate concentrat─â pe parteneriatul cu NATO, reflectat─â ╚Öi ├«n deciziile de vot la ONU.',
+    badges: ['Nu recunoa╚Öte', 'Membru UE', 'Baltic']
   },
   {
     id: 'lithuania',
     nume: 'Lituania',
     numeEn: 'Lithuania',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 55.1694,
     lon: 23.8813,
     coords: [23.8813, 55.1694],
     capitala: 'Vilnius',
-    populatie: '≈ 2 800 000 loc.',
+    populatie: 'Γëê 2 800 000 loc.',
     popVal: 2800000,
-    suprafata: '65 300 km²',
+    suprafata: '65 300 km┬▓',
     supVal: 65300,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Lituania nu recunoaște oficial Palestina, având o politică externă puternic aliniată transatlantic și manifestând o prudență extremă față de orice inițiative diplomatice unilaterale.',
+    note: 'Lituania nu recunoa╚Öte oficial Palestina, av├ónd o politic─â extern─â puternic aliniat─â transatlantic ╚Öi manifest├ónd o pruden╚¢─â extrem─â fa╚¢─â de orice ini╚¢iative diplomatice unilaterale.',
     ue: 'Stat membru al Uniunii Europene (din 2004).',
-    schengen: 'Membru al Spațiului Schengen.',
+    schengen: 'Membru al Spa╚¢iului Schengen.',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Strategia națională de politică externă a Lituaniei',
+      temei: 'Strategia na╚¢ional─â de politic─â extern─â a Lituaniei',
       regim: 'Contacte diplomatice tehnice reduse',
-      particular: 'Lituania a manifestat constant o atitudine extrem de pro-Israel în ultimii ani',
-      observatie: 'Prudență totală pentru a nu perturba parteneriatul de securitate cu SUA'
+      particular: 'Lituania a manifestat constant o atitudine extrem de pro-Israel ├«n ultimii ani',
+      observatie: 'Pruden╚¢─â total─â pentru a nu perturba parteneriatul de securitate cu SUA'
     },
-    particularitati: 'Cea mai fermă poziție restrictivă dintre cele trei state baltice.',
-    badges: ['Nu recunoaște', 'Membru UE', 'Baltic']
+    particularitati: 'Cea mai ferm─â pozi╚¢ie restrictiv─â dintre cele trei state baltice.',
+    badges: ['Nu recunoa╚Öte', 'Membru UE', 'Baltic']
   },
   {
     id: 'croatia',
-    nume: 'Croația',
+    nume: 'Croa╚¢ia',
     numeEn: 'Croatia',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 45.1             ,
     lon: 15.2,
     coords: [15.2, 45.1],
     capitala: 'Zagreb',
-    populatie: '≈ 3 900 000 loc.',
+    populatie: 'Γëê 3 900 000 loc.',
     popVal: 3900000,
-    suprafata: '56 594 km²',
+    suprafata: '56 594 km┬▓',
     supVal: 56594,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Croația nu recunoaște oficial Palestina, spre deosebire de alte state vecine din fosta Iugoslavie (precum Slovenia, Serbia, Bosnia). Guvernul de la Zagreb susține o soluție negociată, respingând recunoașterile unilaterale.',
+    note: 'Croa╚¢ia nu recunoa╚Öte oficial Palestina, spre deosebire de alte state vecine din fosta Iugoslavie (precum Slovenia, Serbia, Bosnia). Guvernul de la Zagreb sus╚¢ine o solu╚¢ie negociat─â, resping├ónd recunoa╚Öterile unilaterale.',
     ue: 'Stat membru al Uniunii Europene (din 2013).',
-    schengen: 'Membru al Spațiului Schengen (din ianuarie 2023).',
+    schengen: 'Membru al Spa╚¢iului Schengen (din ianuarie 2023).',
     moneda: 'Euro (EUR)',
     viza: {
-      temei: 'Orientarea diplomatică a Ministerului Afacerilor Externe de la Zagreb',
-      regim: 'Relații diplomatice neoficiale reduse',
-      particular: 'Aliniere strânsă cu pozițiile conservatoare europene',
-      observatie: 'Sprijină de principiu dreptul umanitar în Orientul Mijlociu'
+      temei: 'Orientarea diplomatic─â a Ministerului Afacerilor Externe de la Zagreb',
+      regim: 'Rela╚¢ii diplomatice neoficiale reduse',
+      particular: 'Aliniere str├óns─â cu pozi╚¢iile conservatoare europene',
+      observatie: 'Sprijin─â de principiu dreptul umanitar ├«n Orientul Mijlociu'
     },
-    particularitati: 'O disonanță diplomatică evidentă față de restul țărilor din fosta Iugoslavie, având o politică mai conservatoare.',
-    badges: ['Nu recunoaște', 'Membru UE', 'Schengen']
+    particularitati: 'O disonan╚¢─â diplomatic─â evident─â fa╚¢─â de restul ╚¢─ârilor din fosta Iugoslavie, av├ónd o politic─â mai conservatoare.',
+    badges: ['Nu recunoa╚Öte', 'Membru UE', 'Schengen']
   },
   {
     id: 'georgia',
     nume: 'Georgia',
     numeEn: 'Georgia',
     categorie: 'norec',
-    categorieLabel: 'Nu recunoaște',
+    categorieLabel: 'Nu recunoa╚Öte',
     lat: 42.3154,
     lon: 43.3569,
     coords: [43.3569, 42.3154],
     capitala: 'Tbilisi',
-    populatie: '≈ 3 700 000 loc.',
+    populatie: 'Γëê 3 700 000 loc.',
     popVal: 3700000,
-    suprafata: '69 700 km²',
+    suprafata: '69 700 km┬▓',
     supVal: 69700,
-    zee: '—',
+    zee: 'ΓÇö',
     zeeVal: 9999,
-    note: 'Georgia nu recunoaște oficial Palestina ca stat, având o politică externă pro-occidentală strâns legată de parteneriatul cu SUA și Israel.',
-    ue: 'Stat candidat la aderarea în Uniunea Europeană.',
+    note: 'Georgia nu recunoa╚Öte oficial Palestina ca stat, av├ónd o politic─â extern─â pro-occidental─â str├óns legat─â de parteneriatul cu SUA ╚Öi Israel.',
+    ue: 'Stat candidat la aderarea ├«n Uniunea European─â.',
     schengen: 'Nu face parte din Schengen.',
     moneda: 'Lari georgian (GEL)',
     viza: {
-      temei: 'Strategia diplomatică a Guvernului de la Tbilisi',
-      regim: 'Fără contacte diplomatice formale',
-      particular: 'Georgia menține relații diplomatice și economice extrem de strânse cu Israel',
-      observatie: 'Prudență maximă în forurile internaționale'
+      temei: 'Strategia diplomatic─â a Guvernului de la Tbilisi',
+      regim: 'F─âr─â contacte diplomatice formale',
+      particular: 'Georgia men╚¢ine rela╚¢ii diplomatice ╚Öi economice extrem de str├ónse cu Israel',
+      observatie: 'Pruden╚¢─â maxim─â ├«n forurile interna╚¢ionale'
     },
-    particularitati: 'Relații bilaterale excepționale cu Israelul, care au transformat Georgia într-un aliat de facto pe arena externă.',
-    badges: ['Nu recunoaște', 'Candidat UE', 'Caucaz']
+    particularitati: 'Rela╚¢ii bilaterale excep╚¢ionale cu Israelul, care au transformat Georgia ├«ntr-un aliat de facto pe arena extern─â.',
+    badges: ['Nu recunoa╚Öte', 'Candidat UE', 'Caucaz']
   }
 ];
 
@@ -2817,19 +2808,19 @@ let currentMode = '2d-eur';
 let projection, pathGenerator, svg, container;
 let zoomBehavior;
 
-// Elemente cache-uite pentru performanță sporită la rotire
+// Elemente cache-uite pentru performan╚¢─â sporit─â la rotire
 let cachedSphere, cachedGraticule, cachedCountries, cachedMarkers;
 let isRotating = false;
 let autoRotateTimer;
 let autoRotateTimeout;
-let rotationState = [15, -50, 0];
+let rotationState = [-15, -48, 0];
 
 const tooltip = document.getElementById('tooltip');
 const searchInput = document.getElementById('search-input');
 const suggestionsUl = document.getElementById('search-suggestions');
 const panelContent = document.getElementById('panel-content');
 
-// 1. Randarea inițială a hărții și inițializarea structurilor D3
+// 1. Randarea ini╚¢ial─â a h─âr╚¢ii ╚Öi ini╚¢ializarea structurilor D3
 function renderMap() {
   container = document.querySelector('.map-wrap');
   svg = d3.select('#worldmap');
@@ -2839,54 +2830,56 @@ function renderMap() {
   const H = rect.height;
   
   svg.attr('viewBox', `0 0 ${W} ${H}`).attr('width', W).attr('height', H);
-  svg.selectAll('*').remove(); // Curățăm SVG-ul la inițializare
+  svg.selectAll('*').remove(); // Cur─â╚¢─âm SVG-ul la ini╚¢ializare
   
-  // Inițializare Proiecție bazată pe mod (2D Europa, 2D Planiglob sau 3D Glob)
+  // Ini╚¢ializare Proiec╚¢ie bazat─â pe mod (2D plan─â adaptat─â pe Europa sau 3D sferic─â)
   if (currentMode === '2d-eur') {
+    // Proiec\u021Bie geoEquirectangular perfect centrat\u0103 pe continentul European
     projection = d3.geoEquirectangular()
       .scale(W * 1.15)
       .center([15, 52])
       .translate([W / 2, H / 2.1])
       .precision(0.1);
   } else if (currentMode === '2d-glob') {
+    // Proiec\u021Bie geoEquirectangular planiglob global\u0103 (Planiglob)
     projection = d3.geoEquirectangular()
-      .scale(W / 6.2)
-      .center([0, 0])
-      .translate([W / 2, H / 2])
+      .scale(W * 0.16)
+      .center([0, 20])
+      .translate([W / 2, H / 2.1])
       .precision(0.1);
   } else {
     projection = d3.geoOrthographic()
-      .scale(Math.min(W, H) * 0.45)
+      .scale(Math.min(W, H) * 0.45) // Ajustat pentru a vedea \u00EEntreaga sfer\u0103 a globului
       .translate([W / 2, H / 2])
-      .clipAngle(90) // Previne randarea țărilor de pe spatele globului pe fața acestuia!
-      .rotate([-rotationState[0], -rotationState[1], rotationState[2]])
+      .clipAngle(90) // Previne randarea \u021Barilor de pe spatele globului pe fa\u021Ba acestuia!
+      .rotate(rotationState)
       .precision(0.1);
   }
   
   pathGenerator = d3.geoPath().projection(projection);
   
-  // Desenăm Oceanul (Sfera în 3D, fundalul în 2D)
+  // Desen─âm Oceanul (Sfera ├«n 3D, fundalul ├«n 2D)
   cachedSphere = svg.append('path')
     .datum({type: 'Sphere'})
     .attr('class', 'sphere')
     .attr('d', pathGenerator);
     
-  // Desenăm Grila de Coordonate (Graticule)
+  // Desen─âm Grila de Coordonate (Graticule)
   const graticule = d3.geoGraticule().step([10, 10]); // Linii mai fine
   cachedGraticule = svg.append('path')
     .datum(graticule)
     .attr('class', 'graticule')
     .attr('d', pathGenerator);
 
-  // Încărcăm datele hărții din scriptul securizat world-data
+  // ├Änc─ârc─âm datele h─âr╚¢ii din scriptul securizat world-data
   const worldDataNode = document.getElementById('world-data');
   const worldData = JSON.parse(worldDataNode.textContent);
   const countries = topojson.feature(worldData, worldData.objects.countries);
 
-  // Căutăm țările noastre în dataset
-  const targetNames = teritorii.map(t => t.numeEn.toLowerCase());
+  // C─âut─âm ╚¢─ârile noastre ├«n dataset
+  const targetNames = teritorii.map(t => t.numeEn ? t.numeEn.toLowerCase() : '');
 
-  // Randarea granițelor tuturor țărilor lumii
+  // Randarea grani╚¢elor tuturor ╚¢─ârilor lumii
   cachedCountries = svg.append('g')
     .selectAll('path')
     .data(countries.features)
@@ -2894,24 +2887,24 @@ function renderMap() {
     .append('path')
     .attr('class', d => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      let cls = 'country';
-      if (targetNames.includes(name) || d.id === '642' || d.id === '826') {
-        cls += ' europe-focus';
-      }
       const countryData = findCountryData(d, name);
+      let cls = 'country';
+      if (currentMode === '2d-eur') {
+        if (targetNames.includes(name) || d.id === '642' || d.id === '826') {
+          cls += ' europe-focus';
+        }
+      } else {
+        cls += ' europe-focus'; // Make all visible globally
+      }
       if (countryData) {
-        cls += ` ${countryData.categorie}`;
+        cls += ' ' + countryData.categorie;
       }
       return cls;
     })
-    .attr('d', pathGenerator)
-    .attr('fill', d => {
-      const name = d.properties.name ? d.properties.name.toLowerCase() : '';
-      const countryData = findCountryData(d, name);
-      if (countryData) {
-        return `var(--${countryData.categorie})`;
+      if (t) {
+        return `var(--${t.categorie})`;
       }
-      return 'var(--land)'; // Default fallback land color
+      return null; // Va folosi culoarea din CSS
     })
     .on('mouseenter', (event, d) => {
       const name = d.properties.name ? d.properties.name.toLowerCase() : '';
@@ -2919,24 +2912,12 @@ function renderMap() {
       
       if (countryData) {
         tooltip.innerHTML = `
-          <div class="flag-name"><span>${countryData.flag}</span>${countryData.nume}</div>
-          <div class="status-tag" style="background:var(--${countryData.categorie}); color:${countryData.categorie === 'rec' ? '#000000' : '#ffffff'}">${countryData.categorie === 'rec' ? 'Recunoaște' : (countryData.categorie === 'norec' ? 'Nu recunoaște' : 'Contestat')}</div>
-          <div class="note-text">${countryData.note || ''}</div>
+          <div class="flag-name"><span>\${countryData.flag}</span>\${countryData.nume}</div>
+          <div class="status-tag" style="background:var(--\${countryData.categorie}); color:\${countryData.categorie === 'rec' ? '#000000' : '#ffffff'}">\${countryData.categorie === 'rec' ? 'Recunoa\u0219te' : (countryData.categorie === 'norec' ? 'Nu recunoa\u0219te' : 'Contestat')}</div>
+          <div class="note-text">\${countryData.note || ''}</div>
         `;
         tooltip.style.opacity = '1';
       }
-    })
-    .on('mousemove', event => {
-      const r = container.getBoundingClientRect();
-      let left = event.clientX - r.left + 15;
-      let top = event.clientY - r.top - 40;
-      
-      if (left + 220 > r.width) {
-        left = event.clientX - r.left - 235;
-      }
-      
-      tooltip.style.left = left + 'px';
-      tooltip.style.top = top + 'px';
     })
     .on('mousemove', event => {
       const r = container.getBoundingClientRect();
@@ -2959,13 +2940,13 @@ function renderMap() {
       if (countryData) selectTerritory(countryData.id);
     });
 
-  // Încărcarea și configurarea comportamentului de Zoom & Pan (exclusiv în 2D)
+  // ├Änc─ârcarea ╚Öi configurarea comportamentului de Zoom & Pan (exclusiv ├«n 2D)
   if (currentMode.startsWith('2d')) {
     zoomBehavior = d3.zoom()
       .scaleExtent([1, 10])
       .on('zoom', (event) => {
         const transform = event.transform;
-        // Aplicăm transformarea pe toate elementele grafice din SVG
+        // Aplic─âm transformarea pe toate elementele grafice din SVG
         cachedSphere.attr('transform', transform);
         cachedGraticule.attr('transform', transform);
         cachedCountries.attr('transform', transform);
@@ -2974,7 +2955,7 @@ function renderMap() {
           cachedMarkers.attr('transform', function(t) {
             const projected = projection(t.coords);
             if (!projected) return null;
-            // Repoziționăm și scalăm markerii proporțional pentru lizibilitate
+            // Repozi╚¢ion─âm ╚Öi scal─âm markerii propor╚¢ional pentru lizibilitate
             const tx = transform.applyX(projected[0]);
             const ty = transform.applyY(projected[1]);
             return `translate(${tx}, ${ty})`;
@@ -2984,7 +2965,7 @@ function renderMap() {
       
     svg.call(zoomBehavior);
   } else {
-    // În modul 3D dezactivăm zoomBehavior-ul clasic și configurăm Dragging-ul pe Sferă
+    // ├Än modul 3D dezactiv─âm zoomBehavior-ul clasic ╚Öi configur─âm Dragging-ul pe Sfer─â
     svg.call(d3.drag()
       .on('start', () => {
         isRotating = false;
@@ -2992,15 +2973,15 @@ function renderMap() {
         clearTimeout(autoRotateTimeout);
       })
       .on('drag', (event) => {
-        const sensitivity = 0.25;
+        const k = 70 / projection.scale();
         const rotate = projection.rotate();
-        // Rotația globului pe baza deplasării mouse-ului
+        // Rota╚¢ia globului pe baza deplas─ârii mouse-ului
         projection.rotate([
-          rotate[0] + event.dx * sensitivity,
-          rotate[1] - event.dy * sensitivity,
+          rotate[0] + event.dx * k,
+          rotate[1] - event.dy * k,
           rotate[2]
         ]);
-        rotationState = [-projection.rotate()[0], -projection.rotate()[1], projection.rotate()[2]];
+        rotationState = projection.rotate();
         updateProjection();
       })
       .on('end', () => {
@@ -3009,10 +2990,10 @@ function renderMap() {
     );
   }
 
-  // 6. Randarea marcajelor teritoriilor (creare elemente în DOM o singură dată)
+  // 6. Randarea marcajelor teritoriilor (creare elemente ├«n DOM o singur─â dat─â)
   buildMarkers();
 
-  // Ascundem ecranul de încărcare deoarece harta a pornit perfect local
+  // Ascundem ecranul de ├«nc─ârcare deoarece harta a pornit perfect local
   document.getElementById('loading').classList.add('hidden');
 
   if (currentMode === '3d') {
@@ -3020,11 +3001,11 @@ function renderMap() {
   }
 }
 
-// Construiește structura DOM a marcajelor (rulată doar la re-randarea hărții)
+// Construie╚Öte structura DOM a marcajelor (rulat─â doar la re-randarea h─âr╚¢ii)
 function buildMarkers() {
   svg.selectAll('.marker').remove();
   
-  // Afișăm marcajele doar pentru țările europene din lista noastră
+  // Afi╚Ö─âm marcajele doar pentru ╚¢─ârile europene din lista noastr─â
   const activeList = teritorii.filter(t => t.popVal > 0); // Excludem placeholderul tehnic
   
   cachedMarkers = svg.append('g')
@@ -3051,7 +3032,7 @@ function buildMarkers() {
     .attr('r', t => getMarkerRadius(t))
     .attr('fill', t => `var(--${t.categorie})`);
 
-  // Textul cu numele țării
+  // Textul cu numele ╚¢─ârii
   cachedMarkers.append('text')
     .attr('class', 'marker-label')
     .attr('text-anchor', 'middle')
@@ -3061,27 +3042,12 @@ function buildMarkers() {
   updateMarkerPositions();
 }
 
-// Actualizează rapid poziția, vizibilitatea și scara marcajelor fără a reconstrui DOM-ul
+// Actualizeaz─â rapid pozi╚¢ia, vizibilitatea ╚Öi scara marcajelor f─âr─â a reconstrui DOM-ul
 function updateMarkerPositions() {
   if (!cachedMarkers) return;
 
-  // Determină factorul de zoom curent
-  let zoomScale = 1;
-  if (currentMode.startsWith('2d')) {
-    const node = svg.node();
-    if (node) {
-      zoomScale = d3.zoomTransform(node).k;
-    }
-  } else {
-    // În 3D, comparăm scala curentă cu cea de bază
-    const rect = container.getBoundingClientRect();
-    const baseScale = Math.min(rect.width, rect.height) * 0.45;
-    zoomScale = projection.scale() / baseScale;
-  }
-  const showLabels = zoomScale >= 2.0;
-
   cachedMarkers.each(function(t) {
-    const isVisible = currentMode.startsWith('2d') || isVisibleOnGlobe(t.coords);
+    const isVisible = currentMode === '2d' || isVisibleOnGlobe(t.coords);
     const projected = projection(t.coords);
     const g = d3.select(this);
 
@@ -3089,7 +3055,7 @@ function updateMarkerPositions() {
       g.style('display', 'block')
        .attr('transform', `translate(${projected[0]}, ${projected[1]})`);
       
-      // Sincronizăm fin dimensiunile marcajelor
+      // Sincroniz─âm fin dimensiunile marcajelor
       const radius = getMarkerRadius(t);
       g.select('.halo').attr('r', radius * 1.5);
       g.select('.core').attr('r', radius);
@@ -3102,7 +3068,7 @@ function updateMarkerPositions() {
   });
 }
 
-// Calculează raza marcajului pe baza indicatorului selectat
+// Calculeaz─â raza marcajului pe baza indicatorului selectat
 function getMarkerRadius(t) {
   if (activeTerritoryId === t.id) return 9;
   
@@ -3122,7 +3088,7 @@ function getMarkerRadius(t) {
   const minVal = d3.min(vals);
   const maxVal = d3.max(vals);
 
-  // Scara logaritmică
+  // Scara logaritmic─â
   const logScale = d3.scaleLog()
     .domain([minVal, maxVal])
     .range([4, 12]);
@@ -3130,15 +3096,15 @@ function getMarkerRadius(t) {
   return logScale(safeVal);
 }
 
-// Verifică dacă țara se află pe emisfera vizibilă a globului (3D)
+// Verific─â dac─â ╚¢ara se afl─â pe emisfera vizibil─â a globului (3D)
 function isVisibleOnGlobe(coords) {
   const rotate = projection.rotate();
   const center = [-rotate[0], -rotate[1]];
   const dist = d3.geoDistance(coords, center);
-  return dist < Math.PI / 2.1; // Margini mai strânse
+  return dist < Math.PI / 2.1; // Margini mai str├ónse
 }
 
-// Actualizează proiecțiile pe ecran când globul se rotește
+// Actualizeaz─â proiec╚¢iile pe ecran c├ónd globul se rote╚Öte
 function updateProjection() {
   if (!projection || !cachedSphere || !cachedGraticule || !cachedCountries) return;
   
@@ -3149,15 +3115,15 @@ function updateProjection() {
   updateMarkerPositions();
 }
 
-// 7. Rotație Cinematică Glob (3D)
+// 7. Rota╚¢ie Cinematic─â Glob (3D)
 function startCinematicRotation() {
   if (autoRotateTimer) autoRotateTimer.stop();
   
   autoRotateTimer = d3.timer(() => {
     if (!isRotating || currentMode !== '3d') return;
     const rotate = projection.rotate();
-    projection.rotate([rotate[0] + 0.04, rotate[1], rotate[2]]);
-    rotationState = [-projection.rotate()[0], -projection.rotate()[1], projection.rotate()[2]];
+    projection.rotate([rotate[0] - 0.05, rotate[1], rotate[2]]);
+    rotationState = projection.rotate();
     updateProjection();
   });
 }
@@ -3173,7 +3139,7 @@ function resetAutoRotationTimeout() {
   }, 4000);
 }
 
-// 8. Controale Fizice Harta (Zoom +/- și Reset)
+// 8. Controale Fizice Harta (Zoom +/- ╚Öi Reset)
 document.getElementById('zoom-in').addEventListener('click', () => {
   if (currentMode.startsWith('2d')) {
     svg.transition().duration(400).call(zoomBehavior.scaleBy, 1.6);
@@ -3196,51 +3162,15 @@ document.getElementById('zoom-reset').addEventListener('click', () => {
   if (currentMode.startsWith('2d')) {
     svg.transition().duration(800).call(zoomBehavior.transform, d3.zoomIdentity);
   } else {
-    rotationState = [15, -50, 0];
+    rotationState = [-15, -48, 0];
     const rect = container.getBoundingClientRect();
-    projection.scale(Math.min(rect.width, rect.height) * 0.45).rotate([-rotationState[0], -rotationState[1], rotationState[2]]);
+    projection.scale(Math.min(rect.width, rect.height) * 0.95).rotate(rotationState);
     updateProjection();
   }
 });
+});
 
-let cachedSearchList = null;
-function getGlobalSearchList() {
-  if (cachedSearchList) return cachedSearchList;
-  
-  const list = [...teritorii];
-  
-  // Adăugăm marile puteri
-  for (const name in globalMajorData) {
-    const raw = globalMajorData[name];
-    if (raw.inherits) continue;
-    if (!list.some(x => x.id === raw.id)) {
-      list.push(raw);
-    }
-  }
-  
-  // Adăugăm dinamic toate celelalte țări din world-data
-  const worldDataNode = document.getElementById('world-data');
-  if (worldDataNode) {
-    const worldData = JSON.parse(worldDataNode.textContent);
-    const countries = topojson.feature(worldData, worldData.objects.countries);
-    countries.features.forEach(f => {
-      const name = f.properties.name ? f.properties.name.toLowerCase() : '';
-      if (!name) return;
-      const id = name.replace(/[^a-z]/g, '');
-      if (!list.some(x => x.id === id)) {
-        const countryData = findCountryData(f, name);
-        if (countryData) {
-          list.push(countryData);
-        }
-      }
-    });
-  }
-  
-  cachedSearchList = list;
-  return list;
-}
-
-// 9. Căutare Instantă cu Autocomplete
+// 9. C─âutare Instant─â cu Autocomplete
 searchInput.addEventListener('input', (event) => {
   const query = event.target.value.toLowerCase().trim();
   if (!query) {
@@ -3257,7 +3187,7 @@ searchInput.addEventListener('input', (event) => {
   );
 
   if (filtered.length === 0) {
-    suggestionsUl.innerHTML = '<li style="color:var(--ink-soft); cursor:default">Nicio țară găsită</li>';
+    suggestionsUl.innerHTML = '<li style="color:var(--ink-soft); cursor:default">Nicio ╚¢ar─â g─âsit─â</li>';
   } else {
     suggestionsUl.innerHTML = filtered.map(t => `
       <li data-id="${t.id}">
@@ -3269,7 +3199,7 @@ searchInput.addEventListener('input', (event) => {
   suggestionsUl.style.display = 'block';
 });
 
-// Selecția din sugestii
+// Selec╚¢ia din sugestii
 suggestionsUl.addEventListener('click', (event) => {
   const li = event.target.closest('li');
   if (!li || !li.dataset.id) return;
@@ -3279,31 +3209,31 @@ suggestionsUl.addEventListener('click', (event) => {
   suggestionsUl.style.display = 'none';
 });
 
-// Închidem sugestiile la click în afară
+// ├Änchidem sugestiile la click ├«n afar─â
 document.addEventListener('click', (event) => {
   if (!event.target.closest('.search-container')) {
     suggestionsUl.style.display = 'none';
   }
 });
 
-// 10. Clasamente (Cronologie / Populație / Suprafață)
+// 10. Clasamente (Cronologie / Popula╚¢ie / Suprafa╚¢─â)
 function renderRankings() {
-  const activeList = teritorii.filter(t => t.popVal > 0);
+  const activeList = getGlobalSearchList();
   
   const minVal = d3.min(activeList, d => Math.max(1, activeMetric === 'year' ? (d.zeeVal === 9999 ? 2026 : d.zeeVal) : (activeMetric === 'pop' ? d.popVal : d.supVal)));
   const maxVal = d3.max(activeList, d => Math.max(1, activeMetric === 'year' ? (d.zeeVal === 9999 ? 2026 : d.zeeVal) : (activeMetric === 'pop' ? d.popVal : d.supVal)));
 
-  // Ordonare dinamică
+  // Ordonare dinamic─â
   const sorted = [...activeList].sort((a, b) => {
     if (activeMetric === 'year') {
       const yearA = a.zeeVal;
       const yearB = b.zeeVal;
-      // Ordonăm anii crescător (cei mai vechi primii). Cei care nu recunosc (9999) la sfârșit.
+      // Ordon─âm anii cresc─âtor (cei mai vechi primii). Cei care nu recunosc (9999) la sf├ór╚Öit.
       return yearA - yearB;
     }
     const valA = activeMetric === 'pop' ? a.popVal : a.supVal;
     const valB = activeMetric === 'pop' ? b.popVal : b.supVal;
-    return valB - valA; // Descrescător pentru demografie
+    return valB - valA; // Descresc─âtor pentru demografie
   });
 
   const listContainer = document.getElementById('rank-list-container');
@@ -3313,7 +3243,7 @@ function renderRankings() {
     let dispVal;
     let val;
     if (activeMetric === 'year') { 
-      dispVal = t.zeeVal === 9999 ? 'Nu recunoaște' : 'An: ' + t.zee; 
+      dispVal = t.zeeVal === 9999 ? 'Nu recunoa╚Öte' : 'An: ' + t.zee; 
       val = t.zeeVal === 9999 ? 2026 : t.zeeVal;
     } else if (activeMetric === 'pop') { 
       dispVal = t.populatie; 
@@ -3328,7 +3258,7 @@ function renderRankings() {
     if (activeMetric === 'year') {
       if (t.zeeVal === 9999) percent = 100;
       else {
-        // Cu cât e mai veche (1988), cu atât e mai plină bara
+        // Cu c├ót e mai veche (1988), cu at├ót e mai plin─â bara
         percent = ((2026 - val) / (2026 - 1988)) * 100;
       }
     } else {
@@ -3351,7 +3281,7 @@ function renderRankings() {
     `;
   }).join('');
 
-  // Animăm fluid
+  // Anim─âm fluid
   setTimeout(() => {
     listContainer.querySelectorAll('.rank-item').forEach(item => {
       const t = teritorii.find(x => x.id === item.dataset.id);
@@ -3364,7 +3294,7 @@ function renderRankings() {
       
       let percent;
       if (activeMetric === 'year') {
-        if (t.zeeVal === 9999) percent = 5; // Bara minimă pentru no-rec
+        if (t.zeeVal === 9999) percent = 5; // Bara minim─â pentru no-rec
         else {
           percent = 10 + (((2026 - val) / (2026 - 1988)) * 90);
         }
@@ -3402,16 +3332,16 @@ document.querySelector('.rankings-selector').addEventListener('click', (event) =
   updateProjection();
 });
 
-// Randăm clasamentele inițiale
+// Rand─âm clasamentele ini╚¢iale
 renderRankings();
 
-// 11. Selecție Țară și Fișă Tab-uri
+// 11. Selec╚¢ie ╚Üar─â ╚Öi Fi╚Ö─â Tab-uri
 function selectTerritory(id) {
   activeTerritoryId = id;
   const t = getTerritoryById(id);
   if (!t) return;
 
-  // Clasa activă pe hartă
+  // Clasa activ─â pe hart─â
   if (cachedMarkers) {
     cachedMarkers.attr('class', m => {
       let classes = 'marker';
@@ -3421,37 +3351,37 @@ function selectTerritory(id) {
     });
   }
 
-  // Focalizare sferică (3D) sau Centrare (2D)
-  if (currentMode.startsWith('2d')) {
+  // Focalizare sferic─â (3D) sau Centrare (2D)
+  if (currentMode === '2d') {
     zoomToCoords(t.coords, 4);
   } else {
     rotateToCoords(t.coords);
   }
 
   const badgeMap = {
-    'Recunoaște Palestina': 'rec',
-    'Nu recunoaște': 'norec',
-    'Recunoaște (Contestat)': 'contested'
+    'Recunoa╚Öte Palestina': 'rec',
+    'Nu recunoa╚Öte': 'norec',
+    'Recunoa╚Öte (Contestat)': 'contested'
   };
 
   const recognitionText = t.categorie === 'rec' 
-    ? `Recunoaște oficial Statul Palestina din anul <strong>${t.zee}</strong>.` 
-    : (t.categorie === 'contested' ? `A recunoscut Palestina în <strong>${t.zee}</strong>, însă această recunoaștere este contestată sau ignorată în prezent.` : 'Nu recunoaște formal în prezent Statul Palestina.');
+    ? `Recunoa╚Öte oficial Statul Palestina din anul <strong>${t.zee}</strong>.` 
+    : (t.categorie === 'contested' ? `A recunoscut Palestina ├«n <strong>${t.zee}</strong>, ├«ns─â aceast─â recunoa╚Ötere este contestat─â sau ignorat─â ├«n prezent.` : 'Nu recunoa╚Öte formal ├«n prezent Statul Palestina.');
 
   panelContent.innerHTML = `
     <div class="territory-detail">
       <div class="detail-header-wrap">
-        <button class="btn-back-rankings" id="btn-back-rankings">← Înapoi la Cronologie</button>
+        <button class="btn-back-rankings" id="btn-back-rankings">ΓåÉ ├Änapoi la Cronologie</button>
         <div class="panel-cat" data-cat="${t.categorie}">
-          <span>●</span>${t.categorieLabel}
+          <span>ΓùÅ</span>${t.categorieLabel}
         </div>
         <h2>${t.flag} ${t.nume}<em>${t.numeEn}</em></h2>
       </div>
       
       <div class="panel-tabs">
         <button class="tab-btn active" data-tab="tab-prez">Prezentare</button>
-        <button class="tab-btn" data-tab="tab-juridic">Recunoaștere</button>
-        <button class="tab-btn" data-tab="tab-vize">Relații Externe</button>
+        <button class="tab-btn" data-tab="tab-juridic">Recunoa╚Ötere</button>
+        <button class="tab-btn" data-tab="tab-vize">Rela╚¢ii Externe</button>
         <button class="tab-btn" data-tab="tab-fin">Geografie &amp; Demog.</button>
       </div>
 
@@ -3468,43 +3398,43 @@ function selectTerritory(id) {
           
           <div class="stat-grid">
             <div class="stat"><div class="k">Capitala</div><div class="v" style="font-size:13.5px">${t.capitala}</div></div>
-            <div class="stat"><div class="k">An Recunoaștere</div><div class="v">${t.zee === '1988' ? '1988 (Val Ist.)' : (t.zee === '—' ? 'Nerecunoscut' : t.zee)}</div></div>
-            <div class="stat"><div class="k">Populația</div><div class="v" style="font-size:13px">${t.populatie}</div></div>
-            <div class="stat"><div class="k">Suprafața</div><div class="v" style="font-size:13.5px">${t.suprafata}</div></div>
+            <div class="stat"><div class="k">An Recunoa╚Ötere</div><div class="v">${t.zee === '1988' ? '1988 (Val Ist.)' : (t.zee === 'ΓÇö' ? 'Nerecunoscut' : t.zee)}</div></div>
+            <div class="stat"><div class="k">Popula╚¢ia</div><div class="v" style="font-size:13px">${t.populatie}</div></div>
+            <div class="stat"><div class="k">Suprafa╚¢a</div><div class="v" style="font-size:13.5px">${t.suprafata}</div></div>
           </div>
 
           <div class="panel-section">
-            <h3>Detalii Poziție</h3>
+            <h3>Detalii Pozi╚¢ie</h3>
             <p>${t.note}</p>
           </div>
         </div>
 
-        <!-- Tab 2: Recunoaștere Juridică -->
+        <!-- Tab 2: Recunoa╚Ötere Juridic─â -->
         <div class="tab-content" id="tab-juridic">
           <div class="alert-box">
-            <h3>Temei și Statut</h3>
+            <h3>Temei ╚Öi Statut</h3>
             <p>${recognitionText}</p>
           </div>
           <div class="panel-section">
-            <h3>Note Istorice și Diplomatice</h3>
+            <h3>Note Istorice ╚Öi Diplomatice</h3>
             <p>${t.viza.particular}</p>
           </div>
           <div class="panel-section">
-            <h3>Proceduri administrative și reprezentare</h3>
+            <h3>Proceduri administrative ╚Öi reprezentare</h3>
             <p><strong>Temei politic:</strong> ${t.viza.temei}</p>
             <p style="margin-top:8px"><strong>Regim de cooperare:</strong> ${t.viza.regim}</p>
-            <p style="margin-top:8px"><strong>Observații:</strong> ${t.viza.observatie}</p>
+            <p style="margin-top:8px"><strong>Observa╚¢ii:</strong> ${t.viza.observatie}</p>
           </div>
         </div>
 
-        <!-- Tab 3: Relații Externe -->
+        <!-- Tab 3: Rela╚¢ii Externe -->
         <div class="tab-content" id="tab-vize">
           <div class="panel-section">
-            <h3>Integrare Europeană</h3>
+            <h3>Integrare European─â</h3>
             <p>${t.ue}</p>
           </div>
           <div class="panel-section">
-            <h3>Poziția privind Libera Circulație (Schengen)</h3>
+            <h3>Pozi╚¢ia privind Libera Circula╚¢ie (Schengen)</h3>
             <p>${t.schengen}</p>
           </div>
           <div class="badge-row">
@@ -3513,15 +3443,15 @@ function selectTerritory(id) {
           </div>
         </div>
 
-        <!-- Tab 4: Informații Geografice și Demografice -->
+        <!-- Tab 4: Informa╚¢ii Geografice ╚Öi Demografice -->
         <div class="tab-content" id="tab-fin">
           <div class="stat-grid">
-            <div class="stat"><div class="k">Monedă</div><div class="v" style="font-size:14px">${t.moneda}</div></div>
-            <div class="stat"><div class="k">Poziționare</div><div class="v" style="font-size:14px">${t.lat.toFixed(2)}° N / ${t.lon.toFixed(2)}° E</div></div>
+            <div class="stat"><div class="k">Moned─â</div><div class="v" style="font-size:14px">${t.moneda}</div></div>
+            <div class="stat"><div class="k">Pozi╚¢ionare</div><div class="v" style="font-size:14px">${t.lat.toFixed(2)}┬░ N / ${t.lon.toFixed(2)}┬░ E</div></div>
           </div>
           
           <div class="panel-section">
-            <h3>Particularități Geopolitice</h3>
+            <h3>Particularit─â╚¢i Geopolitice</h3>
             <p>${t.particularitati}</p>
           </div>
         </div>
@@ -3543,7 +3473,7 @@ function selectTerritory(id) {
     });
   });
 
-  // Înapoi la Clasament
+  // ├Änapoi la Clasament
   document.getElementById('btn-back-rankings').addEventListener('click', () => {
     activeTerritoryId = null;
     
@@ -3557,13 +3487,13 @@ function selectTerritory(id) {
     panelContent.innerHTML = `
       <div class="rankings-view">
         <div class="rankings-header">
-          <h3 class="rankings-title">⚜ Cronologia Recunoașterii</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--ink-soft);line-height:1.3;margin-bottom:12px;">Vizualizează cronologia deciziilor istorice și recente. Țările care nu recunosc sunt ordonate alfabetic la final.</p>
+          <h3 class="rankings-title">ΓÜ£ Cronologia Recunoa╚Öterii</h3>
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--ink-soft);line-height:1.3;margin-bottom:12px;">Vizualizeaz─â cronologia deciziilor istorice ╚Öi recente. ╚Ü─ârile care nu recunosc sunt ordonate alfabetic la final.</p>
         </div>
         <div class="rankings-selector">
-          <button class="rank-btn ${activeMetric === 'year' ? 'active' : ''}" data-metric="year">An Recunoaștere</button>
-          <button class="rank-btn ${activeMetric === 'pop' ? 'active' : ''}" data-metric="pop">Populație</button>
-          <button class="rank-btn ${activeMetric === 'sup' ? 'active' : ''}" data-metric="sup">Suprafață</button>
+          <button class="rank-btn ${activeMetric === 'year' ? 'active' : ''}" data-metric="year">An Recunoa╚Ötere</button>
+          <button class="rank-btn ${activeMetric === 'pop' ? 'active' : ''}" data-metric="pop">Popula╚¢ie</button>
+          <button class="rank-btn ${activeMetric === 'sup' ? 'active' : ''}" data-metric="sup">Suprafa╚¢─â</button>
         </div>
         <div id="rank-list-container" class="rank-list">
           <!-- Dynamic ranked items will be rendered here by Javascript -->
@@ -3586,7 +3516,7 @@ function selectTerritory(id) {
   });
 }
 
-// Centrare și Zoom în 2D
+// Centrare ╚Öi Zoom ├«n 2D
 function zoomToCoords(coords, zoomLevel = 4) {
   const [lng, lat] = coords;
   const width = container.getBoundingClientRect().width;
@@ -3607,7 +3537,7 @@ function zoomToCoords(coords, zoomLevel = 4) {
     );
 }
 
-// Tranziție sferică în 3D
+// Tranzi╚¢ie sferic─â ├«n 3D
 function rotateToCoords(coords) {
   const [lng, lat] = coords;
   isRotating = false;
@@ -3615,7 +3545,7 @@ function rotateToCoords(coords) {
   clearTimeout(autoRotateTimeout);
 
   const r = projection.rotate();
-  // Rotația sferică
+  // Rota╚¢ia sferic─â
   const targetRotation = [-lng, -lat, r[2]];
   const interpolator = d3.interpolate(r, targetRotation);
 
@@ -3624,7 +3554,7 @@ function rotateToCoords(coords) {
     .tween('rotate', () => {
       return (t) => {
         projection.rotate(interpolator(t));
-        rotationState = [-projection.rotate()[0], -projection.rotate()[1], projection.rotate()[2]];
+        rotationState = projection.rotate();
         updateProjection();
       };
     })
@@ -3633,7 +3563,7 @@ function rotateToCoords(coords) {
     });
 }
 
-// Chips de filtrare rapidă
+// Chips de filtrare rapid─â
 document.querySelectorAll('.chip').forEach(chip => {
   chip.addEventListener('click', () => {
     document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
@@ -3654,7 +3584,8 @@ document.querySelectorAll('.chip').forEach(chip => {
   });
 });
 
-// Comutatoare Proiecții (2D Europa / 2D Planiglob / 3D Glob)
+// Comutatoare 2D vs 3D
+// Comutatoare Proiec\u021Bii (2D Europa / 2D Planiglob / 3D Glob)
 document.getElementById('btn-2d-eur').addEventListener('click', function() {
   if (currentMode === '2d-eur') return;
   document.getElementById('btn-2d-glob').classList.remove('active');
@@ -3686,15 +3617,15 @@ document.getElementById('btn-3d').addEventListener('click', function() {
   renderMap();
 });
 
-// Modificare Temă (Light / Dark Mode)
+// Modificare Tem─â (Light / Dark Mode)
 const themeToggle = document.getElementById('theme-toggle');
 themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('light-theme');
   const isLight = document.body.classList.contains('light-theme');
-  themeToggle.textContent = isLight ? '🌙 Dark Mode' : '☀️ Light Mode';
+  themeToggle.textContent = isLight ? '≡ƒîÖ Dark Mode' : 'ΓÿÇ∩╕Å Light Mode';
 });
 
-// Inițializare
+// Ini╚¢ializare
 renderMap();
 
 let resizeTimeout;
@@ -3707,9 +3638,15 @@ window.addEventListener('resize', () => {
 </html>
 '@
 
-Write-Host "Scriu fisierul asamblat in $destPath..."
-$newContent = $htmlHeader + "`n" + $jsonBlock + "`n" + $htmlFooter
-$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-[System.IO.File]::WriteAllText($destPath, $newContent, $utf8NoBom)
+Write-Host "Citesc bibliotecile locale d3.min.js si topojson.min.js pentru inline embedding..."
+$d3Path = "C:\Users\Bogdan\.gemini\antigravity\scratch\harta-palestina\d3.min.js"
+$topojsonPath = "C:\Users\Bogdan\.gemini\antigravity\scratch\harta-palestina\topojson.min.js"
 
-Write-Host "SUCCES: index.html asamblat perfect cu diacritice românești în format UTF-8 fără BOM!"
+$d3Content = [System.IO.File]::ReadAllText($d3Path, [System.Text.Encoding]::UTF8)
+$topojsonContent = [System.IO.File]::ReadAllText($topojsonPath, [System.Text.Encoding]::UTF8)
+
+$inlineScripts = "<script>`n$d3Content`n</script>`n<script>`n$topojsonContent`n</script>"
+$mergedContent = $htmlHeader + "`n" + $jsonBlock + "`n" + $htmlFooter
+$newContent = $mergedContent.Replace("<!-- INLINE_SCRIPTS_PLACEHOLDER -->", $inlineScripts)
+
+Write-Host "SUCCES: index.html asamblat perfect cu diacritice rom├óne╚Öti ├«n format UTF-8 f─âr─â BOM (100% self-contained)!"
