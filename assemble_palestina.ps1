@@ -1114,8 +1114,10 @@ window.onerror = function(message, source, lineno, colno, error) {
     <div class="header-actions">
       <div class="meta">
         <div class="line"><span class="label">Proiec╚¢ie</span><span>Europe Focus / Orthographic</span></div>
-        <div class="line"><span class="label">Total Recunosc</span><span>30 State Europene</span></div>
-        <div class="line"><span class="label">Nu recunosc</span><span>14 State</span></div>
+        <div class="line"><span class="label">Total Recunosc (Europa)</span><span>30 State</span></div>
+        <div class="line"><span class="label">Nu recunosc (Europa)</span><span>14 State</span></div>
+        <div class="line" style="margin-top: 8px;"><span class="label">Total Recunosc (Global)</span><span>146 State</span></div>
+        <div class="line"><span class="label">Nu recunosc (Global)</span><span>47 State</span></div>
         <div class="line" style="margin-top: 16px; justify-content: flex-end; border-top: 1px dashed var(--border); padding-top: 12px;">
           <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--accent); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1;">ΓÇö creat de Popa Bogdan</span>
         </div>
