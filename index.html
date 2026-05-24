@@ -1645,6 +1645,14 @@ function translateCountryNameToRomanian(engName) {
 
 function getFlagEmoji(engName) {
   const map = {
+    'romania': '🇷🇴', 'poland': '🇵🇱', 'bulgaria': '🇧🇬', 'slovakia': '🇸🇰', 'ukraine': '🇺🇦',
+    'belarus': '🇧🇾', 'slovenia': '🇸🇮', 'iceland': '🇮🇸', 'cyprus': '🇨🇾', 'albania': '🇦🇱',
+    'serbia': '🇷🇸', 'bosnia and herzegovina': '🇧🇦', 'north macedonia': '🇲🇰', 'montenegro': '🇲🇪',
+    'germany': '🇩🇪', 'italy': '🇮🇹', 'france': '🇫🇷', 'france_placeholder': '🇫🇷', 'austria': '🇦🇹',
+    'hungary': '🇭🇺', 'czech republic': '🇨🇿', 'greece': '🇬🇷', 'switzerland': '🇨🇭',
+    'netherlands': '🇳🇱', 'finland': '🇫🇮', 'denmark': '🇩🇰', 'estonia': '🇪🇪', 'latvia': '🇱🇻',
+    'lithuania': '🇱🇹', 'croatia': '🇭🇷', 'georgia': '🇬🇪', 'ireland': '🇮🇪', 'sweden': '🇸🇪',
+    'belgium': '🇧🇪', 'portugal': '🇵🇹', 'spain': '🇪🇸', 'norway': '🇳🇴', 'united kingdom': '🇬🇧',
     'united states of america': '🇺🇸', 'united states': '🇺🇸',
     'canada': '🇨🇦', 'mexico': '🇲🇽', 'colombia': '🇨🇴', 'venezuela': '🇻🇪',
     'ecuador': '🇪🇨', 'peru': '🇵🇪', 'bolivia': '🇧🇴', 'chile': '🇨🇱',
@@ -2945,7 +2953,7 @@ function renderMap() {
       
       if (countryData) {
         tooltip.innerHTML = `
-          <div class="flag-name"><span>${countryData.flag}</span>${countryData.nume}</div>
+          <div class="flag-name"><span>${getFlagEmoji(countryData.numeEn)}</span>${countryData.nume}</div>
           <div class="status-tag" style="background:var(--${countryData.categorie}); color:${countryData.categorie === 'rec' ? '#000000' : '#ffffff'}">${countryData.categorie === 'rec' ? 'Recunoaște' : (countryData.categorie === 'norec' ? 'Nu recunoaște' : 'Contestat')}</div>
           <div class="note-text">${countryData.note || ''}</div>
         `;

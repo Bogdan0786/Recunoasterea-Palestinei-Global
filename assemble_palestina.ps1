@@ -2732,7 +2732,7 @@ function renderMap() {
       
       if (countryData) {
         tooltip.innerHTML = `
-          <div class="flag-name"><span>\${countryData.flag}</span>\${countryData.nume}</div>
+          <div class="flag-name"><span>\${getFlagEmoji(countryData.numeEn)}</span>\${countryData.nume}</div>
           <div class="status-tag" style="background:var(--\${countryData.categorie}); color:\${countryData.categorie === 'rec' ? '#000000' : '#ffffff'}">\${countryData.categorie === 'rec' ? 'Recunoa\u0219te' : (countryData.categorie === 'norec' ? 'Nu recunoa\u0219te' : 'Contestat')}</div>
           <div class="note-text">\${countryData.note || ''}</div>
         `;
