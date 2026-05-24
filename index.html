@@ -3252,8 +3252,7 @@ searchInput.addEventListener('input', (event) => {
   );
 
   if (filtered.length === 0) {
-    suggestionsUl.innerHTML = '<li style="color: #000000;
-    font-weight: 500; cursor:default">Nicio țară găsită</li>';
+    suggestionsUl.innerHTML = '<li style="color: #000000; font-weight: 500; cursor:default">Nicio țară găsită</li>';
   } else {
     suggestionsUl.innerHTML = filtered.map(t => `
       <li data-id="${t.id}">
