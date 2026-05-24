@@ -1218,6 +1218,22 @@ $htmlFooter = @'
 <script>
 // Datele complete ale celor 44 de State Europene (inclusiv detalii demografice si de recunoastere)
 // Dictionare si baze de date pentru extinderea globala a hartii
+function getFlagEmoji(engName) {
+  const map = {
+    'romania': '🇷🇴', 'poland': '🇵🇱', 'bulgaria': '🇧🇬', 'slovakia': '🇸🇰', 'ukraine': '🇺🇦',
+    'belarus': '🇧🇾', 'slovenia': '🇸🇮', 'iceland': '🇮🇸', 'cyprus': '🇨🇾', 'albania': '🇦🇱',
+    'serbia': '🇷🇸', 'bosnia and herzegovina': '🇧🇦', 'north macedonia': '🇲🇰', 'montenegro': '🇲🇪',
+    'germany': '🇩🇪', 'italy': '🇮🇹', 'france': '🇫🇷', 'france_placeholder': '🇫🇷', 'austria': '🇦🇹',
+    'hungary': '🇭🇺', 'czech republic': '🇨🇿', 'greece': '🇬🇷', 'switzerland': '🇨🇭',
+    'netherlands': '🇳🇱', 'finland': '🇫🇮', 'denmark': '🇩🇰', 'estonia': '🇪🇪', 'latvia': '🇱🇻',
+    'lithuania': '🇱🇹', 'croatia': '🇭🇷', 'georgia': '🇬🇪', 'ireland': '🇮🇪', 'sweden': '🇸🇪',
+    'belgium': '🇧🇪', 'portugal': '🇵🇹', 'spain': '🇪🇸', 'norway': '🇳🇴', 'united kingdom': '🇬🇧',
+    'united states of america': '🇺🇸', 'united states': '🇺🇸',
+    'canada': '🇨🇦', 'mexico': '🇲🇽', 'colombia': '🇨🇴', 'venezuela': '🇻🇪'
+  };
+  return map[engName.toLowerCase()] || '🏳️';
+}
+
 const nonEuropeanNonRecognizing = new Set([
   'united states of america', 'united states', 'israel', 'japan', 'republic of korea', 'south korea',
   'singapore', 'panama', 'paraguay', 'cameroon', 'eritrea', 'new zealand', 'fiji', 'kiribati',
