@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="ro">
-<head>
+<head>\n<script>
+window.addEventListener('error', function(event) {
+    var err = document.createElement('div');
+    err.style = 'position:fixed;top:0;left:0;background:red;color:white;z-index:9999;padding:20px;font-size:18px;width:100%;';
+    err.innerHTML = 'ERROR: ' + event.message + ' at line ' + event.lineno + ':' + event.colno;
+    document.body.appendChild(err);
+});
+window.addEventListener('unhandledrejection', function(event) {
+    var err = document.createElement('div');
+    err.style = 'position:fixed;top:60px;left:0;background:orange;color:black;z-index:9999;padding:20px;font-size:18px;width:100%;';
+    err.innerHTML = 'PROMISE REJECTION: ' + event.reason;
+    document.body.appendChild(err);
+});
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recunoașterea Palestinei în Europa — Hartă Juridică Interactivă</title>
@@ -1580,7 +1593,57 @@ function translateCountryNameToRomanian(engName) {
     'kenya': 'Kenya',
     'somalia': 'Somalia',
     'madagascar': 'Madagascar',
-    'southfunction getFlagEmoji(engName) {
+    'south africa': 'Africa de Sud',
+    'algeria': 'Algeria',
+    'morocco': 'Maroc',
+    'mauritania': 'Mauritania',
+    'mali': 'Mali',
+    'niger': 'Niger',
+    'chad': 'Ciad',
+    'angola': 'Angola',
+    'namibia': 'Namibia',
+    'botswana': 'Botswana',
+    'zimbabwe': 'Zimbabwe',
+    'saudi arabia': 'Arabia Saudită',
+    'yemen': 'Yemen',
+    'oman': 'Oman',
+    'turkey': 'Turcia',
+    'syria': 'Siria',
+    'iraq': 'Irak',
+    'iran': 'Iran',
+    'afghanistan': 'Afganistan',
+    'pakistan': 'Pakistan',
+    'india': 'India',
+    'china': 'China',
+    'mongolia': 'Mongolia',
+    'russia': 'Rusia',
+    'kazakhstan': 'Kazahstan',
+    'japan': 'Japonia',
+    'south korea': 'Coreea de Sud',
+    'north korea': 'Coreea de Nord',
+    'vietnam': 'Vietnam',
+    'laos': 'Laos',
+    'thailand': 'Tailanda',
+    'cambodia': 'Cambodgia',
+    'malaysia': 'Malaezia',
+    'indonesia': 'Indonezia',
+    'philippines': 'Filipine',
+    'australia': 'Australia',
+    'new zealand': 'Noua Zeelandă',
+    'dem. rep. congo': 'R.D. Congo',
+    'congo': 'Congo',
+    'cameroon': 'Camerun',
+    'nigeria': 'Nigeria',
+    'ghana': 'Ghana',
+    'ivory coast': 'Coasta de Fildeș',
+    'senegal': 'Senegal',
+    'papua new guinea': 'Papua Noua Guinee'
+  };
+  const key = engName.toLowerCase();
+  return map[key] || engName.charAt(0).toUpperCase() + engName.slice(1);
+}
+
+function getFlagEmoji(engName) {
   const map = {
     'united states of america': '🇺🇸', 'united states': '🇺🇸',
     'canada': '🇨🇦', 'mexico': '🇲🇽', 'colombia': '🇨🇴', 'venezuela': '🇻🇪',
@@ -1616,35 +1679,9 @@ function findCountryData(d, name) {
     const raw = globalMajorData[name];
     if (raw.inherits) return globalMajorData[raw.inherits];
     return raw;
-  }na': 'ðŸ‡§ðŸ‡¼', 'zimbabwe': 'ðŸ‡¿ðŸ‡¼', 'saudi arabia': 'ðŸ‡¸ðŸ‡¦',
-    'yemen': 'ðŸ‡¾ðŸ‡ª', 'oman': 'ðŸ‡´ðŸ‡²', 'turkey': 'ðŸ‡¹ðŸ‡·', 'syria': 'ðŸ‡¸ðŸ‡¾',
-    'iraq': 'ðŸ‡®ðŸ‡¶', 'iran': 'ðŸ‡®ðŸ‡·', 'afghanistan': 'ðŸ‡¦ð’‡', 'pakistan': 'ðŸ‡µðŸ‡°',
-    'india': 'ðŸ‡®ðŸ‡³', 'china': 'ðŸ‡¨ðŸ‡³', 'mongolia': 'ðŸ‡²ðŸ‡³', 'russia': 'ðŸ‡·ðŸ‡º',
-    'kazakhstan': 'ðŸ‡°ðŸ‡¿', 'japan': 'ðŸ‡¯ðŸ‡µ', 'south korea': 'ðŸ‡°ðŸ‡·', 'north korea': 'ðŸ‡°ðŸ‡µ',
-    'vietnam': 'ðŸ‡»ðŸ‡³', 'laos': 'ðŸ‡±ðŸ‡¦', 'thailand': 'ðŸ‡¹ðŸ‡­', 'cambodia': 'ðŸ‡°ðŸ‡­',
-    'malaysia': 'ðŸ‡²ðŸ‡¾', 'indonesia': 'ðŸ‡®ðŸ‡©', 'philippines': 'ðŸ‡µðŸ‡­', 'australia': 'ðŸ‡¦ðŸ‡º',
-    'new zealand': 'ðŸ‡³ðŸ‡¿', 'greenland': 'ðŸ‡¬ðŸ‡±', 'cameroon': 'ðŸ‡¨ðŸ‡²', 'eritrea': 'ðŸ‡ªðŸ‡·',
-    'fiji': 'ðŸ‡«ðŸ‡¯', 'kiribati': 'ðŸ‡°ðŸ‡®', 'marshall islands': 'ðŸ‡²ðŸ‡­',
-    'micronesia': 'ðŸ‡«ðŸ‡²', 'nauru': 'ðŸ‡³ðŸ‡·', 'palau': 'ðŸ‡µðŸ‡¼', 'papua new guinea': 'ðŸ‡µðŸ‡¬',
-    'samoa': 'ðŸ‡¼ðŸ‡¸', 'solomon islands': 'ðŸ‡¸ðŸ‡§', 'tonga': 'ðŸ‡¹ðŸ‡´', 'tuvalu': 'ðŸ‡¹ðŸ‡»'
-  };
-  const key = engName.toLowerCase();
-  return map[key] || 'ðŸ³ï¸';
-}
-
-function findCountryData(d, name) {
-  // 1. CÄƒutÄƒm Ã®n baza de date EuropeanÄƒ detaliatÄƒ
-  const t = teritorii.find(x => (x.numeEn && x.numeEn.toLowerCase() === name) || (x.numeEn === 'Romania' && d.id === '642') || (x.numeEn === 'United Kingdom' && d.id === '826') || (x.numeEn === 'Bosnia and Herzegovina' && name === 'bosnia and herzegovina'));
-  if (t) return t;
-
-  // 2. CÄƒutÄƒm Ã®n baza de date de Marile Puteri globale
-  if (globalMajorData[name]) {
-    const raw = globalMajorData[name];
-    if (raw.inherits) return globalMajorData[raw.inherits];
-    return raw;
   }
 
-  // 3. GenerÄƒm dinamic date de bazÄƒ pentru restul lumii
+  // 3. Generăm dinamic date de bază pentru restul lumii
   if (!d.properties || !d.properties.name) return null;
   
   const isNonRecognizing = nonEuropeanNonRecognizing.has(name);
@@ -1658,25 +1695,25 @@ function findCountryData(d, name) {
     numeEn: d.properties.name,
     flag: flagEmoji,
     categorie: isNonRecognizing ? 'norec' : 'rec',
-    categorieLabel: isNonRecognizing ? 'Nu recunoaÈ™te Palestina' : 'RecunoaÈ™te Palestina',
+    categorieLabel: isNonRecognizing ? 'Nu recunoaște Palestina' : 'Recunoaște Palestina',
     lat: centroid[1] || 0,
     lon: centroid[0] || 0,
     coords: centroid || [0, 0],
     capitala: 'N/A',
-    populatie: 'â€”',
+    populatie: '—',
     popVal: 0,
-    suprafata: 'â€”',
+    suprafata: '—',
     supVal: 0,
-    zee: isNonRecognizing ? 'â€”' : '1988 (Val Istoric)',
-    moneda: 'MonedÄƒ LocalÄƒ',
-    particularitati: 'Stat suveran membru al comunitÄƒÈ›ii globale.',
+    zee: isNonRecognizing ? '—' : '1988 (Val Istoric)',
+    moneda: 'Monedă Locală',
+    particularitati: 'Stat suveran membru al comunității globale.',
     note: isNonRecognizing 
-      ? `Statul ${romanianName} nu oferÄƒ Ã®n prezent recunoaÈ™tere oficialÄƒ deplinÄƒ Statului Palestina ca suveran.`
-      : `Statul ${romanianName} recunoaÈ™te oficial Statul Palestina, susÈ›inÃ¢nd autodeterminarea È™i soluÈ›ia celor douÄƒ state conform rezoluÈ›iilor ONU.`,
+      ? `Statul ${romanianName} nu oferă în prezent recunoaștere oficială deplină Statului Palestina ca suveran.`
+      : `Statul ${romanianName} recunoaște oficial Statul Palestina, susținând autodeterminarea și soluția celor două state conform rezoluțiilor ONU.`,
     viza: {
-      particular: 'RelaÈ›ii diplomatice conform statutului naÈ›ional de recunoaÈ™tere.',
-      temei: 'Principii generale de drept internaÈ›ional.',
-      regim: 'Cooperare diplomaticÄƒ generalÄƒ.',
+      particular: 'Relații diplomatice conform statutului național de recunoaștere.',
+      temei: 'Principii generale de drept internațional.',
+      regim: 'Cooperare diplomatică generală.',
       observatie: 'Statut administrativ standard.'
     },
     ue: 'Stat partener non-european.',
@@ -2416,6 +2453,7 @@ const teritorii = [
     id: 'france_placeholder_norec',
     idReal: 'france',
     nume: 'Franța (Istoric)',
+    numeEn: 'france_placeholder',
     categorie: 'norec',
     popVal: 0, supVal: 0, zeeVal: 9999, note: 'Pentru evitarea erorilor, Franța este trecută în categoria celor care recunosc după decizia istorică din septembrie 2025.',
     badges: []
