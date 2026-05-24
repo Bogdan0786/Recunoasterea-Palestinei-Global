@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ro">
 <head>\n<script>
 window.addEventListener('error', function(event) {
@@ -3287,7 +3287,7 @@ searchInput.addEventListener('input', (event) => {
   } else {
     suggestionsUl.innerHTML = filtered.map(t => `
       <li data-id="${t.id}">
-        <span style="font-weight:600">${t.flag} ${t.nume}</span>
+        <span style="font-weight:600">${getFlagEmoji(t.numeEn)} ${t.nume}</span>
         <span class="cat-badge" style="background:var(--${t.categorie}); color:${t.categorie === 'rec' ? '#000000' : '#ffffff'}">${t.categorie === 'rec' ? 'REC' : (t.categorie === 'norec' ? 'NO' : 'CONT')}</span>
       </li>
     `).join('');
@@ -3367,7 +3367,7 @@ function renderRankings() {
     return `
       <div class="rank-item" data-id="${t.id}">
         <div class="rank-item-meta">
-          <span class="rank-item-name">${t.flag} ${t.nume}</span>
+          <span class="rank-item-name">${getFlagEmoji(t.numeEn)} ${t.nume}</span>
           <span class="rank-item-val" style="color:var(--${t.categorie})">${dispVal}</span>
         </div>
         <div class="rank-bar-bg">
@@ -3471,7 +3471,7 @@ function selectTerritory(id) {
         <div class="panel-cat" data-cat="${t.categorie}">
           <span>●</span>${t.categorieLabel}
         </div>
-        <h2>${t.flag} ${t.nume}<em>${t.numeEn}</em></h2>
+        <h2>${getFlagEmoji(t.numeEn)} ${t.nume}<em>${t.numeEn}</em></h2>
       </div>
       
       <div class="panel-tabs">
